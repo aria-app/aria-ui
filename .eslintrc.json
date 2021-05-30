@@ -1,0 +1,24 @@
+{
+  "extends": [
+    "plugin:jest/recommended",
+    "plugin:jest/style",
+    "plugin:testing-library/react",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": ["jest", "simple-import-sort", "testing-library"],
+  "overrides": [
+    {
+      "extends": [],
+      "files": ["**/test/**/*.[jt]s?(x)"]
+    }
+  ],
+  "rules": {
+    "import/order": "off",
+    "simple-import-sort/exports": "error",
+    "simple-import-sort/imports": "error",
+    "sort-imports": "off",
+    "@typescript-eslint/array-type": ["error", { "default": "array" }],
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-explicit-any": "off"
+  }
+}

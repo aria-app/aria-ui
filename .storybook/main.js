@@ -7,7 +7,7 @@ module.exports = {
     check: true,
     docgen: 'none',
     reactDocgenTypescriptOptions: {
-      include: ['src/**/*.tsx'],
+      include: ['src/**/*.tsx', 'stories/**/*.tsx'],
     },
   },
   webpackFinal: async config => {

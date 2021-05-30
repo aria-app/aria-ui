@@ -1,8 +1,8 @@
-import styled from '@emotion/styled/macro';
+import styled from '@emotion/styled';
 import React, { ElementType, FC, HTMLAttributes } from 'react';
 
 const Inner = styled.div(({ theme }) => ({
-  color: 'red',
+  color: theme.palette.textPrimary,
   fontFamily: theme.fontFamily,
 }));
 

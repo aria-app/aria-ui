@@ -1,6 +1,4 @@
-import { ThemeProvider } from '@emotion/react';
-
-import { lightTheme } from '../src';
+import { lightTheme, ThemeProvider } from '../src';
 
 export const parameters = {
   actions: { argTypesRegex: '^on.*' },

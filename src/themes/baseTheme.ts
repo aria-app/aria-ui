@@ -6,6 +6,7 @@ export interface AriaUIBaseTheme {
 
 export interface AriaUITheme extends AriaUIBaseTheme {
   palette: {
+    backgroundDefault: CSS.Properties['backgroundColor'];
     textPrimary: CSS.Properties['color'];
   };
 }

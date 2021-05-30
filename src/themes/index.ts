@@ -6,3 +6,4 @@ declare module '@emotion/react' {
 }
 
 export * from './lightTheme';
+export * from './ThemeProvider';
