@@ -11,16 +11,16 @@
     "node": ">=10"
   },
   "scripts": {
-    "start": "tsdx watch",
+    "analyze": "size-limit --why",
+    "build-storybook": "build-storybook",
     "build": "tsdx build",
-    "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
+    "semantic-release": "semantic-release",
     "size": "size-limit",
-    "analyze": "size-limit --why",
+    "start": "start-storybook -p 6006",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
-    "semantic-release": "semantic-release"
+    "test": "tsdx test --passWithNoTests"
   },
   "peerDependencies": {
     "react": ">=16"
