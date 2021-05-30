@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.0.0-development",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -19,7 +19,8 @@
     "size": "size-limit",
     "analyze": "size-limit --why",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "semantic-release": "semantic-release"
   },
   "peerDependencies": {
     "react": ">=16"
@@ -35,16 +36,16 @@
     "singleQuote": true,
     "trailingComma": "all"
   },
-  "name": "lib",
+  "name": "aria-ui",
   "author": "Nick Johnson",
-  "module": "dist/lib.esm.js",
+  "module": "dist/aria-ui.esm.js",
   "size-limit": [
     {
-      "path": "dist/lib.cjs.production.min.js",
+      "path": "dist/aria-ui.cjs.production.min.js",
       "limit": "10 KB"
     },
     {
-      "path": "dist/lib.esm.js",
+      "path": "dist/aria-ui.esm.js",
       "limit": "10 KB"
     }
   ],
@@ -66,6 +67,11 @@
     "size-limit": "^4.11.0",
     "tsdx": "^0.14.1",
     "tslib": "^2.2.0",
-    "typescript": "^3.9.9"
+    "typescript": "^3.9.9",
+    "semantic-release": "^17.4.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aria-app/aria-ui.git"
   }
 }
