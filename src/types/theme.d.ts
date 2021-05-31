@@ -3,6 +3,7 @@ import CSS from 'csstype';
 export interface TextVariant {
   fontSize: CSS.Properties['fontSize'];
   fontWeight: CSS.Properties['fontWeight'];
+  lineHeight: CSS.Properties['lineHeight'];
 }
 
 export interface ThemeBase {
@@ -10,6 +11,8 @@ export interface ThemeBase {
   space: (spacing: number) => number;
   textVariants: {
     body: TextVariant;
+    display: TextVariant;
+    header: TextVariant;
     helper: TextVariant;
     label: TextVariant;
   };

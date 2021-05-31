@@ -7,14 +7,27 @@ export const baseTheme: ThemeBase = {
     body: {
       fontSize: '16px',
       fontWeight: 400,
+      lineHeight: 1,
+    },
+    display: {
+      fontSize: '72px',
+      fontWeight: 600,
+      lineHeight: 1,
+    },
+    header: {
+      fontSize: '24px',
+      fontWeight: 400,
+      lineHeight: 1,
     },
     helper: {
       fontSize: '14px',
       fontWeight: 400,
+      lineHeight: 1,
     },
     label: {
       fontSize: '16px',
       fontWeight: 600,
+      lineHeight: 1,
     },
   },
 };

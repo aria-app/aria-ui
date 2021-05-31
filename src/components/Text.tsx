@@ -23,7 +23,7 @@ export type TextProps<E extends ElementType> = PolymorphicComponentProps<
   TextOwnProps
 >;
 
-const defaultElement = 'div';
+const defaultElement = 'span';
 
 export function Text<E extends ElementType = typeof defaultElement>({
   component = defaultElement,
