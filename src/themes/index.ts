@@ -5,5 +5,6 @@ declare module '@emotion/react' {
   export interface Theme extends AriaUITheme {}
 }
 
+export * from './darkTheme';
 export * from './lightTheme';
 export * from './ThemeProvider';

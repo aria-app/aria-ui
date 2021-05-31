@@ -35,4 +35,5 @@ Default.args = {
   backgroundColor: 'backgroundDefault',
   color: 'textPrimary',
   component: 'div',
+  isInteractive: true,
 };

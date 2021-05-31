@@ -1,13 +1,26 @@
 import CSS from 'csstype';
 
+export interface TextVariant {
+  fontSize: CSS.Properties['fontSize'];
+  fontWeight: CSS.Properties['fontWeight'];
+}
+
 export interface ThemeBase {
   fontFamily: CSS.Properties['fontFamily'];
   space: (spacing: number) => number;
+  textVariants: {
+    body: TextVariant;
+    helper: TextVariant;
+    label: TextVariant;
+  };
 }
 
 export interface Theme extends ThemeBase {
-  palette: {
-    backgroundDefault: CSS.Properties['backgroundColor'];
+  colors: {
+    backgroundDefault: CSS.Properties['color'];
+    brandContrast: CSS.Properties['color'];
+    brandPrimary: CSS.Properties['color'];
+    brandSubtle: CSS.Properties['color'];
     textPrimary: CSS.Properties['color'];
   };
 }

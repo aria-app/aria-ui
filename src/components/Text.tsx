@@ -1,23 +1,33 @@
 import styled from '@emotion/styled';
-import React, { ElementType, FC, HTMLAttributes } from 'react';
+import React, { ElementType } from 'react';
+import { PolymorphicComponentProps } from 'react-polymorphic-box';
 
-const Inner = styled.div(({ theme }) => ({
-  color: theme.palette.textPrimary,
-  fontFamily: theme.fontFamily,
-}));
+import { Theme } from '../types';
 
-export interface TextProps extends HTMLAttributes<HTMLElement> {
+export type TextOwnProps = {
+  color?: keyof Theme['colors'];
   component?: ElementType;
-}
-
-export const Text: FC<TextProps> = ({
-  children,
-  component: Component = 'span',
-  ...rest
-}) => {
-  return (
-    <Component {...rest}>
-      <Inner>{children}</Inner>
-    </Component>
-  );
+  variant?: keyof Theme['textVariants'];
 };
+
+const TextRoot = styled.span<TextOwnProps>(
+  ({ color = 'textPrimary', theme, variant = 'body' }) => ({
+    color: color && theme.colors[color],
+    fontFamily: theme.fontFamily,
+    ...theme.textVariants[variant],
+  }),
+);
+
+export type TextProps<E extends ElementType> = PolymorphicComponentProps<
+  E,
+  TextOwnProps
+>;
+
+const defaultElement = 'div';
+
+export function Text<E extends ElementType = typeof defaultElement>({
+  component = defaultElement,
+  ...rest
+}: TextProps<E>): JSX.Element {
+  return <TextRoot as={component} {...rest}></TextRoot>;
+}

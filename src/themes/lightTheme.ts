@@ -3,8 +3,11 @@ import { baseTheme } from './baseTheme';
 
 export const lightTheme: Theme = {
   ...baseTheme,
-  palette: {
+  colors: {
     backgroundDefault: '#f5f5f5',
-    textPrimary: '#333',
+    brandContrast: '#2f2a9b',
+    brandPrimary: '#5944ff',
+    brandSubtle: '#9b9bf9',
+    textPrimary: '#333333',
   },
 };
