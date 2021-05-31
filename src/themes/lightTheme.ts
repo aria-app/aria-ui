@@ -1,6 +1,7 @@
-import { AriaUITheme, baseTheme } from './baseTheme';
+import { baseTheme } from './baseTheme';
+import { Theme } from './theme';
 
-export const lightTheme: AriaUITheme = {
+export const lightTheme: Theme = {
   ...baseTheme,
   palette: {
     backgroundDefault: '#f5f5f5',

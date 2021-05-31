@@ -13,13 +13,10 @@ export default {
       },
     },
   },
-  parameters: {
-    controls: { expanded: true },
-  },
 } as Meta;
 
 export const Default: Story<TextProps> = args => <Text {...args} />;
 
 Default.args = {
-  children: 'Some default text',
+  children: 'The quick brown fox jumps over the lazy dog',
 };

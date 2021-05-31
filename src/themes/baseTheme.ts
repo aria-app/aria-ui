@@ -1,16 +1,5 @@
-import CSS from 'csstype';
+import { ThemeBase } from './theme';
 
-export interface AriaUIBaseTheme {
-  fontFamily: CSS.Properties['fontFamily'];
-}
-
-export interface AriaUITheme extends AriaUIBaseTheme {
-  palette: {
-    backgroundDefault: CSS.Properties['backgroundColor'];
-    textPrimary: CSS.Properties['color'];
-  };
-}
-
-export const baseTheme: AriaUIBaseTheme = {
+export const baseTheme: ThemeBase = {
   fontFamily: 'Nunito, Helvetica, sans-serif',
 };
