@@ -1,5 +1,5 @@
+import { Theme } from '../types';
 import { baseTheme } from './baseTheme';
-import { Theme } from './theme';
 
 export const lightTheme: Theme = {
   ...baseTheme,

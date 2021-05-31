@@ -2,6 +2,7 @@ import { Meta, Story } from '@storybook/react';
 import React, { ElementType } from 'react';
 
 import { Box, BoxProps } from '../src';
+import { colors } from './constants';
 
 export default {
   title: 'Box',
@@ -12,19 +13,26 @@ export default {
         type: 'text',
       },
     },
+    backgroundColor: {
+      control: {
+        type: 'select',
+      },
+      options: colors,
+    },
     color: {
       control: {
-        type: 'text',
+        type: 'select',
       },
+      options: colors,
     },
   },
 } as Meta;
 
-export const Default: Story<BoxProps<ElementType<any>>> = args => (
-  <Box {...args} />
-);
+export const Default: Story<BoxProps<ElementType>> = args => <Box {...args} />;
+
 Default.args = {
   children: 'The quick brown fox jumps over the lazy dog',
-  color: 'red',
-  component: 'footer',
+  backgroundColor: 'backgroundDefault',
+  color: 'textPrimary',
+  component: 'div',
 };

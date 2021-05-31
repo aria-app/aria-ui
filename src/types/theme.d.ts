@@ -2,6 +2,7 @@ import CSS from 'csstype';
 
 export interface ThemeBase {
   fontFamily: CSS.Properties['fontFamily'];
+  space: (spacing: number) => number;
 }
 
 export interface Theme extends ThemeBase {
