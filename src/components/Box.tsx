@@ -1,4 +1,4 @@
-import { useTheme } from '@emotion/react';
+import { CSSObject, useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import CSS from 'csstype';
 import React, { ElementType } from 'react';
@@ -10,11 +10,11 @@ import { ResponsiveProp, Spacing, Theme } from '../types';
 
 // Component-specific props should be specified separately
 export type BoxOwnProps = {
-  backgroundColor?: keyof Theme['colors'];
+  backgroundColor?: keyof Theme['colors'] | CSS.Properties['backgroundColor'];
   borderBottomLeftRadius?: keyof Theme['borderRadii'];
   borderBottomRightRadius?: keyof Theme['borderRadii'];
   borderBottomWidth?: CSS.Properties['borderBottomWidth'];
-  borderColor?: keyof Theme['colors'];
+  borderColor?: keyof Theme['colors'] | CSS.Properties['backgroundColor'];
   borderLeftWidth?: CSS.Properties['borderLeftWidth'];
   borderRadius?: keyof Theme['borderRadii'];
   borderRightWidth?: CSS.Properties['borderRightWidth'];
@@ -44,6 +44,7 @@ export type BoxOwnProps = {
   position?: CSS.Properties['position'];
   right?: ResponsiveProp<Spacing>;
   size?: ResponsiveProp<Spacing>;
+  sx?: CSSObject;
   top?: ResponsiveProp<Spacing>;
   width?: ResponsiveProp<Spacing>;
 };
@@ -71,7 +72,7 @@ const BoxRoot = styled.div<BoxOwnProps>(props => {
     borderColor: props.theme.getColor(props.borderColor),
     borderStyle: props.borderColor && 'solid',
     //----Group border widths to enable proper overriding----
-    borderWidth: props.borderWidth || 1,
+    borderWidth: props.borderWidth,
     borderRightWidth: props.borderRightWidth,
     borderTopWidth: props.borderTopWidth,
     borderBottomWidth: props.borderBottomWidth,
@@ -104,6 +105,7 @@ const BoxRoot = styled.div<BoxOwnProps>(props => {
       : {}),
     // Place after interactive overlay mixin to override the position set inside
     position: props.position,
+    ...(props.sx || {}),
   };
 });
 

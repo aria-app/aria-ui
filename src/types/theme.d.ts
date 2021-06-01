@@ -46,7 +46,7 @@ export interface ThemeColors {
 
 export interface Theme extends ThemeBase {
   colors: ThemeColors;
-  getColor: (color?: keyof ThemeColors) => CSS.Properties['color'] | undefined;
+  getColor: (color?: keyof ThemeColors) => string | undefined;
   getForegroundColor: (
     backgroundColor?: keyof ThemeColors,
   ) => CSS.Properties['color'];

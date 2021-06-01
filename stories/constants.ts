@@ -5,6 +5,8 @@ export const borderRadii = Object.keys(
   lightTheme.borderRadii,
 ) as (keyof Theme['borderRadii'])[];
 
+export const buttonVariants = ['contained', 'outlined', 'text'];
+
 export const colors = Object.keys(
   lightTheme.colors,
 ) as (keyof Theme['colors'])[];

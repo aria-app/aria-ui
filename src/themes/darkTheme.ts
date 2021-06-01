@@ -23,7 +23,7 @@ export const darkTheme: Theme = {
     return readableColor(resolvedColor, colors.textPrimary);
   },
   getColor: color => {
-    if (!color || !colors[color]) return;
+    if (!color || !colors[color]) return color;
 
     return colors[color];
   },
