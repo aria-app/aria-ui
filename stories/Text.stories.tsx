@@ -4,6 +4,7 @@ import React, { ElementType } from 'react';
 
 import { Box, Text, TextProps } from '../src';
 import { baseTheme } from '../src/themes/baseTheme';
+import * as argTypes from './argTypes';
 import { colors, textVariants } from './constants';
 
 export default {
@@ -15,27 +16,14 @@ export default {
         type: 'text',
       },
     },
-    color: {
-      control: {
-        type: 'select',
-      },
-      options: colors,
-    },
-    colorIsBackground: {
-      control: {
-        type: 'boolean',
-      },
-    },
+    color: argTypes.color,
+    colorIsBackground: { control: { type: 'boolean' } },
     variant: {
-      control: {
-        type: 'select',
-      },
+      control: { type: 'select' },
       options: textVariants,
     },
   },
-  args: {
-    children: 'The quick brown fox jumps over the lazy dog',
-  },
+  args: {},
 } as Meta;
 
 export const Default: Story<TextProps<ElementType>> = args => (
@@ -43,12 +31,11 @@ export const Default: Story<TextProps<ElementType>> = args => (
 );
 
 Default.args = {
-  color: 'textPrimary',
-  component: 'span',
-  variant: 'body',
+  children: 'The quick brown fox jumps over the lazy dog',
 };
 
 export const Colors: Story<TextProps<ElementType>> = ({
+  children,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   color: colorProp,
   ...rest
@@ -56,12 +43,16 @@ export const Colors: Story<TextProps<ElementType>> = ({
   <Box style={{ maxWidth: 900 }}>
     <Text variant="header">Foreground Colors</Text>
     {colors.map(color => (
-      <Text key={color} color={color} {...rest} />
+      <Text key={color} color={color} {...rest}>
+        {children || color}
+      </Text>
     ))}
     <Text variant="header">Background Colors</Text>
     {colors.map(color => (
       <Box key={`bg-${color}`} backgroundColor={color}>
-        <Text color={color} colorIsBackground {...rest} />
+        <Text color={color} {...rest} colorIsBackground>
+          {children || color}
+        </Text>
       </Box>
     ))}
   </Box>
@@ -73,9 +64,11 @@ Colors.args = {
 
 Colors.argTypes = {
   color: { table: { disable: true } },
+  colorIsBackground: { table: { disable: true } },
 };
 
 export const Variants: Story<TextProps<ElementType>> = ({
+  children,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   variant,
   ...rest
@@ -86,7 +79,9 @@ export const Variants: Story<TextProps<ElementType>> = ({
       textVariant => baseTheme.textVariants[textVariant].fontSize,
       'desc',
     ).map(textVariant => (
-      <Text key={textVariant} variant={textVariant} {...rest} />
+      <Text key={textVariant} variant={textVariant} {...rest}>
+        {children || textVariant}
+      </Text>
     ))}
   </Box>
 );
