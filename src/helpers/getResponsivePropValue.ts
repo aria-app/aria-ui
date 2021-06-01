@@ -1,5 +1,4 @@
-import { isArray, isNil } from 'lodash';
-import last from 'lodash/last';
+import { isArray, isNil, last } from 'lodash';
 
 import { ResponsiveProp, Theme } from '../types';
 
