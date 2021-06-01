@@ -4,7 +4,7 @@ import { Theme } from '../types';
 import { baseTheme } from './baseTheme';
 
 const colors = {
-  backgroundContrast: '#111',
+  backgroundContrast: '#333',
   backgroundDefault: '#555',
   brandContrast: '#9b9bf9',
   brandPrimary: '#5944ff',

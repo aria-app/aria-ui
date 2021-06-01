@@ -1,14 +1,31 @@
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import React, { ElementType } from 'react';
 import { PolymorphicComponentProps } from 'react-polymorphic-box';
 
-import { Theme } from '../types';
+import { getResponsivePropValue } from '../helpers';
+import { useScreenSizeType } from '../hooks';
+import { ResponsiveProp, Theme } from '../types';
 
 // Component-specific props should be specified separately
 export type BoxOwnProps = {
   backgroundColor?: keyof Theme['colors'];
   component?: ElementType;
   isInteractive?: boolean;
+  margin?: ResponsiveProp<number>;
+  marginBottom?: ResponsiveProp<number>;
+  marginLeft?: ResponsiveProp<number>;
+  marginRight?: ResponsiveProp<number>;
+  marginTop?: ResponsiveProp<number>;
+  marginX?: ResponsiveProp<number>;
+  marginY?: ResponsiveProp<number>;
+  padding?: ResponsiveProp<number>;
+  paddingBottom?: ResponsiveProp<number>;
+  paddingLeft?: ResponsiveProp<number>;
+  paddingRight?: ResponsiveProp<number>;
+  paddingTop?: ResponsiveProp<number>;
+  paddingX?: ResponsiveProp<number>;
+  paddingY?: ResponsiveProp<number>;
 };
 
 const BoxRoot = styled.div<BoxOwnProps>(
@@ -57,7 +74,58 @@ const defaultElement = 'div';
 
 export function Box<E extends ElementType = typeof defaultElement>({
   component = defaultElement,
+  margin,
+  marginBottom,
+  marginLeft,
+  marginRight,
+  marginTop,
+  marginX,
+  marginY,
+  padding,
+  paddingBottom,
+  paddingLeft,
+  paddingRight,
+  paddingTop,
+  paddingX,
+  paddingY,
+  style: styleProp = {},
   ...rest
 }: BoxProps<E>): JSX.Element {
-  return <BoxRoot as={component} {...rest}></BoxRoot>;
+  const screenSizeType = useScreenSizeType();
+  const theme = useTheme();
+  const style = React.useMemo(() => {
+    const getValue = (baseValue: ResponsiveProp<number | undefined>) =>
+      theme.space(getResponsivePropValue(baseValue, screenSizeType));
+
+    return {
+      marginBottom: getValue(marginBottom || marginY || margin),
+      marginLeft: getValue(marginLeft || marginX || margin),
+      marginRight: getValue(marginRight || marginX || margin),
+      marginTop: getValue(marginTop || marginY || margin),
+      paddingBottom: getValue(paddingBottom || paddingY || padding),
+      paddingLeft: getValue(paddingLeft || paddingX || padding),
+      paddingRight: getValue(paddingRight || paddingX || padding),
+      paddingTop: getValue(paddingTop || paddingY || padding),
+      ...styleProp,
+    };
+  }, [
+    margin,
+    marginBottom,
+    marginLeft,
+    marginRight,
+    marginTop,
+    marginX,
+    marginY,
+    padding,
+    paddingBottom,
+    paddingLeft,
+    paddingRight,
+    paddingTop,
+    paddingX,
+    paddingY,
+    screenSizeType,
+    styleProp,
+  ]);
+
+  return <BoxRoot as={component} style={style} {...rest}></BoxRoot>;
 }

@@ -8,7 +8,12 @@ export interface TextVariant {
 
 export interface ThemeBase {
   fontFamily: CSS.Properties['fontFamily'];
-  space: (spacing: number) => number;
+  screenSizes: {
+    lg: number;
+    md: number;
+    sm: number;
+  };
+  space: (spacing?: number) => number | undefined;
   textVariants: {
     body: TextVariant;
     display: TextVariant;

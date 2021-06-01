@@ -5,7 +5,7 @@ import { baseTheme } from './baseTheme';
 
 const colors = {
   backgroundContrast: '#fff',
-  backgroundDefault: '#f5f5f5',
+  backgroundDefault: '#ddd',
   brandContrast: '#2f2a9b',
   brandPrimary: '#5944ff',
   brandSubtle: '#9b9bf9',

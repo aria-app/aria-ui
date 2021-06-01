@@ -8,3 +8,9 @@ export declare type RecursivePartial<T> = {
     ? RecursivePartial<T[P]>
     : T[P];
 };
+
+export type ResponsiveProp<PropType> =
+  | PropType
+  | [PropType]
+  | [PropType, PropType]
+  | [PropType, PropType, PropType];

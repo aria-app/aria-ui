@@ -1,8 +1,15 @@
+import { isNil } from 'lodash';
+
 import { ThemeBase } from '../types';
 
 export const baseTheme: ThemeBase = {
   fontFamily: 'Nunito, Helvetica, sans-serif',
-  space: spacing => spacing * 4,
+  screenSizes: {
+    lg: 1024,
+    md: 768,
+    sm: 480,
+  },
+  space: spacing => (isNil(spacing) ? undefined : spacing * 4),
   textVariants: {
     body: {
       fontSize: '16px',
