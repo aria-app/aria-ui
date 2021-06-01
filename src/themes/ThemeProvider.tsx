@@ -1,12 +1,11 @@
 import { ThemeProvider as EmotionThemeProvider } from '@emotion/react';
 import React, { FC, ProviderProps } from 'react';
 
-import { AriaUITheme } from './baseTheme';
+import { Theme } from '../types';
 import { lightTheme } from './lightTheme';
 
-export interface ThemeProviderProps
-  extends Partial<ProviderProps<AriaUITheme>> {
-  theme?: AriaUITheme;
+export interface ThemeProviderProps extends Partial<ProviderProps<Theme>> {
+  theme?: Theme;
 }
 
 export const ThemeProvider: FC<ThemeProviderProps> = ({

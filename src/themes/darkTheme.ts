@@ -4,15 +4,15 @@ import { Theme } from '../types';
 import { baseTheme } from './baseTheme';
 
 const colors = {
-  backgroundContrast: '#fff',
-  backgroundDefault: '#ddd',
-  brandContrast: '#2f2a9b',
+  backgroundContrast: '#333',
+  backgroundDefault: '#555',
+  brandContrast: '#9b9bf9',
   brandPrimary: '#5944ff',
-  brandSubtle: '#9b9bf9',
-  textPrimary: '#333',
+  brandSubtle: '#2f2a9b',
+  textPrimary: '#fff',
 };
 
-export const lightTheme: Theme = {
+export const darkTheme: Theme = {
   ...baseTheme,
   colors,
   getForegroundColor: backgroundColor => {

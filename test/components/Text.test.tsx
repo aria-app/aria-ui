@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Text } from '../src';
-import { render, screen } from '../src/testUtils';
+import { Text } from '../../src';
+import { render, screen } from '../../src/testUtils';
 
 describe('Text', () => {
   test('should contain passed text', () => {

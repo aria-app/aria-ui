@@ -8,6 +8,7 @@ function customRender(
   options?: RenderOptions,
 ): RenderResult {
   return render(ui, {
+    // eslint-disable-next-line react/display-name
     wrapper: ({ children }) => {
       return <ThemeProvider theme={lightTheme}>{children}</ThemeProvider>;
     },
