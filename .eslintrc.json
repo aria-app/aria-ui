@@ -22,6 +22,7 @@
   ],
   "rules": {
     "import/order": "off",
+    "react/prop-types": "off",
     "simple-import-sort/exports": "error",
     "simple-import-sort/imports": "error",
     "sort-imports": "off",

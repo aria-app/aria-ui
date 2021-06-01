@@ -125,6 +125,7 @@ export function Box<E extends ElementType = typeof defaultElement>({
     paddingY,
     screenSizeType,
     styleProp,
+    theme,
   ]);
 
   return <BoxRoot as={component} style={style} {...rest}></BoxRoot>;
