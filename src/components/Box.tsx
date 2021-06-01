@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { readableColor } from 'polished';
 import React, { ElementType } from 'react';
 import { PolymorphicComponentProps } from 'react-polymorphic-box';
 
@@ -8,21 +7,18 @@ import { Theme } from '../types';
 // Component-specific props should be specified separately
 export type BoxOwnProps = {
   backgroundColor?: keyof Theme['colors'];
-  color?: keyof Theme['colors'];
   component?: ElementType;
   isInteractive?: boolean;
 };
 
 const BoxRoot = styled.div<BoxOwnProps>(
-  ({ backgroundColor, color, isInteractive, theme }) => {
-    const resolvedBackgroundColor =
-      backgroundColor && theme.colors[backgroundColor];
-    const contrastColor = readableColor(resolvedBackgroundColor || '#fff');
-    const isLightBackground = contrastColor === '#000';
+  ({ backgroundColor, isInteractive, theme }) => {
+    const foregroundColor = theme.getForegroundColor(backgroundColor);
+    const isLightBackground =
+      !foregroundColor || foregroundColor === theme.colors.textPrimary;
 
     return {
-      backgroundColor: resolvedBackgroundColor,
-      color: color && theme.colors[color],
+      backgroundColor: theme.getColor(backgroundColor),
       ...(isInteractive
         ? {
             cursor: 'pointer',

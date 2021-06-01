@@ -21,6 +21,11 @@ export default {
       },
       options: colors,
     },
+    colorIsBackground: {
+      control: {
+        type: 'boolean',
+      },
+    },
     variant: {
       control: {
         type: 'select',

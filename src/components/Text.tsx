@@ -6,16 +6,22 @@ import { Theme } from '../types';
 
 export type TextOwnProps = {
   color?: keyof Theme['colors'];
+  colorIsBackground?: boolean;
   component?: ElementType;
   variant?: keyof Theme['textVariants'];
 };
 
 const TextRoot = styled.span<TextOwnProps>(
-  ({ color = 'textPrimary', theme, variant = 'body' }) => ({
-    color: color && theme.colors[color],
-    fontFamily: theme.fontFamily,
-    ...theme.textVariants[variant],
-  }),
+  ({ color = 'textPrimary', colorIsBackground, theme, variant = 'body' }) => {
+    const themeColor = colorIsBackground
+      ? theme.getForegroundColor(color)
+      : theme.getColor(color);
+    return {
+      color: themeColor || 'inherit',
+      fontFamily: theme.fontFamily,
+      ...theme.textVariants[variant],
+    };
+  },
 );
 
 export type TextProps<E extends ElementType> = PolymorphicComponentProps<
