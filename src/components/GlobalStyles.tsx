@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 
 const styles: Interpolation<Theme> = theme => css`
   html {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
   }

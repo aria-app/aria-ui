@@ -12,14 +12,15 @@ export type TextOwnProps = {
 };
 
 const TextRoot = styled.span<TextOwnProps>(
-  ({ color = 'textPrimary', colorIsBackground, theme, variant = 'body' }) => {
+  ({ color, colorIsBackground, theme, variant }) => {
     const themeColor = colorIsBackground
       ? theme.getForegroundColor(color)
       : theme.getColor(color);
+
     return {
       color: themeColor || 'inherit',
       fontFamily: theme.fontFamily,
-      ...theme.textVariants[variant],
+      ...theme.getTextVariant(variant),
     };
   },
 );

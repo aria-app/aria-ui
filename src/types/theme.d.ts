@@ -1,5 +1,7 @@
 import CSS from 'csstype';
 
+export type Spacing = number | 'auto';
+
 export interface TextVariant {
   fontSize: CSS.Properties['fontSize'];
   fontWeight: CSS.Properties['fontWeight'];
@@ -7,13 +9,23 @@ export interface TextVariant {
 }
 
 export interface ThemeBase {
+  borderRadii: {
+    full: number;
+    md: number;
+    none: number;
+    sm: number;
+  };
   fontFamily: CSS.Properties['fontFamily'];
+  getBorderRadius: (
+    borderRadius?: keyof Theme['borderRadii'],
+  ) => CSS.Properties<number | string>['borderRadius'] | undefined;
+  getTextVariant: (textVariant?: keyof Theme['textVariants']) => TextVariant;
   screenSizes: {
     lg: number;
     md: number;
     sm: number;
   };
-  space: (spacing?: number) => number | undefined;
+  space: (spacing?: Spacing) => Spacing | undefined;
   textVariants: {
     body: TextVariant;
     display: TextVariant;
@@ -34,7 +46,7 @@ export interface ThemeColors {
 
 export interface Theme extends ThemeBase {
   colors: ThemeColors;
-  getColor: (color?: keyof ThemeColors) => CSS.Properties['color'];
+  getColor: (color?: keyof ThemeColors) => CSS.Properties['color'] | undefined;
   getForegroundColor: (
     backgroundColor?: keyof ThemeColors,
   ) => CSS.Properties['color'];
