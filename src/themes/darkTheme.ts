@@ -4,11 +4,12 @@ import { Theme } from '../types';
 import { baseTheme } from './baseTheme';
 
 const colors = {
-  backgroundDefault: '#333333',
+  backgroundContrast: '#111',
+  backgroundDefault: '#555',
   brandContrast: '#9b9bf9',
   brandPrimary: '#5944ff',
   brandSubtle: '#2f2a9b',
-  textPrimary: '#ffffff',
+  textPrimary: '#fff',
 };
 
 export const darkTheme: Theme = {

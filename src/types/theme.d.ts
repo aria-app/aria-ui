@@ -19,6 +19,7 @@ export interface ThemeBase {
 }
 
 export interface ThemeColors {
+  backgroundContrast: CSS.Properties['color'];
   backgroundDefault: CSS.Properties['color'];
   brandContrast: CSS.Properties['color'];
   brandPrimary: CSS.Properties['color'];

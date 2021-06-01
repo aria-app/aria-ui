@@ -48,6 +48,33 @@ Default.args = {
   variant: 'body',
 };
 
+export const Colors: Story<TextProps<ElementType>> = ({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  color: colorProp,
+  ...rest
+}) => (
+  <Box style={{ maxWidth: 900 }}>
+    <Text variant="header">Foreground Colors</Text>
+    {colors.map(color => (
+      <Text key={color} color={color} {...rest} />
+    ))}
+    <Text variant="header">Background Colors</Text>
+    {colors.map(color => (
+      <Box key={`bg-${color}`} backgroundColor={color}>
+        <Text color={color} colorIsBackground {...rest} />
+      </Box>
+    ))}
+  </Box>
+);
+
+Colors.args = {
+  component: 'div',
+};
+
+Colors.argTypes = {
+  color: { table: { disable: true } },
+};
+
 export const Variants: Story<TextProps<ElementType>> = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   variant,
@@ -66,4 +93,8 @@ export const Variants: Story<TextProps<ElementType>> = ({
 
 Variants.args = {
   component: 'div',
+};
+
+Variants.argTypes = {
+  variant: { table: { disable: true } },
 };
