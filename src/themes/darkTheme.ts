@@ -16,13 +16,13 @@ export const darkTheme: Theme = {
   ...baseTheme,
   colors,
   getForegroundColor: backgroundColor => {
-    const themeColor = colors[backgroundColor as keyof Theme['colors']];
+    const themeColor =
+      colors[backgroundColor as keyof Theme['colors']] || backgroundColor;
 
-    if (!backgroundColor || !themeColor) return colors.textPrimary;
+    if (!themeColor || backgroundColor === 'transparent')
+      return colors.textPrimary;
 
-    const resolvedColor = themeColor;
-
-    return readableColor(resolvedColor, colors.textPrimary);
+    return readableColor(themeColor, colors.textPrimary);
   },
   getColor: color => {
     const themeColor = colors[color as keyof Theme['colors']];

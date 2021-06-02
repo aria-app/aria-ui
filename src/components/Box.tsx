@@ -56,9 +56,43 @@ export type BoxOwnProps = {
 };
 
 const BoxRoot = styled.div<BoxOwnProps & { isKeyDown: boolean }>(props => {
-  const foregroundColor = props.theme.getForegroundColor(props.backgroundColor);
-  const isLightBackground =
-    !foregroundColor || foregroundColor === props.theme.colors.textPrimary;
+  const getInteractiveStyles = () => {
+    if (!props.isInteractive) return {};
+
+    const foregroundColor = props.theme.getForegroundColor(
+      props.backgroundColor,
+    );
+
+    return {
+      cursor: 'pointer',
+      position: 'relative',
+      '&::after': {
+        backgroundColor: foregroundColor,
+        bottom: 0,
+        content: '""',
+        left: 0,
+        pointerEvents: 'none',
+        opacity: 0,
+        position: 'absolute',
+        right: 0,
+        top: 0,
+        transition: 'opacity 100ms ease-in-out',
+        ...(props.isKeyDown
+          ? {
+              opacity: '0.25',
+            }
+          : {}),
+        ...borderRadii,
+      },
+      '&:hover::after, &:focus::after': {
+        opacity: '0.1',
+      },
+      '&:active::after': {
+        opacity: '0.25',
+      },
+    };
+  };
+
   const borderRadii = {
     borderRadius: props.theme.getBorderRadius(props.borderRadius),
     borderBottomLeftRadius: props.theme.getBorderRadius(
@@ -86,37 +120,8 @@ const BoxRoot = styled.div<BoxOwnProps & { isKeyDown: boolean }>(props => {
       borderLeftWidth: props.borderLeftWidth,
       //-------------------------------------------------------
       ...borderRadii,
-      ...(props.isInteractive
-        ? {
-            cursor: 'pointer',
-            position: 'relative',
-            '&::after': {
-              backgroundColor: isLightBackground ? '#000' : '#fff',
-              bottom: 0,
-              content: '""',
-              left: 0,
-              pointerEvents: 'none',
-              opacity: 0,
-              position: 'absolute',
-              right: 0,
-              top: 0,
-              transition: 'opacity 100ms ease-in-out',
-              ...(props.isKeyDown
-                ? {
-                    opacity: isLightBackground ? '0.25' : '0.4',
-                  }
-                : {}),
-              ...borderRadii,
-            },
-            '&:hover::after, &:focus::after': {
-              opacity: isLightBackground ? '0.1' : '0.2',
-            },
-            '&:active::after': {
-              opacity: isLightBackground ? '0.25' : '0.4',
-            },
-          }
-        : {}),
     },
+    getInteractiveStyles(),
     props.sx,
   );
 });

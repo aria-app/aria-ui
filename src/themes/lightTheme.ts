@@ -5,7 +5,8 @@ import { baseTheme } from './baseTheme';
 
 const colors: Theme['colors'] = {
   backgroundContrast: '#fff',
-  backgroundDefault: '#ddd',
+  backgroundDefault: '#f5f5f5',
+  // backgroundDefault: '#ddd',
   brandContrast: '#2f2a9b',
   brandPrimary: '#5944ff',
   brandSubtle: '#9b9bf9',
@@ -16,13 +17,13 @@ export const lightTheme: Theme = {
   ...baseTheme,
   colors,
   getForegroundColor: backgroundColor => {
-    const themeColor = colors[backgroundColor as keyof Theme['colors']];
+    const themeColor =
+      colors[backgroundColor as keyof Theme['colors']] || backgroundColor;
 
-    if (!backgroundColor || !themeColor) return colors.textPrimary;
+    if (!themeColor || backgroundColor === 'transparent')
+      return colors.textPrimary;
 
-    const resolvedColor = themeColor;
-
-    return readableColor(resolvedColor, colors.textPrimary);
+    return readableColor(themeColor, colors.textPrimary);
   },
   getColor: color => {
     const themeColor = colors[color as keyof Theme['colors']];
