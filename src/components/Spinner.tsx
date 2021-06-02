@@ -28,7 +28,6 @@ export const Spinner: FC<SpinnerProps> = props => {
     sx = {},
     ...rest
   } = props;
-  console.log(props.sx);
   const theme = useTheme();
 
   const themeColor = colorIsBackground

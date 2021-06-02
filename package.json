@@ -27,6 +27,7 @@
     "csstype": "3.0.8",
     "framer-motion": "^4.1.17",
     "lodash-es": "^4.17.21",
+    "mdi-react": "^7.5.0",
     "polished": "^4.1.2",
     "react-polymorphic-box": "^3.0.3",
     "react-responsive": "^8.2.0"
