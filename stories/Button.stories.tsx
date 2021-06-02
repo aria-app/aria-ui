@@ -13,6 +13,7 @@ export default {
     text: { control: { type: 'text' } },
     color: argTypes.color,
     colorIsBackground: { control: { type: 'boolean' } },
+    disabled: { control: { type: 'boolean' } },
     onClick: { action: 'onClick' },
     variant: {
       control: { type: 'select' },

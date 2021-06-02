@@ -3,7 +3,7 @@ import readableColor from 'polished/lib/color/readableColor';
 import { Theme } from '../types';
 import { baseTheme } from './baseTheme';
 
-const colors = {
+const colors: Theme['colors'] = {
   backgroundContrast: '#fff',
   backgroundDefault: '#ddd',
   brandContrast: '#2f2a9b',
@@ -16,15 +16,19 @@ export const lightTheme: Theme = {
   ...baseTheme,
   colors,
   getForegroundColor: backgroundColor => {
-    if (!backgroundColor || !colors[backgroundColor]) return;
+    const themeColor = colors[backgroundColor as keyof Theme['colors']];
 
-    const resolvedColor = colors[backgroundColor];
+    if (!backgroundColor || !themeColor) return colors.textPrimary;
+
+    const resolvedColor = themeColor;
 
     return readableColor(resolvedColor, colors.textPrimary);
   },
   getColor: color => {
-    if (!color || !colors[color]) return color;
+    const themeColor = colors[color as keyof Theme['colors']];
 
-    return colors[color];
+    if (!color || !themeColor) return color;
+
+    return themeColor;
   },
 };
