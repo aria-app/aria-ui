@@ -15,6 +15,11 @@ const textVariants = {
     fontWeight: 400,
     lineHeight: 1,
   },
+  button: {
+    fontSize: '16px',
+    fontWeight: 600,
+    lineHeight: 1,
+  },
   display: {
     fontSize: '72px',
     fontWeight: 600,

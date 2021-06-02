@@ -1,40 +1,40 @@
-import styled from '@emotion/styled';
-import React, { ElementType } from 'react';
-import { PolymorphicComponentProps } from 'react-polymorphic-box';
+import { useTheme } from '@emotion/react';
+import React, { ElementType, FC } from 'react';
 
-import { Theme } from '../types';
+import { ColorName, Theme } from '../types';
+import { Box, BoxProps } from './Box';
 
-export type TextOwnProps = {
-  color?: keyof Theme['colors'];
+export interface TextProps extends BoxProps<ElementType> {
+  color?: ColorName;
   colorIsBackground?: boolean;
-  component?: ElementType;
   variant?: keyof Theme['textVariants'];
-};
-
-const TextRoot = styled.span<TextOwnProps>(
-  ({ color, colorIsBackground, theme, variant }) => {
-    const themeColor = colorIsBackground
-      ? theme.getForegroundColor(color)
-      : theme.getColor(color);
-
-    return {
-      color: themeColor || 'inherit',
-      fontFamily: theme.fontFamily,
-      ...theme.getTextVariant(variant),
-    };
-  },
-);
-
-export type TextProps<E extends ElementType> = PolymorphicComponentProps<
-  E,
-  TextOwnProps
->;
-
-const defaultElement = 'span';
-
-export function Text<E extends ElementType = typeof defaultElement>({
-  component = defaultElement,
-  ...rest
-}: TextProps<E>): JSX.Element {
-  return <TextRoot as={component} {...rest}></TextRoot>;
 }
+
+export const Text: FC<TextProps> = props => {
+  const {
+    color,
+    colorIsBackground,
+    component = 'span',
+    sx = {},
+    variant = 'body',
+    ...rest
+  } = props;
+  const theme = useTheme();
+
+  const resolvedColor = colorIsBackground
+    ? theme.getForegroundColor(color)
+    : theme.getColor(color);
+
+  return (
+    <Box
+      component={component}
+      sx={{
+        color: resolvedColor || 'inherit',
+        fontFamily: theme.fontFamily,
+        ...theme.getTextVariant(variant),
+        ...sx,
+      }}
+      {...rest}
+    />
+  );
+};
