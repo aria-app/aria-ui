@@ -23,7 +23,6 @@ export default {
       options: textVariants,
     },
   },
-  args: {},
 } as Meta;
 
 export const Default: Story<TextProps<ElementType>> = args => (

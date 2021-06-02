@@ -1,4 +1,5 @@
 import { useTheme } from '@emotion/react';
+import { merge } from 'lodash';
 import React, { ElementType, FC } from 'react';
 
 import { ColorName, Theme } from '../types';
@@ -21,19 +22,21 @@ export const Text: FC<TextProps> = props => {
   } = props;
   const theme = useTheme();
 
-  const resolvedColor = colorIsBackground
+  const themeColor = colorIsBackground
     ? theme.getForegroundColor(color)
     : theme.getColor(color);
 
   return (
     <Box
       component={component}
-      sx={{
-        color: resolvedColor || 'inherit',
-        fontFamily: theme.fontFamily,
-        ...theme.getTextVariant(variant),
-        ...sx,
-      }}
+      sx={merge(
+        {
+          color: themeColor || 'inherit',
+          fontFamily: theme.fontFamily,
+          ...theme.getTextVariant(variant),
+        },
+        sx,
+      )}
       {...rest}
     />
   );

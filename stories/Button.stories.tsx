@@ -12,15 +12,14 @@ export default {
   argTypes: {
     text: { control: { type: 'text' } },
     color: argTypes.color,
-    colorIsBackground: { control: { type: 'boolean' } },
     disabled: { control: { type: 'boolean' } },
+    isLoading: { control: { type: 'boolean' } },
     onClick: { action: 'onClick' },
     variant: {
-      control: { type: 'select' },
+      control: { type: 'inline-radio' },
       options: buttonVariants,
     },
   },
-  args: {},
 } as Meta;
 
 export const Default: Story<ButtonProps> = args => <Button {...args} />;
