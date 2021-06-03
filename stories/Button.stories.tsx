@@ -12,11 +12,11 @@ export default {
   title: 'Button',
   component: Button,
   argTypes: {
-    text: { control: { type: 'text' } },
     color: argTypes.color,
     disabled: { control: { type: 'boolean' } },
     isLoading: { control: { type: 'boolean' } },
     onClick: { action: 'onClick' },
+    text: { control: { type: 'text' } },
     variant: {
       control: { type: 'inline-radio' },
       options: buttonVariants,
@@ -24,49 +24,11 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<ButtonProps & {
-  endIconChoice: string;
-  startIconChoice: string;
-}> = ({ endIconChoice, startIconChoice, ...rest }) => (
-  <Button
-    endIcon={
-      {
-        none: undefined,
-        chevronRight: <ChevronRightIcon />,
-        search: <SearchIcon />,
-      }[endIconChoice]
-    }
-    startIcon={
-      {
-        none: undefined,
-        chevronRight: <ChevronRightIcon />,
-        search: <SearchIcon />,
-      }[startIconChoice]
-    }
-    {...rest}
-  />
-);
+export const Default: Story<ButtonProps> = args => <Button {...args} />;
 
 Default.args = {
-  endIconChoice: 'none',
-  startIconChoice: 'none',
   text: 'Click me',
   variant: 'outlined',
-};
-
-Default.argTypes = {
-  endIconChoice: {
-    control: {
-      type: 'inline-radio',
-    },
-    options: ['none', 'chevronRight', 'search'],
-  },
-  startIconChoice: {
-    control: {
-      type: 'inline-radio',
-    },
-    options: ['none', 'chevronRight', 'search'],
-  },
 };
 
 export const Variants: Story<ButtonProps> = ({
@@ -99,26 +61,22 @@ Variants.argTypes = {
   variant: { table: { disable: true } },
 };
 
-export const VariantsWithStartIcon: Story<ButtonProps> = args => (
-  <Variants {...args} />
-);
+export const WithStartIcon: Story<ButtonProps> = args => <Variants {...args} />;
 
-VariantsWithStartIcon.args = {
+WithStartIcon.args = {
   ...Variants.args,
   startIcon: <SearchIcon />,
   text: 'Search',
 };
 
-VariantsWithStartIcon.argTypes = Variants.argTypes;
+WithStartIcon.argTypes = Variants.argTypes;
 
-export const VariantsWithEndIcon: Story<ButtonProps> = args => (
-  <Variants {...args} />
-);
+export const WithEndIcon: Story<ButtonProps> = args => <Variants {...args} />;
 
-VariantsWithEndIcon.args = {
+WithEndIcon.args = {
   ...Variants.args,
   endIcon: <ChevronRightIcon />,
   text: 'Go Forward',
 };
 
-VariantsWithEndIcon.argTypes = Variants.argTypes;
+WithEndIcon.argTypes = Variants.argTypes;

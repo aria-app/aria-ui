@@ -42,7 +42,9 @@ export const Spinner: FC<SpinnerProps> = props => {
 
   return (
     <Box
+      aria-busy="true"
       component="div"
+      role="alert"
       size={{ lg: 12, md: 8, sm: 6 }[size]}
       sx={merge(
         {

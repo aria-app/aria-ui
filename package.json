@@ -43,6 +43,11 @@
       "pre-commit": "tsdx lint"
     }
   },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>src/testSetup.ts"
+    ]
+  },
   "prettier": {
     "printWidth": 80,
     "semi": true,
