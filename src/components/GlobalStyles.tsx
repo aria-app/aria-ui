@@ -2,7 +2,7 @@ import { css, Global, Interpolation, Theme } from '@emotion/react';
 import React, { FC } from 'react';
 
 const styles: Interpolation<Theme> = theme => css`
-  html {
+  html * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;

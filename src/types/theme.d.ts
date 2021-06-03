@@ -1,5 +1,7 @@
 import CSS from 'csstype';
 
+export type ColorName = keyof ThemeColors | CSS.Properties['color'];
+
 export type Spacing = number | 'auto';
 
 export interface TextVariant {
@@ -28,6 +30,7 @@ export interface ThemeBase {
   space: (spacing?: Spacing) => Spacing | undefined;
   textVariants: {
     body: TextVariant;
+    button: TextVariant;
     display: TextVariant;
     header: TextVariant;
     helper: TextVariant;
@@ -46,10 +49,8 @@ export interface ThemeColors {
 
 export interface Theme extends ThemeBase {
   colors: ThemeColors;
-  getColor: (color?: keyof ThemeColors) => CSS.Properties['color'] | undefined;
-  getForegroundColor: (
-    backgroundColor?: keyof ThemeColors,
-  ) => CSS.Properties['color'];
+  getColor: (color?: ColorName) => CSS.Properties['color'] | undefined;
+  getForegroundColor: (backgroundColor?: ColorName) => CSS.Properties['color'];
 }
 
 export type ThemeOptions = RecursivePartial<Theme>;

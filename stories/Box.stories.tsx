@@ -34,10 +34,6 @@ export default {
     paddingTop: spacing,
     paddingX: spacing,
     paddingY: spacing,
-    position: {
-      control: { type: 'inline-radio' },
-      options: [undefined, 'absolute', 'relative'],
-    },
     right: spacing,
     size: spacing,
     top: spacing,

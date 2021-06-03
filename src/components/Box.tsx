@@ -1,27 +1,34 @@
-import { useTheme } from '@emotion/react';
+import { CSSObject, useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import CSS from 'csstype';
-import React, { ElementType } from 'react';
+import { merge } from 'lodash';
+import React, {
+  ElementType,
+  KeyboardEventHandler,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react';
 import { PolymorphicComponentProps } from 'react-polymorphic-box';
 
 import { getResponsivePropValue } from '../helpers';
 import { useScreenSizeType } from '../hooks';
-import { ResponsiveProp, Spacing, Theme } from '../types';
+import { ColorName, ResponsiveProp, Spacing, Theme } from '../types';
 
 // Component-specific props should be specified separately
 export type BoxOwnProps = {
-  backgroundColor?: keyof Theme['colors'];
+  backgroundColor?: ColorName;
   borderBottomLeftRadius?: keyof Theme['borderRadii'];
   borderBottomRightRadius?: keyof Theme['borderRadii'];
-  borderBottomWidth?: CSS.Properties['borderBottomWidth'];
-  borderColor?: keyof Theme['colors'];
-  borderLeftWidth?: CSS.Properties['borderLeftWidth'];
+  borderBottomWidth?: CSS.Properties<number | string>['borderBottomWidth'];
+  borderColor?: ColorName;
+  borderLeftWidth?: CSS.Properties<number | string>['borderLeftWidth'];
   borderRadius?: keyof Theme['borderRadii'];
-  borderRightWidth?: CSS.Properties['borderRightWidth'];
+  borderRightWidth?: CSS.Properties<number | string>['borderRightWidth'];
   borderTopLeftRadius?: keyof Theme['borderRadii'];
   borderTopRightRadius?: keyof Theme['borderRadii'];
-  borderTopWidth?: CSS.Properties['borderTopWidth'];
-  borderWidth?: CSS.Properties['borderWidth'];
+  borderTopWidth?: CSS.Properties<number | string>['borderTopWidth'];
+  borderWidth?: CSS.Properties<number | string>['borderWidth'];
   bottom?: ResponsiveProp<Spacing>;
   component?: ElementType;
   height?: ResponsiveProp<Spacing>;
@@ -41,21 +48,52 @@ export type BoxOwnProps = {
   paddingTop?: ResponsiveProp<Spacing>;
   paddingX?: ResponsiveProp<Spacing>;
   paddingY?: ResponsiveProp<Spacing>;
-  position?: CSS.Properties['position'];
   right?: ResponsiveProp<Spacing>;
   size?: ResponsiveProp<Spacing>;
+  sx?: CSSObject;
   top?: ResponsiveProp<Spacing>;
   width?: ResponsiveProp<Spacing>;
 };
 
-const BoxRoot = styled.div<BoxOwnProps>(props => {
-  const foregroundColor = props.theme.getForegroundColor(props.backgroundColor);
-  const isLightBackground =
-    !foregroundColor || foregroundColor === props.theme.colors.textPrimary;
+const BoxRoot = styled.div<BoxOwnProps & { isKeyDown: boolean }>(props => {
+  const getInteractiveStyles = () => {
+    if (!props.isInteractive) return {};
 
-  return {
-    backgroundColor: props.theme.getColor(props.backgroundColor),
-    //----Group border radii to enable proper overriding----
+    const foregroundColor = props.theme.getForegroundColor(
+      props.backgroundColor,
+    );
+
+    return {
+      cursor: 'pointer',
+      position: 'relative',
+      '&::after': {
+        backgroundColor: foregroundColor,
+        bottom: 0,
+        content: '""',
+        left: 0,
+        pointerEvents: 'none',
+        opacity: 0,
+        position: 'absolute',
+        right: 0,
+        top: 0,
+        transition: 'opacity 100ms ease-in-out',
+        ...(props.isKeyDown
+          ? {
+              opacity: '0.25',
+            }
+          : {}),
+        ...borderRadii,
+      },
+      '&:hover::after, &:focus::after': {
+        opacity: '0.1',
+      },
+      '&:active::after': {
+        opacity: '0.25',
+      },
+    };
+  };
+
+  const borderRadii = {
     borderRadius: props.theme.getBorderRadius(props.borderRadius),
     borderBottomLeftRadius: props.theme.getBorderRadius(
       props.borderBottomLeftRadius,
@@ -67,44 +105,25 @@ const BoxRoot = styled.div<BoxOwnProps>(props => {
     borderTopRightRadius: props.theme.getBorderRadius(
       props.borderTopRightRadius,
     ),
-    //-------------------------------------------------------
-    borderColor: props.theme.getColor(props.borderColor),
-    borderStyle: props.borderColor && 'solid',
-    //----Group border widths to enable proper overriding----
-    borderWidth: props.borderWidth || 1,
-    borderRightWidth: props.borderRightWidth,
-    borderTopWidth: props.borderTopWidth,
-    borderBottomWidth: props.borderBottomWidth,
-    borderLeftWidth: props.borderLeftWidth,
-    //-------------------------------------------------------
-    ...(props.isInteractive
-      ? {
-          cursor: 'pointer',
-          overflow: 'hidden',
-          position: 'relative',
-          '&::after': {
-            backgroundColor: isLightBackground ? '#000' : '#fff',
-            bottom: 0,
-            content: '""',
-            left: 0,
-            pointerEvents: 'none',
-            opacity: 0,
-            position: 'absolute',
-            right: 0,
-            top: 0,
-            transition: 'opacity 100ms ease-in-out',
-          },
-          '&:hover::after': {
-            opacity: isLightBackground ? '0.1' : '0.2',
-          },
-          '&:active::after': {
-            opacity: isLightBackground ? '0.25' : '0.4',
-          },
-        }
-      : {}),
-    // Place after interactive overlay mixin to override the position set inside
-    position: props.position,
   };
+
+  return merge(
+    {
+      backgroundColor: props.theme.getColor(props.backgroundColor),
+      borderColor: props.theme.getColor(props.borderColor),
+      borderStyle: props.borderColor && 'solid',
+      //----Group border widths to enable proper overriding----
+      borderWidth: props.borderWidth,
+      borderRightWidth: props.borderRightWidth,
+      borderTopWidth: props.borderTopWidth,
+      borderBottomWidth: props.borderBottomWidth,
+      borderLeftWidth: props.borderLeftWidth,
+      //-------------------------------------------------------
+      ...borderRadii,
+    },
+    getInteractiveStyles(),
+    props.sx,
+  );
 });
 
 // Merge own props with others inherited from the underlying element type
@@ -118,10 +137,12 @@ const defaultElement = 'div';
 export function Box<E extends ElementType = typeof defaultElement>(
   props: BoxProps<E>,
 ): JSX.Element {
+  const [isKeyDown, setIsKeyDown] = useState<boolean>();
   const {
     bottom,
     component = defaultElement,
     height,
+    isInteractive,
     left,
     margin,
     marginBottom,
@@ -146,7 +167,8 @@ export function Box<E extends ElementType = typeof defaultElement>(
   } = props;
   const screenSizeType = useScreenSizeType();
   const theme = useTheme();
-  const style = React.useMemo(() => {
+
+  const style = useMemo(() => {
     const getValue = (baseValue: ResponsiveProp<Spacing | undefined>) =>
       theme.space(getResponsivePropValue(baseValue, screenSizeType));
 
@@ -194,5 +216,28 @@ export function Box<E extends ElementType = typeof defaultElement>(
     width,
   ]);
 
-  return <BoxRoot as={component} style={style} {...rest}></BoxRoot>;
+  const handleKeyDown = useCallback<KeyboardEventHandler<HTMLElement>>(
+    e => {
+      if (isInteractive && e.key === ' ') {
+        setIsKeyDown(true);
+      }
+    },
+    [isInteractive, setIsKeyDown],
+  );
+
+  const handleKeyUp = useCallback<KeyboardEventHandler<HTMLElement>>(() => {
+    setIsKeyDown(false);
+  }, [setIsKeyDown]);
+
+  return (
+    <BoxRoot
+      as={component}
+      isInteractive={isInteractive}
+      isKeyDown={!!isKeyDown}
+      onKeyDown={handleKeyDown}
+      onKeyUp={handleKeyUp}
+      style={style}
+      {...rest}
+    ></BoxRoot>
+  );
 }
