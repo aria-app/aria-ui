@@ -13672,10 +13672,10 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-polymorphic-box@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/react-polymorphic-box/-/react-polymorphic-box-3.0.3.tgz#4d0fe6e874a288c5c0868dce514962b100815d04"
-  integrity sha512-UUm65IGKXW7/KW4z4hyPFaQ8GMcdRMlMm3jPlU26DZ8CaWUbNP3wLD9dfjjSapgFC63uXCibtn6Th6IYd1Cm8g==
+react-polymorphic-types@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-polymorphic-types/-/react-polymorphic-types-1.1.0.tgz#5d7062e2991d12187c67a3e8001492c5c1b39018"
+  integrity sha512-RMHYMdiukpyNFeiWEay10e4kiwIlk1VSiIfvVzrimSJ9KVg9B2iNsd6lw2QPG31S2335YuAPnWPalE2w2eh64w==
 
 react-popper-tooltip@^2.8.3:
   version "2.11.1"
