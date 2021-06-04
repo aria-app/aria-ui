@@ -1,8 +1,11 @@
 import { useTheme } from '@emotion/react';
+import CSS from 'csstype';
 import { flatten, merge } from 'lodash';
 import React, { Children, forwardRef } from 'react';
 
-import { Spacing } from '../types';
+import { getResponsivePropValue } from '../helpers';
+import { useScreenSizeType } from '../hooks';
+import { ResponsiveProp, Spacing } from '../types';
 import { Box, BoxProps } from './Box';
 import { Divider, DividerThickness } from './Divider';
 
@@ -15,26 +18,34 @@ export type StackDirection =
   | 'row-reverse';
 
 export interface StackProps extends BoxProps<'div'> {
-  align?: StackAlignment;
-  direction?: StackDirection;
+  align?: ResponsiveProp<StackAlignment | undefined>;
+  alignSelf?: ResponsiveProp<StackAlignment | undefined>;
+  direction?: ResponsiveProp<StackDirection | undefined>;
   dividerThickness?: DividerThickness;
   isDivided?: boolean;
-  space?: Spacing;
+  space?: ResponsiveProp<Spacing | undefined>;
 }
 
 export const Stack = forwardRef<HTMLDivElement, StackProps>((props, ref) => {
   const {
-    align = 'stretch',
+    align,
+    alignSelf,
     children,
     component = 'div',
-    direction = 'column',
+    direction,
     dividerThickness,
     isDivided,
     space,
-    sx = {},
+    sx,
     ...rest
   } = props;
   const theme = useTheme();
+  const screenSizeType = useScreenSizeType();
+  const alignValue = getResponsivePropValue(align, screenSizeType) || 'stretch';
+  const alignSelfValue = getResponsivePropValue(alignSelf, screenSizeType);
+  const directionValue =
+    getResponsivePropValue(direction, screenSizeType) || 'column';
+  const spaceValue = getResponsivePropValue(space, screenSizeType);
 
   return (
     <Box
@@ -42,21 +53,17 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>((props, ref) => {
       ref={ref}
       sx={merge(
         {
-          alignItems: {
-            center: 'center',
-            end: 'flex-end',
-            start: 'flex-start',
-            stretch: 'stretch',
-          }[align],
+          alignItems: stackAlignToCSS(alignValue),
+          alignSelf: stackAlignToCSS(alignSelfValue),
           display: 'flex',
-          flexDirection: direction,
+          flexDirection: directionValue,
           '& > * + *': {
             [{
               column: 'marginTop',
               'column-reverse': 'marginBottom',
               row: 'marginLeft',
               'row-reverse': 'marginRight',
-            }[direction]]: theme.space(space),
+            }[directionValue]]: theme.space(spaceValue),
           },
         },
         sx,
@@ -70,7 +77,7 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>((props, ref) => {
                 <Divider
                   key={`divider-${index}`}
                   orientation={
-                    direction === 'row' || direction === 'row-reverse'
+                    directionValue === 'row' || directionValue === 'row-reverse'
                       ? 'vertical'
                       : 'horizontal'
                   }
@@ -87,3 +94,16 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>((props, ref) => {
 });
 
 Stack.displayName = 'Stack';
+
+function stackAlignToCSS(
+  stackAlignment?: StackAlignment,
+): CSS.Properties['alignItems'] {
+  return stackAlignment
+    ? {
+        center: 'center',
+        end: 'flex-end',
+        start: 'flex-start',
+        stretch: 'stretch',
+      }[stackAlignment]
+    : undefined;
+}

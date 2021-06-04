@@ -7,13 +7,15 @@ import { Text, TextProps } from './Text';
 export type IconSize = 'lg' | 'md' | 'sm';
 
 export interface IconProps extends Omit<TextProps, 'size' | 'variant'> {
-  icon: ReactElement;
+  icon?: ReactElement;
   size?: IconSize;
 }
 
 export const Icon: FC<IconProps> = props => {
   const { icon, size = 'md', sx, ...rest } = props;
   const theme = useTheme();
+
+  if (!icon) return null;
 
   return (
     <Text sx={merge({ lineHeight: 0 }, sx)} {...rest}>

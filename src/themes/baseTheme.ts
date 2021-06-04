@@ -13,7 +13,7 @@ const textVariants = {
   body: {
     fontSize: '16px',
     fontWeight: 400,
-    lineHeight: 1,
+    lineHeight: 'inherit',
   },
   button: {
     fontSize: '16px',
@@ -27,7 +27,7 @@ const textVariants = {
   },
   header: {
     fontSize: '24px',
-    fontWeight: 400,
+    fontWeight: 600,
     lineHeight: 1,
   },
   helper: {

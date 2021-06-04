@@ -11,6 +11,7 @@ const colors: Theme['colors'] = {
   brandPrimary: '#5944ff',
   brandSubtle: '#9b9bf9',
   textPrimary: '#333',
+  textSecondary: '#777',
 };
 
 export const lightTheme: Theme = {

@@ -46,6 +46,7 @@ export interface ThemeColors {
   brandPrimary: CSS.Properties['color'];
   brandSubtle: CSS.Properties['color'];
   textPrimary: CSS.Properties['color'];
+  textSecondary: CSS.Properties['color'];
 }
 
 export interface Theme extends ThemeBase {

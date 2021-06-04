@@ -14,12 +14,7 @@ export interface DividerProps extends BoxProps<'hr'> {
 }
 
 export const Divider: FC<DividerProps> = props => {
-  const {
-    orientation = 'horizontal',
-    thickness = 'md',
-    sx = {},
-    ...rest
-  } = props;
+  const { orientation = 'horizontal', thickness = 'md', sx, ...rest } = props;
   const theme = useTheme();
 
   const thicknessStyles =
