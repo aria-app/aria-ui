@@ -1,6 +1,6 @@
 import { useTheme } from '@emotion/react';
 import { merge } from 'lodash';
-import React, { FC } from 'react';
+import React, { forwardRef } from 'react';
 
 import { Box, BoxProps } from './Box';
 
@@ -13,7 +13,10 @@ export interface DividerProps extends BoxProps<'hr'> {
   thickness?: DividerThickness;
 }
 
-export const Divider: FC<DividerProps> = props => {
+export const Divider = forwardRef<HTMLHRElement, DividerProps>(function Divider(
+  props,
+  ref,
+) {
   const { orientation = 'horizontal', thickness = 'md', sx, ...rest } = props;
   const theme = useTheme();
 
@@ -39,10 +42,12 @@ export const Divider: FC<DividerProps> = props => {
   return (
     <Box
       component="hr"
+      ref={ref}
       sx={merge(
         {
           backgroundColor: theme.colors.border,
           border: 0,
+          label: 'Divider',
           ...thicknessStyles,
         },
         sx,
@@ -50,4 +55,4 @@ export const Divider: FC<DividerProps> = props => {
       {...rest}
     />
   );
-};
+});

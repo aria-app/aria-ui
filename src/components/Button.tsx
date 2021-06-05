@@ -1,5 +1,5 @@
 import { useTheme } from '@emotion/react';
-import React, { ElementType, FC, ReactElement, useMemo } from 'react';
+import React, { ElementType, forwardRef, ReactElement, useMemo } from 'react';
 
 import { Box, BoxProps } from './Box';
 import { Icon, IconSize } from './Icon';
@@ -19,7 +19,10 @@ export interface ButtonProps extends BoxProps<ElementType> {
   variant?: ButtonVariant;
 }
 
-export const Button: FC<ButtonProps> = props => {
+export const Button = forwardRef<
+  HTMLAnchorElement | HTMLButtonElement,
+  ButtonProps
+>(function Button(props, ref) {
   const {
     color = 'textPrimary',
     component = 'button',
@@ -83,6 +86,7 @@ export const Button: FC<ButtonProps> = props => {
       isInteractive={!disabled}
       paddingX={text ? 4 : undefined}
       paddingY={paddingY}
+      ref={ref}
       {...variantProps}
       sx={{
         alignItems: 'center',
@@ -91,6 +95,7 @@ export const Button: FC<ButtonProps> = props => {
         display: 'flex',
         flex: 'none',
         justifyContent: 'center',
+        label: 'Button',
         minWidth: text ? theme.space(6) : undefined,
         opacity: disabled ? 0.5 : undefined,
         outline: 'none',
@@ -151,4 +156,4 @@ export const Button: FC<ButtonProps> = props => {
       )}
     </Box>
   );
-};
+});

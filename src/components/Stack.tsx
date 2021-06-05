@@ -26,7 +26,10 @@ export interface StackProps extends BoxProps<'div'> {
   space?: ResponsiveProp<Spacing | undefined>;
 }
 
-export const Stack = forwardRef<HTMLDivElement, StackProps>((props, ref) => {
+export const Stack = forwardRef<HTMLDivElement, StackProps>(function Stack(
+  props,
+  ref,
+) {
   const {
     align,
     alignSelf,
@@ -57,6 +60,7 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>((props, ref) => {
           alignSelf: stackAlignToCSS(alignSelfValue),
           display: 'flex',
           flexDirection: directionValue,
+          label: 'Stack',
           '& > * + *': {
             [{
               column: 'marginTop',
@@ -92,8 +96,6 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>((props, ref) => {
     </Box>
   );
 });
-
-Stack.displayName = 'Stack';
 
 function stackAlignToCSS(
   stackAlignment?: StackAlignment,

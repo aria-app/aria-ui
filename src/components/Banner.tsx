@@ -1,5 +1,5 @@
 import { merge } from 'lodash';
-import React, { FC, KeyboardEventHandler } from 'react';
+import React, { forwardRef, KeyboardEventHandler } from 'react';
 
 import { Button } from './Button';
 import { Stack, StackProps } from './Stack';
@@ -13,10 +13,13 @@ export interface BannerProps extends StackProps {
   onDismiss?: KeyboardEventHandler<HTMLDivElement>;
 }
 
-export const Banner: FC<BannerProps> = props => {
+export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner(
+  props,
+  ref,
+) {
   const {
-    confirmText,
-    dismissText,
+    confirmText = 'Confirm',
+    dismissText = 'Dismiss',
     message,
     onConfirm,
     onDismiss,
@@ -30,9 +33,10 @@ export const Banner: FC<BannerProps> = props => {
       direction="row"
       paddingX={6}
       paddingY={[6, 6, 4]}
+      ref={ref}
       role="alert"
       space={6}
-      sx={merge({ width: '100%' }, sx)}
+      sx={merge({ label: 'Banner', width: '100%' }, sx)}
       {...rest}
     >
       <Stack
@@ -69,9 +73,4 @@ export const Banner: FC<BannerProps> = props => {
       </Stack>
     </Stack>
   );
-};
-
-Banner.defaultProps = {
-  confirmText: 'Confirm',
-  dismissText: 'Dismiss',
-};
+});

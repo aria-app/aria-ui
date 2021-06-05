@@ -62,7 +62,7 @@ export type BoxOwnProps = {
   width?: SpacingProp;
 };
 
-const BoxRoot = styled.div<BoxOwnProps & { isKeyDown: boolean }>(props => {
+const StyledBox = styled.div<BoxOwnProps & { isKeyDown: boolean }>(props => {
   const getInteractiveStyles = () => {
     if (!props.isInteractive) return {};
 
@@ -127,6 +127,7 @@ const BoxRoot = styled.div<BoxOwnProps & { isKeyDown: boolean }>(props => {
       borderLeftWidth: props.borderLeftWidth,
       //-------------------------------------------------------
       ...borderRadii,
+      label: 'Box',
     },
     getInteractiveStyles(),
     props.sx,
@@ -241,7 +242,7 @@ export const Box: PolymorphicForwardRefExoticComponent<
   }, [setIsKeyDown]);
 
   return (
-    <BoxRoot
+    <StyledBox
       as={component}
       isInteractive={isInteractive}
       isKeyDown={!!isKeyDown}
@@ -250,6 +251,6 @@ export const Box: PolymorphicForwardRefExoticComponent<
       ref={ref as ForwardedRef<HTMLDivElement>}
       style={style}
       {...rest}
-    ></BoxRoot>
+    ></StyledBox>
   );
 });
