@@ -16,8 +16,7 @@ import {
   PolymorphicPropsWithRef,
 } from 'react-polymorphic-types';
 
-import { getResponsivePropValue } from '../helpers';
-import { useScreenSizeType } from '../hooks';
+import { useResponsivePropValue } from '../hooks';
 import { ColorName, ResponsiveProp, Spacing, Theme } from '../types';
 
 type SpacingProp = ResponsiveProp<Spacing | undefined>;
@@ -151,82 +150,85 @@ export const Box: PolymorphicForwardRefExoticComponent<
 ): JSX.Element {
   const [isKeyDown, setIsKeyDown] = useState<boolean>();
   const {
-    bottom,
     component = defaultElement,
-    height,
     isInteractive,
-    left,
-    margin,
-    marginBottom,
-    marginLeft,
-    marginRight,
-    marginTop,
-    marginX,
-    marginY,
-    padding,
-    paddingBottom,
-    paddingLeft,
-    paddingRight,
-    paddingTop,
-    paddingX,
-    paddingY,
-    right,
-    size,
     style: styleProp = {},
-    top,
-    width,
     ...rest
   } = props;
-  const screenSizeType = useScreenSizeType();
   const theme = useTheme();
+  const bottomValue = useResponsivePropValue(props.bottom);
+  const heightValue = useResponsivePropValue(props.height);
+  const leftValue = useResponsivePropValue(props.left);
+  const marginValue = useResponsivePropValue(props.margin);
+  const marginBottomValue = useResponsivePropValue(props.marginBottom);
+  const marginLeftValue = useResponsivePropValue(props.marginLeft);
+  const marginRightValue = useResponsivePropValue(props.marginRight);
+  const marginTopValue = useResponsivePropValue(props.marginTop);
+  const marginXValue = useResponsivePropValue(props.marginX);
+  const marginYValue = useResponsivePropValue(props.marginY);
+  const paddingValue = useResponsivePropValue(props.padding);
+  const paddingBottomValue = useResponsivePropValue(props.paddingBottom);
+  const paddingLeftValue = useResponsivePropValue(props.paddingLeft);
+  const paddingRightValue = useResponsivePropValue(props.paddingRight);
+  const paddingTopValue = useResponsivePropValue(props.paddingTop);
+  const paddingXValue = useResponsivePropValue(props.paddingX);
+  const paddingYValue = useResponsivePropValue(props.paddingY);
+  const rightValue = useResponsivePropValue(props.right);
+  const sizeValue = useResponsivePropValue(props.size);
+  const topValue = useResponsivePropValue(props.top);
+  const widthValue = useResponsivePropValue(props.width);
 
-  const style = useMemo(() => {
-    const getValue = (baseValue: ResponsiveProp<Spacing | undefined>) =>
-      theme.space(getResponsivePropValue(baseValue, screenSizeType));
-
-    return {
-      bottom: getValue(bottom),
-      height: getValue(size || height),
-      left: getValue(left),
-      marginBottom: getValue(marginBottom || marginY || margin),
-      marginLeft: getValue(marginLeft || marginX || margin),
-      marginRight: getValue(marginRight || marginX || margin),
-      marginTop: getValue(marginTop || marginY || margin),
-      paddingBottom: getValue(paddingBottom || paddingY || padding),
-      paddingLeft: getValue(paddingLeft || paddingX || padding),
-      paddingRight: getValue(paddingRight || paddingX || padding),
-      paddingTop: getValue(paddingTop || paddingY || padding),
-      right: getValue(right),
-      top: getValue(top),
-      width: getValue(size || width),
+  const style = useMemo(
+    () => ({
+      bottom: theme.space(bottomValue),
+      height: theme.space(sizeValue || heightValue),
+      left: theme.space(leftValue),
+      marginBottom: theme.space(
+        marginBottomValue || marginYValue || marginValue,
+      ),
+      marginLeft: theme.space(marginLeftValue || marginXValue || marginValue),
+      marginRight: theme.space(marginRightValue || marginXValue || marginValue),
+      marginTop: theme.space(marginTopValue || marginYValue || marginValue),
+      paddingBottom: theme.space(
+        paddingBottomValue || paddingYValue || paddingValue,
+      ),
+      paddingLeft: theme.space(
+        paddingLeftValue || paddingXValue || paddingValue,
+      ),
+      paddingRight: theme.space(
+        paddingRightValue || paddingXValue || paddingValue,
+      ),
+      paddingTop: theme.space(paddingTopValue || paddingYValue || paddingValue),
+      right: theme.space(rightValue),
+      top: theme.space(topValue),
+      width: theme.space(sizeValue || widthValue),
       ...styleProp,
-    };
-  }, [
-    bottom,
-    height,
-    left,
-    margin,
-    marginBottom,
-    marginLeft,
-    marginRight,
-    marginTop,
-    marginX,
-    marginY,
-    padding,
-    paddingBottom,
-    paddingLeft,
-    paddingRight,
-    paddingTop,
-    paddingX,
-    paddingY,
-    right,
-    screenSizeType,
-    size,
-    styleProp,
-    theme,
-    top,
-    width,
-  ]);
+    }),
+    [
+      bottomValue,
+      heightValue,
+      leftValue,
+      marginBottomValue,
+      marginLeftValue,
+      marginRightValue,
+      marginTopValue,
+      marginValue,
+      marginXValue,
+      marginYValue,
+      paddingBottomValue,
+      paddingLeftValue,
+      paddingRightValue,
+      paddingTopValue,
+      paddingValue,
+      paddingXValue,
+      paddingYValue,
+      rightValue,
+      sizeValue,
+      theme,
+      topValue,
+      widthValue,
+    ],
+  );
 
   const handleKeyDown = useCallback<KeyboardEventHandler<HTMLElement>>(
     e => {

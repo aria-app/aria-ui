@@ -25,6 +25,7 @@
     "test:watch": "tsdx test --coverage --watch"
   },
   "dependencies": {
+    "capsize": "^2.0.0",
     "csstype": "3.0.8",
     "framer-motion": "^4.1.17",
     "lodash-es": "^4.17.21",

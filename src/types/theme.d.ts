@@ -1,3 +1,4 @@
+import { FontMetrics } from 'capsize';
 import CSS from 'csstype';
 
 export type ColorName = keyof ThemeColors | 'transparent';
@@ -5,9 +6,9 @@ export type ColorName = keyof ThemeColors | 'transparent';
 export type Spacing = number | 'auto';
 
 export interface TextVariant {
-  fontSize: CSS.Properties['fontSize'];
+  fontSize: number;
   fontWeight: CSS.Properties['fontWeight'];
-  lineHeight: CSS.Properties['lineHeight'];
+  leading?: number;
 }
 
 export interface ThemeBase {
@@ -18,6 +19,7 @@ export interface ThemeBase {
     sm: number;
   };
   fontFamily: CSS.Properties['fontFamily'];
+  fontMetrics: FontMetrics;
   getBorderRadius: (
     borderRadius?: keyof Theme['borderRadii'],
   ) => CSS.Properties<number | string>['borderRadius'] | undefined;

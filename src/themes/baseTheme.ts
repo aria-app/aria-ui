@@ -11,40 +11,44 @@ const borderRadii = {
 
 const textVariants = {
   body: {
-    fontSize: '16px',
+    fontSize: 16,
     fontWeight: 400,
-    lineHeight: 'inherit',
+    leading: 24,
   },
   button: {
-    fontSize: '16px',
+    fontSize: 16,
     fontWeight: 600,
-    lineHeight: 1,
+    leading: 16,
   },
   display: {
-    fontSize: '72px',
+    fontSize: 72,
     fontWeight: 600,
-    lineHeight: 1,
   },
   header: {
-    fontSize: '24px',
+    fontSize: 24,
     fontWeight: 600,
-    lineHeight: 1,
   },
   helper: {
-    fontSize: '14px',
+    fontSize: 14,
     fontWeight: 400,
-    lineHeight: 1,
   },
   label: {
-    fontSize: '16px',
+    fontSize: 16,
     fontWeight: 600,
-    lineHeight: 1,
   },
 };
 
 export const baseTheme: ThemeBase = {
   borderRadii,
   fontFamily: 'Nunito, Helvetica, sans-serif',
+  // Metrics for Nunito derived from https://seek-oss.github.io/capsize/
+  fontMetrics: {
+    capHeight: 705,
+    ascent: 1011,
+    descent: -353,
+    lineGap: 0,
+    unitsPerEm: 1000,
+  },
   getBorderRadius: borderRadius => borderRadius && borderRadii[borderRadius],
   getTextVariant: textVariant =>
     textVariant && textVariants[textVariant]
