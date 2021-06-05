@@ -1,5 +1,5 @@
-import capsize from 'capsize';
 import { useTheme } from '@emotion/react';
+import capsize from 'capsize';
 import { merge } from 'lodash';
 import React, { ElementType, forwardRef } from 'react';
 

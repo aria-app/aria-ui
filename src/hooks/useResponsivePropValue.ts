@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+
 import { getResponsivePropValue } from '../helpers';
 import { ResponsiveProp } from '../types';
 import { useScreenSizeType } from './useScreenSizeType';

@@ -7,8 +7,8 @@ import React, {
   ReactElement,
   Ref,
 } from 'react';
-import { ColorName } from '../types';
 
+import { ColorName } from '../types';
 import { Box, BoxProps } from './Box';
 
 export type IconSize = 'lg' | 'md' | 'sm';

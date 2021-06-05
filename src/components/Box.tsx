@@ -224,6 +224,7 @@ export const Box: PolymorphicForwardRefExoticComponent<
       paddingYValue,
       rightValue,
       sizeValue,
+      styleProp,
       theme,
       topValue,
       widthValue,
