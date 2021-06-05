@@ -39,7 +39,8 @@ export const Default: Story<BannerProps & {
 Default.args = {
   confirmText: 'Confirm',
   dismissText: 'Dismiss',
-  message: 'There have been changes to our project management system.',
+  message:
+    'This is a sample message that can be used to stretch out a component and test its ability to handle text.',
   showConfirmButton: true,
   showDismissButton: true,
 };

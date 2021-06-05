@@ -1,6 +1,6 @@
 import { useTheme } from '@emotion/react';
 import { merge } from 'lodash';
-import React, { ElementType, FC } from 'react';
+import React, { ElementType, forwardRef } from 'react';
 
 import { ColorName, Theme } from '../types';
 import { Box, BoxProps } from './Box';
@@ -11,7 +11,7 @@ export interface TextProps extends BoxProps<ElementType> {
   variant?: keyof Theme['textVariants'];
 }
 
-export const Text: FC<TextProps> = props => {
+export const Text = forwardRef<HTMLElement, TextProps>((props, ref) => {
   const {
     color,
     colorIsBackground,
@@ -29,10 +29,12 @@ export const Text: FC<TextProps> = props => {
   return (
     <Box
       component={component}
+      ref={ref}
       sx={merge(
         {
           color: themeColor || 'inherit',
           fontFamily: theme.fontFamily,
+          label: 'Text',
           ...theme.getTextVariant(variant),
         },
         sx,
@@ -40,4 +42,4 @@ export const Text: FC<TextProps> = props => {
       {...rest}
     />
   );
-};
+});

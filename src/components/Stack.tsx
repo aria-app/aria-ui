@@ -57,6 +57,7 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>((props, ref) => {
           alignSelf: stackAlignToCSS(alignSelfValue),
           display: 'flex',
           flexDirection: directionValue,
+          label: 'Stack',
           '& > * + *': {
             [{
               column: 'marginTop',
