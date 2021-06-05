@@ -14,7 +14,8 @@
     "analyze": "size-limit --why",
     "build-storybook": "build-storybook",
     "build": "tsdx build",
-    "lint": "tsdx lint",
+    "ci": "yarn lint && yarn build && yarn test",
+    "lint": "tsdx lint src stories test",
     "prepare": "tsdx build",
     "semantic-release": "semantic-release",
     "size": "size-limit",
@@ -29,7 +30,7 @@
     "lodash-es": "^4.17.21",
     "mdi-react": "^7.5.0",
     "polished": "^4.1.2",
-    "react-polymorphic-box": "^3.0.3",
+    "react-polymorphic-types": "^1.1.0",
     "react-responsive": "^8.2.0"
   },
   "peerDependencies": {

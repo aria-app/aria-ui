@@ -25,7 +25,7 @@ export const Spinner: FC<SpinnerProps> = props => {
     color = 'brandPrimary',
     colorIsBackground,
     size = 'md',
-    sx = {},
+    sx,
     ...rest
   } = props;
   const theme = useTheme();

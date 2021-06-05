@@ -4,7 +4,7 @@ import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
 import SearchIcon from 'mdi-react/SearchIcon';
 import React from 'react';
 
-import { Box, Button, ButtonProps } from '../src';
+import { Button, ButtonProps, Stack } from '../src';
 import * as argTypes from './argTypes';
 import { buttonVariants } from './constants';
 
@@ -14,6 +14,7 @@ export default {
   argTypes: {
     color: argTypes.color,
     disabled: { control: { type: 'boolean' } },
+    startIcon: { table: { disable: true } },
     isLoading: { control: { type: 'boolean' } },
     onClick: { action: 'onClick' },
     text: { control: { type: 'text' } },
@@ -37,9 +38,7 @@ export const Variants: Story<ButtonProps> = ({
   variant,
   ...rest
 }) => (
-  <Box
-    sx={{ alignItems: 'flex-start', display: 'flex', flexDirection: 'column' }}
-  >
+  <Stack space={4}>
     {orderBy(
       buttonVariants,
       buttonVariant => buttonVariants[buttonVariant],
@@ -52,7 +51,7 @@ export const Variants: Story<ButtonProps> = ({
         text={text || buttonVariant}
       />
     ))}
-  </Box>
+  </Stack>
 );
 
 Variants.args = {};
@@ -69,7 +68,10 @@ WithStartIcon.args = {
   text: 'Search',
 };
 
-WithStartIcon.argTypes = Variants.argTypes;
+WithStartIcon.argTypes = {
+  ...Variants.argTypes,
+  startIcon: { table: { disable: true } },
+};
 
 export const WithEndIcon: Story<ButtonProps> = args => <Variants {...args} />;
 
@@ -79,4 +81,7 @@ WithEndIcon.args = {
   text: 'Go Forward',
 };
 
-WithEndIcon.argTypes = Variants.argTypes;
+WithEndIcon.argTypes = {
+  ...Variants.argTypes,
+  endIcon: { table: { disable: true } },
+};

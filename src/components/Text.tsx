@@ -16,7 +16,7 @@ export const Text: FC<TextProps> = props => {
     color,
     colorIsBackground,
     component = 'span',
-    sx = {},
+    sx,
     variant = 'body',
     ...rest
   } = props;

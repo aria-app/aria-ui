@@ -1,4 +1,4 @@
-import { borderRadii, colors } from './constants';
+import { borderRadii, colors, statuses } from './constants';
 
 export const borderRadius = {
   control: { type: 'select' },
@@ -11,3 +11,8 @@ export const color = {
 };
 
 export const spacing = { control: { type: 'number' } };
+
+export const status = {
+  control: { type: 'inline-radio' },
+  options: [undefined, ...statuses],
+};

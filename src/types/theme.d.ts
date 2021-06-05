@@ -1,6 +1,6 @@
 import CSS from 'csstype';
 
-export type ColorName = keyof ThemeColors | CSS.Properties['color'];
+export type ColorName = keyof ThemeColors | 'transparent';
 
 export type Spacing = number | 'auto';
 
@@ -41,10 +41,15 @@ export interface ThemeBase {
 export interface ThemeColors {
   backgroundContrast: CSS.Properties['color'];
   backgroundDefault: CSS.Properties['color'];
+  border: CSS.Properties['color'];
   brandContrast: CSS.Properties['color'];
   brandPrimary: CSS.Properties['color'];
   brandSubtle: CSS.Properties['color'];
+  error: CSS.Properties['color'];
+  success: CSS.Properties['color'];
   textPrimary: CSS.Properties['color'];
+  textSecondary: CSS.Properties['color'];
+  warning: CSS.Properties['color'];
 }
 
 export interface Theme extends ThemeBase {
