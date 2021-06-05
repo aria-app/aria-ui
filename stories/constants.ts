@@ -4,7 +4,7 @@ import {
   StackAlignment,
   StackDirection,
 } from '../src';
-import { Theme } from '../src/types';
+import { Status, Theme } from '../src/types';
 
 export const borderRadii = Object.keys(
   lightTheme.borderRadii,
@@ -33,6 +33,8 @@ export const stackDirections: StackDirection[] = [
   'row',
   'row-reverse',
 ];
+
+export const statuses: Status[] = ['info', 'success', 'warning', 'error'];
 
 export const textVariants = Object.keys(
   lightTheme.textVariants,

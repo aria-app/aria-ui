@@ -10,8 +10,11 @@ const colors: Theme['colors'] = {
   brandContrast: '#9b9bf9',
   brandPrimary: '#5944ff',
   brandSubtle: '#2f2a9b',
+  error: '#fc381b',
+  success: '#6fbf50',
   textPrimary: '#fff',
   textSecondary: '#ccc',
+  warning: '#febb3f',
 };
 
 export const darkTheme: Theme = {

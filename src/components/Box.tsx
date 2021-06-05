@@ -20,6 +20,8 @@ import { getResponsivePropValue } from '../helpers';
 import { useScreenSizeType } from '../hooks';
 import { ColorName, ResponsiveProp, Spacing, Theme } from '../types';
 
+type SpacingProp = ResponsiveProp<Spacing | undefined>;
+
 // Component-specific props should be specified separately
 export type BoxOwnProps = {
   backgroundColor?: ColorName;
@@ -34,30 +36,30 @@ export type BoxOwnProps = {
   borderTopRightRadius?: keyof Theme['borderRadii'];
   borderTopWidth?: CSS.Properties<number | string>['borderTopWidth'];
   borderWidth?: CSS.Properties<number | string>['borderWidth'];
-  bottom?: ResponsiveProp<Spacing>;
+  bottom?: SpacingProp;
   component?: ElementType;
-  height?: ResponsiveProp<Spacing>;
+  height?: SpacingProp;
   isInteractive?: boolean;
-  left?: ResponsiveProp<Spacing>;
-  margin?: ResponsiveProp<Spacing>;
-  marginBottom?: ResponsiveProp<Spacing>;
-  marginLeft?: ResponsiveProp<Spacing>;
-  marginRight?: ResponsiveProp<Spacing>;
-  marginTop?: ResponsiveProp<Spacing>;
-  marginX?: ResponsiveProp<Spacing>;
-  marginY?: ResponsiveProp<Spacing>;
-  padding?: ResponsiveProp<Spacing>;
-  paddingBottom?: ResponsiveProp<Spacing>;
-  paddingLeft?: ResponsiveProp<Spacing>;
-  paddingRight?: ResponsiveProp<Spacing>;
-  paddingTop?: ResponsiveProp<Spacing>;
-  paddingX?: ResponsiveProp<Spacing>;
-  paddingY?: ResponsiveProp<Spacing>;
-  right?: ResponsiveProp<Spacing>;
-  size?: ResponsiveProp<Spacing>;
+  left?: SpacingProp;
+  margin?: SpacingProp;
+  marginBottom?: SpacingProp;
+  marginLeft?: SpacingProp;
+  marginRight?: SpacingProp;
+  marginTop?: SpacingProp;
+  marginX?: SpacingProp;
+  marginY?: SpacingProp;
+  padding?: SpacingProp;
+  paddingBottom?: SpacingProp;
+  paddingLeft?: SpacingProp;
+  paddingRight?: SpacingProp;
+  paddingTop?: SpacingProp;
+  paddingX?: SpacingProp;
+  paddingY?: SpacingProp;
+  right?: SpacingProp;
+  size?: SpacingProp;
   sx?: CSSObject;
-  top?: ResponsiveProp<Spacing>;
-  width?: ResponsiveProp<Spacing>;
+  top?: SpacingProp;
+  width?: SpacingProp;
 };
 
 const BoxRoot = styled.div<BoxOwnProps & { isKeyDown: boolean }>(props => {

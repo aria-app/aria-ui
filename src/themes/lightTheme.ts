@@ -10,8 +10,11 @@ const colors: Theme['colors'] = {
   brandContrast: '#2f2a9b',
   brandPrimary: '#5944ff',
   brandSubtle: '#9b9bf9',
+  error: '#fc381b',
+  success: '#6fbf50',
   textPrimary: '#333',
   textSecondary: '#777',
+  warning: '#febb3f',
 };
 
 export const lightTheme: Theme = {
