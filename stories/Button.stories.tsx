@@ -14,9 +14,18 @@ export default {
   argTypes: {
     color: argTypes.color,
     disabled: { control: { type: 'boolean' } },
-    startIcon: { table: { disable: true } },
+    endIcon: { table: { disable: true } },
+    endIconSize: {
+      control: { type: 'inline-radio' },
+      options: ['lg', 'md', 'sm'],
+    },
     isLoading: { control: { type: 'boolean' } },
     onClick: { action: 'onClick' },
+    startIcon: { table: { disable: true } },
+    startIconSize: {
+      control: { type: 'inline-radio' },
+      options: ['lg', 'md', 'sm'],
+    },
     text: { control: { type: 'text' } },
     variant: {
       control: { type: 'inline-radio' },

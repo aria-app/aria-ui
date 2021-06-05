@@ -1,6 +1,8 @@
 import { FontMetrics } from 'capsize';
 import CSS from 'csstype';
 
+import { RecursivePartial } from './utilities';
+
 export type ColorName = keyof ThemeColors | 'transparent';
 
 export type Spacing = number | 'auto';
@@ -23,6 +25,8 @@ export interface ThemeBase {
   getBorderRadius: (
     borderRadius?: keyof Theme['borderRadii'],
   ) => CSS.Properties<number | string>['borderRadius'] | undefined;
+  getColor: (color?: ColorName) => CSS.Properties['color'] | undefined;
+  getForegroundColor: (backgroundColor?: ColorName) => CSS.Properties['color'];
   getTextVariant: (textVariant?: keyof Theme['textVariants']) => TextVariant;
   screenSizes: {
     lg: number;
@@ -34,6 +38,7 @@ export interface ThemeBase {
     body: TextVariant;
     button: TextVariant;
     display: TextVariant;
+    field: TextVariant;
     header: TextVariant;
     helper: TextVariant;
     label: TextVariant;
@@ -56,8 +61,6 @@ export interface ThemeColors {
 
 export interface Theme extends ThemeBase {
   colors: ThemeColors;
-  getColor: (color?: ColorName) => CSS.Properties['color'] | undefined;
-  getForegroundColor: (backgroundColor?: ColorName) => CSS.Properties['color'];
 }
 
-export type ThemeOptions = RecursivePartial<Theme>;
+export type ThemeOptions = RecursivePartial<Theme> & { colors: ThemeColors };

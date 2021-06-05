@@ -17,7 +17,7 @@ export type StackDirection =
   | 'row'
   | 'row-reverse';
 
-export interface StackProps extends BoxProps<'div'> {
+export interface StackProps extends Omit<BoxProps<'div'>, 'ref'> {
   align?: ResponsiveProp<StackAlignment | undefined>;
   alignSelf?: ResponsiveProp<StackAlignment | undefined>;
   direction?: ResponsiveProp<StackDirection | undefined>;

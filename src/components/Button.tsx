@@ -12,8 +12,9 @@ export interface ButtonProps extends BoxProps<ElementType> {
   color?: BoxProps<ElementType>['backgroundColor'];
   component?: 'a' | 'button';
   endIcon?: ReactElement;
-  iconSize?: IconSize;
+  endIconSize?: IconSize;
   startIcon?: ReactElement;
+  startIconSize?: IconSize;
   isLoading?: boolean;
   text?: string;
   variant?: ButtonVariant;
@@ -28,9 +29,10 @@ export const Button = forwardRef<
     component = 'button',
     disabled,
     endIcon,
-    iconSize = 'md',
+    endIconSize = 'md',
     isLoading,
     startIcon,
+    startIconSize = 'md',
     text,
     variant = 'outlined',
     ...rest
@@ -94,7 +96,7 @@ export const Button = forwardRef<
           color={color}
           colorIsBackground={variant === 'contained'}
           icon={startIcon}
-          size={iconSize}
+          size={startIconSize}
           marginLeft={-1}
           marginRight={3}
           sx={{
@@ -121,7 +123,7 @@ export const Button = forwardRef<
           color={color}
           colorIsBackground={variant === 'contained'}
           icon={endIcon}
-          size={iconSize}
+          size={endIconSize}
           marginLeft={3}
           marginRight={-1}
           sx={{
