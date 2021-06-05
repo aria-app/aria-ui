@@ -1,11 +1,11 @@
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
-import { Banner, BannerProps } from '../src';
-import { status } from './argTypes';
+import { Banner, BannerProps } from '../../src';
+import { status } from '../argTypes';
 
 export default {
-  title: 'Banner',
+  title: 'Components/Banner',
   component: Banner,
   parameters: {
     layout: 'fullscreen',

@@ -1,11 +1,11 @@
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
-import { Spinner, SpinnerProps } from '../src';
-import * as argTypes from './argTypes';
+import { Spinner, SpinnerProps } from '../../src';
+import * as argTypes from '../argTypes';
 
 export default {
-  title: 'Spinner',
+  title: 'Components/Spinner',
   component: Spinner,
   argTypes: {
     color: argTypes.color,

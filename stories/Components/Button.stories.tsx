@@ -4,12 +4,12 @@ import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
 import SearchIcon from 'mdi-react/SearchIcon';
 import React from 'react';
 
-import { Button, ButtonProps, Stack } from '../src';
-import * as argTypes from './argTypes';
-import { buttonVariants } from './constants';
+import { Button, ButtonProps, Stack } from '../../src';
+import * as argTypes from '../argTypes';
+import { buttonVariants } from '../constants';
 
 export default {
-  title: 'Button',
+  title: 'Components/Button',
   component: Button,
   argTypes: {
     color: argTypes.color,

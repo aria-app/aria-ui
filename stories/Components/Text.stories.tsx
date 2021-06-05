@@ -2,12 +2,12 @@ import { Meta, Story } from '@storybook/react';
 import { orderBy } from 'lodash';
 import React from 'react';
 
-import { Box, lightTheme, Text, TextProps } from '../src';
-import * as argTypes from './argTypes';
-import { colors, textVariants } from './constants';
+import { Box, lightTheme, Text, TextProps } from '../../src';
+import * as argTypes from '../argTypes';
+import { colors, textVariants } from '../constants';
 
 export default {
-  title: 'Text',
+  title: 'Components/Text',
   component: Text,
   argTypes: {
     children: {

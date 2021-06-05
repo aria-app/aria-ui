@@ -3,10 +3,10 @@ import SearchIcon from 'mdi-react/SearchIcon';
 import SendIcon from 'mdi-react/SendIcon';
 import React from 'react';
 
-import { Box, Stack, TextField, TextFieldProps } from '../src';
+import { Box, Stack, TextField, TextFieldProps } from '../../src';
 
 export default {
-  title: 'TextField',
+  title: 'Components/TextField',
   component: TextField,
   argTypes: {
     disabled: { control: { type: 'boolean' } },
