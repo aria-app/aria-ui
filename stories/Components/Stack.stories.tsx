@@ -1,11 +1,11 @@
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
-import { Box, Stack, StackProps, Text } from '../src';
-import { stackAlignments, stackDirections } from './constants';
+import { Box, Stack, StackProps, Text } from '../../src';
+import { stackAlignments, stackDirections } from '../constants';
 
 export default {
-  title: 'Stack',
+  title: 'Components/Stack',
   component: Stack,
   argTypes: {
     align: { control: { type: 'inline-radio' }, options: stackAlignments },

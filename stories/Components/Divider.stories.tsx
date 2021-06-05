@@ -1,10 +1,10 @@
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
-import { Box, Divider, DividerProps } from '../src';
+import { Box, Divider, DividerProps } from '../../src';
 
 export default {
-  title: 'Divider',
+  title: 'Components/Divider',
   component: Divider,
   argTypes: {
     thickness: {

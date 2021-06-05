@@ -1,11 +1,11 @@
 import { Meta, Story } from '@storybook/react';
 import React, { ElementType } from 'react';
 
-import { Box, BoxProps, Text, useScreenSizeType } from '../src';
-import { borderRadius, color as colorArgType, spacing } from './argTypes';
+import { Box, BoxProps, Text, useScreenSizeType } from '../../src';
+import { borderRadius, color as colorArgType, spacing } from '../argTypes';
 
 export default {
-  title: 'Box',
+  title: 'Components/Box',
   component: Box,
   argTypes: {
     backgroundColor: colorArgType,

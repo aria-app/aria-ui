@@ -2,11 +2,11 @@ import { Meta, Story } from '@storybook/react';
 import StarIcon from 'mdi-react/StarIcon';
 import React from 'react';
 
-import { Icon, IconProps } from '../src';
-import * as argTypes from './argTypes';
+import { Icon, IconProps } from '../../src';
+import * as argTypes from '../argTypes';
 
 export default {
-  title: 'Icon',
+  title: 'Components/Icon',
   component: Icon,
   argTypes: {
     color: argTypes.color,
