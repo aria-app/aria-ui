@@ -11,7 +11,10 @@ export interface TextProps extends BoxProps<ElementType> {
   variant?: keyof Theme['textVariants'];
 }
 
-export const Text = forwardRef<HTMLElement, TextProps>((props, ref) => {
+export const Text = forwardRef<HTMLElement, TextProps>(function Text(
+  props,
+  ref,
+) {
   const {
     color,
     colorIsBackground,

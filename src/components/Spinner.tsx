@@ -21,7 +21,7 @@ export interface SpinnerProps extends Omit<BoxProps<'div'>, 'size'> {
 }
 
 export const Spinner = forwardRef<HTMLDivElement, SpinnerProps>(
-  (props, ref) => {
+  function Spinner(props, ref) {
     const {
       color = 'brandPrimary',
       colorIsBackground,

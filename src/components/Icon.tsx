@@ -11,7 +11,10 @@ export interface IconProps extends Omit<TextProps, 'size' | 'variant'> {
   size?: IconSize;
 }
 
-export const Icon = forwardRef<HTMLElement, IconProps>((props, ref) => {
+export const Icon = forwardRef<HTMLElement, IconProps>(function Icon(
+  props,
+  ref,
+) {
   const { icon, size = 'md', sx, ...rest } = props;
   const theme = useTheme();
 
