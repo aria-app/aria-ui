@@ -36,8 +36,8 @@ export const Banner: FC<BannerProps> = props => {
       {...rest}
     >
       <Stack
-        align={[, , 'center']}
-        direction={[, , 'row']}
+        align={['stretch', 'stretch', 'center']}
+        direction={['column', 'column', 'row']}
         space={4}
         sx={{ flex: 1 }}
       >

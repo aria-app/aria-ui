@@ -58,16 +58,16 @@ export const Button: FC<ButtonProps> = props => {
       ({
         contained: {
           backgroundColor,
-          borderColor: 'transparent',
+          borderColor: 'transparent' as const,
           borderWidth: 0,
         },
         minimal: {
-          backgroundColor: 'transparent',
-          borderColor: 'transparent',
+          backgroundColor: 'transparent' as const,
+          borderColor: 'transparent' as const,
           borderWidth: 0,
         },
         outlined: {
-          backgroundColor: 'transparent',
+          backgroundColor: 'transparent' as const,
           borderColor: color,
           borderWidth: 3,
         },

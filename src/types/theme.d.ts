@@ -1,6 +1,6 @@
 import CSS from 'csstype';
 
-export type ColorName = keyof ThemeColors | CSS.Properties['color'];
+export type ColorName = keyof ThemeColors | 'transparent';
 
 export type Spacing = number | 'auto';
 
