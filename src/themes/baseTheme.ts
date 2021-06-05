@@ -4,9 +4,9 @@ import { ThemeBase } from '../types';
 
 const borderRadii = {
   full: 9999,
-  md: 6,
+  md: 8,
   none: 0,
-  sm: 2,
+  sm: 4,
 };
 
 const textVariants = {
@@ -18,10 +18,13 @@ const textVariants = {
   button: {
     fontSize: 16,
     fontWeight: 600,
-    leading: 16,
   },
   display: {
     fontSize: 72,
+    fontWeight: 600,
+  },
+  field: {
+    fontSize: 16,
     fontWeight: 600,
   },
   header: {
@@ -43,7 +46,7 @@ export const baseTheme: ThemeBase = {
   fontFamily: 'Nunito, Helvetica, sans-serif',
   // Metrics for Nunito derived from https://seek-oss.github.io/capsize/
   fontMetrics: {
-    capHeight: 730,
+    capHeight: 705,
     ascent: 1011,
     descent: -353,
     lineGap: 0,

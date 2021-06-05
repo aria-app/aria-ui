@@ -34,6 +34,7 @@ export interface ThemeBase {
     body: TextVariant;
     button: TextVariant;
     display: TextVariant;
+    field: TextVariant;
     header: TextVariant;
     helper: TextVariant;
     label: TextVariant;

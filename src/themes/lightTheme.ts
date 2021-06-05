@@ -5,15 +5,15 @@ import { baseTheme } from './baseTheme';
 
 const colors: Theme['colors'] = {
   backgroundContrast: '#fff',
-  backgroundDefault: '#e5e5e5',
-  border: '#ccc',
+  backgroundDefault: '#ebebfe',
+  border: '#f5f5ff',
   brandContrast: '#2f2a9b',
   brandPrimary: '#5944ff',
   brandSubtle: '#9b9bf9',
   error: '#fc381b',
   success: '#6fbf50',
-  textPrimary: '#333',
-  textSecondary: '#777',
+  textPrimary: '#222238',
+  textSecondary: '#5d5d7e',
   warning: '#febb3f',
 };
 
