@@ -37,30 +37,11 @@ export const Button = forwardRef<
   } = props;
   const theme = useTheme();
 
-  const backgroundColor = useMemo(
-    () => (variant === 'contained' ? color : undefined),
-    [color, variant],
-  );
-
-  const paddingY = useMemo(() => {
-    if (endIcon || startIcon) {
-      const basePadding = {
-        lg: 2,
-        md: 3,
-        sm: 4,
-      }[iconSize];
-
-      return variant === 'outlined' ? basePadding - 0.75 : basePadding;
-    }
-
-    return variant === 'outlined' ? 3.25 : 4;
-  }, [endIcon, iconSize, startIcon, variant]);
-
   const variantProps = useMemo(
     () =>
       ({
         contained: {
-          backgroundColor,
+          backgroundColor: variant === 'contained' ? color : undefined,
           borderColor: 'transparent' as const,
           borderWidth: 0,
         },
@@ -75,7 +56,7 @@ export const Button = forwardRef<
           borderWidth: 3,
         },
       }[variant]),
-    [backgroundColor, color, variant],
+    [color, variant],
   );
 
   return (
@@ -83,9 +64,9 @@ export const Button = forwardRef<
       borderRadius="md"
       component={component}
       disabled={disabled}
+      height={12}
       isInteractive={!disabled}
       paddingX={text ? 4 : undefined}
-      paddingY={paddingY}
       ref={ref}
       {...variantProps}
       sx={{

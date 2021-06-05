@@ -9,7 +9,6 @@ import { Box, BoxProps } from './Box';
 export interface TextProps extends BoxProps<ElementType> {
   color?: ColorName;
   colorIsBackground?: boolean;
-  trimSpace?: boolean;
   variant?: keyof Theme['textVariants'];
 }
 
@@ -22,7 +21,6 @@ export const Text = forwardRef<HTMLElement, TextProps>(function Text(
     colorIsBackground,
     component = 'span',
     sx,
-    trimSpace = true,
     variant = 'body',
     ...rest
   } = props;
@@ -49,7 +47,6 @@ export const Text = forwardRef<HTMLElement, TextProps>(function Text(
             fontSize,
             leading,
           }),
-          ...(trimSpace ? {} : { '::after': {}, '::before': {} }),
         },
         sx,
       )}
