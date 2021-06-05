@@ -1,9 +1,8 @@
 import { Meta, Story } from '@storybook/react';
 import { orderBy } from 'lodash';
-import React, { ElementType } from 'react';
+import React from 'react';
 
-import { Box, Text, TextProps } from '../src';
-import { baseTheme } from '../src/themes/baseTheme';
+import { Box, lightTheme, Text, TextProps } from '../src';
 import * as argTypes from './argTypes';
 import { colors, textVariants } from './constants';
 
@@ -25,15 +24,13 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<TextProps<ElementType>> = args => (
-  <Text {...args} />
-);
+export const Default: Story<TextProps> = args => <Text {...args} />;
 
 Default.args = {
   children: 'The quick brown fox jumps over the lazy dog',
 };
 
-export const Colors: Story<TextProps<ElementType>> = ({
+export const Colors: Story<TextProps> = ({
   children,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   color: colorProp,
@@ -66,7 +63,7 @@ Colors.argTypes = {
   colorIsBackground: { table: { disable: true } },
 };
 
-export const Variants: Story<TextProps<ElementType>> = ({
+export const Variants: Story<TextProps> = ({
   children,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   variant,
@@ -75,7 +72,7 @@ export const Variants: Story<TextProps<ElementType>> = ({
   <Box style={{ maxWidth: 900 }}>
     {orderBy(
       textVariants,
-      textVariant => baseTheme.textVariants[textVariant].fontSize,
+      textVariant => lightTheme.textVariants[textVariant].fontSize,
       'desc',
     ).map(textVariant => (
       <Text key={textVariant} variant={textVariant} {...rest}>

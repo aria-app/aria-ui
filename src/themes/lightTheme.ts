@@ -1,39 +1,17 @@
-import readableColor from 'polished/lib/color/readableColor';
+import { createTheme } from './createTheme';
 
-import { Theme } from '../types';
-import { baseTheme } from './baseTheme';
-
-const colors: Theme['colors'] = {
-  backgroundContrast: '#fff',
-  backgroundDefault: '#ebebfe',
-  border: '#f5f5ff',
-  brandContrast: '#2f2a9b',
-  brandPrimary: '#5944ff',
-  brandSubtle: '#9b9bf9',
-  error: '#fc381b',
-  success: '#6fbf50',
-  textPrimary: '#222238',
-  textSecondary: '#5d5d7e',
-  warning: '#febb3f',
-};
-
-export const lightTheme: Theme = {
-  ...baseTheme,
-  colors,
-  getForegroundColor: backgroundColor => {
-    const themeColor =
-      colors[backgroundColor as keyof Theme['colors']] || backgroundColor;
-
-    if (!themeColor || backgroundColor === 'transparent')
-      return colors.textPrimary;
-
-    return readableColor(themeColor, colors.textPrimary);
+export const lightTheme = createTheme({
+  colors: {
+    backgroundContrast: '#fff',
+    backgroundDefault: '#e3e3fc',
+    border: '#f5f5ff',
+    brandContrast: '#2f2a9b',
+    brandPrimary: '#5944ff',
+    brandSubtle: '#9b9bf9',
+    error: '#fc381b',
+    success: '#6fbf50',
+    textPrimary: '#222238',
+    textSecondary: '#646487',
+    warning: '#febb3f',
   },
-  getColor: color => {
-    const themeColor = colors[color as keyof Theme['colors']];
-
-    if (!color || !themeColor) return color;
-
-    return themeColor;
-  },
-};
+});
