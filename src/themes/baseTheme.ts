@@ -43,7 +43,7 @@ export const baseTheme: ThemeBase = {
   fontFamily: 'Nunito, Helvetica, sans-serif',
   // Metrics for Nunito derived from https://seek-oss.github.io/capsize/
   fontMetrics: {
-    capHeight: 705,
+    capHeight: 730,
     ascent: 1011,
     descent: -353,
     lineGap: 0,
