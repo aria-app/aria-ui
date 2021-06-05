@@ -1,3 +1,4 @@
+import capsize from 'capsize';
 import { useTheme } from '@emotion/react';
 import { merge } from 'lodash';
 import React, { ElementType, forwardRef } from 'react';
@@ -8,6 +9,7 @@ import { Box, BoxProps } from './Box';
 export interface TextProps extends BoxProps<ElementType> {
   color?: ColorName;
   colorIsBackground?: boolean;
+  trimSpace?: boolean;
   variant?: keyof Theme['textVariants'];
 }
 
@@ -20,10 +22,13 @@ export const Text = forwardRef<HTMLElement, TextProps>(function Text(
     colorIsBackground,
     component = 'span',
     sx,
+    trimSpace = true,
     variant = 'body',
     ...rest
   } = props;
   const theme = useTheme();
+
+  const { fontSize, fontWeight, leading } = theme.getTextVariant(variant);
 
   const themeColor = colorIsBackground
     ? theme.getForegroundColor(color)
@@ -37,8 +42,14 @@ export const Text = forwardRef<HTMLElement, TextProps>(function Text(
         {
           color: themeColor || 'inherit',
           fontFamily: theme.fontFamily,
+          fontWeight: fontWeight,
           label: 'Text',
-          ...theme.getTextVariant(variant),
+          ...capsize({
+            fontMetrics: theme.fontMetrics,
+            fontSize,
+            leading,
+          }),
+          ...(trimSpace ? {} : { '::after': {}, '::before': {} }),
         },
         sx,
       )}

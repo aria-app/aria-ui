@@ -129,6 +129,7 @@ export const Button = forwardRef<
             pointerEvents: disabled ? 'none' : undefined,
             visibility: isLoading ? 'hidden' : undefined,
           }}
+          trimSpace={false}
           variant="button"
         >
           {text}
