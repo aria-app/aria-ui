@@ -7,6 +7,7 @@ export * from './GlobalStyles';
 export * from './Icon';
 export * from './IconButton';
 export * from './ListItem';
+export * from './Overlay';
 export * from './Spinner';
 export * from './Stack';
 export * from './Text';
