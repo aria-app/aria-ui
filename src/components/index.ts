@@ -5,6 +5,7 @@ export * from './Divider';
 export * from './FormGroup';
 export * from './GlobalStyles';
 export * from './Icon';
+export * from './IconButton';
 export * from './ListItem';
 export * from './Spinner';
 export * from './Stack';

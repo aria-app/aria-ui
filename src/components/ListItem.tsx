@@ -1,14 +1,20 @@
-import { CSSObject, useTheme } from '@emotion/react';
+import { CSSObject } from '@emotion/react';
 import { merge } from 'lodash';
-import React, { forwardRef, ReactElement } from 'react';
+import React, { forwardRef, MouseEventHandler, ReactElement } from 'react';
 
 import { ColorName } from '../types';
 import { Box, BoxProps } from './Box';
-import { Icon, IconSize } from './Icon';
+import { IconSize } from './Icon';
+import { IconButton } from './IconButton';
 import { Stack } from './Stack';
 import { Text } from './Text';
 
 export interface ListItemProps extends Omit<BoxProps<'li'>, 'ref'> {
+  endIcon?: ReactElement;
+  endIconColor?: ColorName;
+  endIconSize?: IconSize;
+  onEndIconClick?: MouseEventHandler<HTMLButtonElement>;
+  onStartIconClick?: MouseEventHandler<HTMLButtonElement>;
   primaryText?: string;
   primaryTextColor?: ColorName;
   secondaryText?: string;
@@ -21,6 +27,11 @@ export interface ListItemProps extends Omit<BoxProps<'li'>, 'ref'> {
 export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
   function ListItem(props, ref) {
     const {
+      endIcon,
+      endIconColor = 'textSecondary',
+      endIconSize = 'md',
+      onEndIconClick,
+      onStartIconClick,
       primaryText,
       primaryTextColor = 'textPrimary',
       secondaryText,
@@ -31,7 +42,6 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
       sx,
       ...rest
     } = props;
-    const theme = useTheme();
 
     return (
       <Box
@@ -41,33 +51,57 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
         paddingY={4}
         sx={merge<CSSObject, CSSObject | undefined>(
           {
-            backgroundColor: theme.colors.border,
-            border: 0,
             label: 'ListItem',
             listStyle: 'none',
+            position: 'relative',
           },
           sx,
         )}
         {...rest}
       >
-        <Stack align="center" direction="row" space={4}>
+        <Box
+          isInteractive
+          sx={{
+            bottom: 0,
+            left: 0,
+            position: 'absolute',
+            right: 0,
+            top: 0,
+            zIndex: 1,
+          }}
+        />
+        <Stack align="center" direction="row" space={2}>
           {startIcon && (
-            <Icon
+            <IconButton
               color={startIconColor}
               icon={startIcon}
+              marginLeft={-1}
+              onClick={onStartIconClick}
               size={startIconSize}
             />
           )}
           <Stack space={3}>
             {primaryText && (
-              <Text color={primaryTextColor} variant="label">
-                {primaryText}
-              </Text>
+              <Box>
+                <Text color={primaryTextColor} variant="label">
+                  {primaryText}
+                </Text>
+              </Box>
             )}
             {secondaryText && (
               <Text color={secondaryTextColor}>{secondaryText}</Text>
             )}
           </Stack>
+          {endIcon && (
+            <IconButton
+              color={endIconColor}
+              icon={endIcon}
+              marginRight={-1}
+              onClick={onEndIconClick}
+              size={endIconSize}
+              sx={{ position: 'relative', zIndex: 3 }}
+            />
+          )}
         </Stack>
       </Box>
     );
