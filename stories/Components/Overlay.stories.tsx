@@ -1,18 +1,16 @@
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
-import { Overlay } from '../../src';
+import { Overlay, OverlayProps } from '../../src';
 
 export default {
   title: 'Components/Overlay',
   component: Overlay,
   argTypes: {
-    showComponent: { control: { type: 'boolean' }, name: 'Show Component' },
+    isVisible: { control: { type: 'boolean' } },
   },
 } as Meta;
 
-export const Default: Story<{ showComponent: boolean }> = ({
-  showComponent,
-}) => <>{showComponent ? <Overlay /> : null}</>;
+export const Default: Story<OverlayProps> = args => <Overlay {...args} />;
 
-Default.args = { showComponent: true };
+Default.args = { isVisible: true };
