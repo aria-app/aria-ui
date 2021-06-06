@@ -1,0 +1,29 @@
+import { merge } from 'lodash';
+import React, { forwardRef } from 'react';
+
+import { Box, BoxProps } from './Box';
+
+export interface {{pascalCase name}}Props extends BoxProps<'div'> {
+  myProp?: any;
+}
+
+export const {{pascalCase name}} = forwardRef<HTMLDivElement, {{pascalCase name}}Props>(function {{pascalCase name}}(
+  props,
+  ref,
+) {
+  const { myProp, sx, ...rest } = props;
+
+  return (
+    <Box
+      as="div"
+      ref={ref}
+      sx={merge(
+        {
+          label: '{{pascalCase name}}',
+        },
+        sx,
+      )}
+      {...rest}
+    />
+  );
+});

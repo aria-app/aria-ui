@@ -68,6 +68,7 @@ export const WithStartIcon: Story<ListItemProps> = args => (
 );
 
 WithStartIcon.args = {};
+
 WithStartIcon.argTypes = {
   onStartIconClick: { action: 'onStartIconClick' },
 };
