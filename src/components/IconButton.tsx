@@ -1,5 +1,5 @@
 import { merge } from 'lodash';
-import React, { forwardRef, MouseEventHandler } from 'react';
+import React, { forwardRef } from 'react';
 
 import { Box, BoxProps } from './Box';
 import { Icon, IconProps } from './Icon';
@@ -9,7 +9,6 @@ export interface IconButtonProps extends Omit<BoxProps<'button'>, 'size'> {
   colorIsBackground?: IconProps['colorIsBackground'];
   disabled?: boolean;
   icon?: IconProps['icon'];
-  onClick?: MouseEventHandler<HTMLButtonElement>;
   size?: IconProps['size'];
 }
 
@@ -20,7 +19,6 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       colorIsBackground,
       disabled,
       icon,
-      onClick,
       size,
       sx,
       ...rest
@@ -30,10 +28,11 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       <Box
         backgroundColor="transparent"
         borderRadius="md"
+        childColor={colorIsBackground ? undefined : color}
         component="button"
-        isInteractive={!!onClick}
-        onClick={onClick}
+        isInteractive
         padding={2}
+        parentColor={colorIsBackground ? color : undefined}
         ref={ref}
         sx={merge(
           {

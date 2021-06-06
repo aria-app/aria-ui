@@ -20,6 +20,7 @@ export interface ListItemProps extends Omit<BoxProps<'li'>, 'ref'> {
   onClick?: MouseEventHandler<HTMLElement>;
   onEndIconClick?: MouseEventHandler<HTMLButtonElement>;
   onStartIconClick?: MouseEventHandler<HTMLButtonElement>;
+  parentColor?: BoxProps<'li'>['parentColor'];
   primaryText?: string;
   primaryTextColor?: ColorName;
   secondaryText?: string;
@@ -38,6 +39,7 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
       onClick,
       onEndIconClick,
       onStartIconClick,
+      parentColor,
       primaryText,
       primaryTextColor = 'textPrimary',
       secondaryText,
@@ -76,6 +78,7 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
           <Box
             isInteractive
             onClick={onClick}
+            parentColor={parentColor}
             sx={{
               bottom: 0,
               left: 0,
@@ -91,6 +94,7 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
             <IconButton
               color={startIconColor}
               icon={startIcon}
+              isInteractive={!!onStartIconClick}
               marginLeft={iconPaddingCorrection}
               marginY={iconPaddingCorrection}
               onClick={onStartIconClick}
@@ -118,6 +122,7 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
             <IconButton
               color={endIconColor}
               icon={endIcon}
+              isInteractive={!!onEndIconClick}
               marginRight={iconPaddingCorrection}
               marginY={iconPaddingCorrection}
               onClick={onEndIconClick}

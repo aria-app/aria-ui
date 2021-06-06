@@ -16,6 +16,7 @@ import {
   PolymorphicPropsWithRef,
 } from 'react-polymorphic-types';
 
+import { isLightColor } from '../helpers';
 import { useResponsivePropValue } from '../hooks';
 import { ColorName, ResponsiveProp, Spacing, Theme } from '../types';
 
@@ -36,6 +37,7 @@ export type BoxOwnProps = {
   borderTopWidth?: CSS.Properties<number | string>['borderTopWidth'];
   borderWidth?: CSS.Properties<number | string>['borderWidth'];
   bottom?: SpacingProp;
+  childColor?: ColorName;
   component?: ElementType;
   height?: SpacingProp;
   isInteractive?: boolean;
@@ -54,6 +56,7 @@ export type BoxOwnProps = {
   paddingTop?: SpacingProp;
   paddingX?: SpacingProp;
   paddingY?: SpacingProp;
+  parentColor?: ColorName;
   right?: SpacingProp;
   size?: SpacingProp;
   sx?: CSSObject;
@@ -65,9 +68,11 @@ const StyledBox = styled.div<BoxOwnProps & { isKeyDown: boolean }>(props => {
   const getInteractiveStyles = () => {
     if (!props.isInteractive) return {};
 
-    const foregroundColor = props.theme.getForegroundColor(
-      props.backgroundColor,
-    );
+    const foregroundColor = props.childColor
+      ? props.theme.getColor(props.childColor)
+      : props.theme.getForegroundColor(
+          props.parentColor || props.backgroundColor,
+        );
 
     return {
       cursor: 'pointer',
@@ -91,10 +96,10 @@ const StyledBox = styled.div<BoxOwnProps & { isKeyDown: boolean }>(props => {
         ...borderRadii,
       },
       '&:hover::after, &:focus::after': {
-        opacity: '0.1',
+        opacity: isLightColor(foregroundColor || 'white') ? '0.2' : '0.1',
       },
       '&:active::after': {
-        opacity: '0.25',
+        opacity: isLightColor(foregroundColor || 'white') ? '0.4' : '0.25',
       },
     };
   };

@@ -52,6 +52,7 @@ export const Stack = forwardRef<HTMLElement, StackProps>(function Stack(
 
   return (
     <Box
+      as={component}
       component={component}
       ref={ref}
       sx={merge(

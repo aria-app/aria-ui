@@ -64,6 +64,7 @@ export const Button = forwardRef<
   return (
     <Box
       borderRadius="md"
+      childColor={variant !== 'contained' ? color : undefined}
       component={component}
       disabled={disabled}
       height={12}
@@ -85,7 +86,6 @@ export const Button = forwardRef<
         pointerEvents: isLoading ? 'none' : undefined,
         position: 'relative',
         '&::after': {
-          borderRadius: 5,
           margin: variant === 'outlined' ? -3 : undefined,
         },
       }}

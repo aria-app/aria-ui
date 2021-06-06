@@ -48,7 +48,7 @@ export const Icon = forwardRef<HTMLElement, IconProps>(function Icon(
       size={{ lg: 8, md: 6, sm: 4 }[size]}
       sx={merge(
         {
-          color: themeColor || 'inherit',
+          color: themeColor,
           label: 'Icon',
           lineHeight: 0,
         },

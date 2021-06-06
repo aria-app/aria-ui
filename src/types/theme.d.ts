@@ -25,8 +25,10 @@ export interface ThemeBase {
   getBorderRadius: (
     borderRadius?: keyof Theme['borderRadii'],
   ) => CSS.Properties<number | string>['borderRadius'] | undefined;
-  getColor: (color?: ColorName) => CSS.Properties['color'] | undefined;
-  getForegroundColor: (backgroundColor?: ColorName) => CSS.Properties['color'];
+  getColor: (colorName?: ColorName) => CSS.Properties['color'] | undefined;
+  getForegroundColor: (
+    backgroundColorName?: ColorName,
+  ) => CSS.Properties['color'];
   getTextVariant: (textVariant?: keyof Theme['textVariants']) => TextVariant;
   screenSizes: {
     lg: number;
