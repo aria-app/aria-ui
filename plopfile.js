@@ -26,7 +26,7 @@ module.exports = function(plop) {
         path: 'src/components/index.ts',
         transform: (content, action) => {
           const lines = content.split('\n').filter(line => line !== '');
-          const filename = _.startCase(_.camelCase(action.name));
+          const filename = _.upperFirst(_.camelCase(action.name));
           const lineToAdd = `export * from './${filename}';`;
 
           if (lines.includes(lineToAdd)) return content;
