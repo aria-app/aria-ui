@@ -41,6 +41,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
             cursor: disabled ? 'not-allowed' : undefined,
             label: 'IconButton',
             opacity: disabled ? 0.5 : undefined,
+            outline: 'none',
           },
           sx,
         )}

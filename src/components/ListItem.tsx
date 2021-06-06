@@ -1,6 +1,10 @@
-import { CSSObject } from '@emotion/react';
 import { merge } from 'lodash';
-import React, { forwardRef, MouseEventHandler, ReactElement } from 'react';
+import React, {
+  forwardRef,
+  MouseEventHandler,
+  ReactElement,
+  useMemo,
+} from 'react';
 
 import { ColorName } from '../types';
 import { Box, BoxProps } from './Box';
@@ -13,6 +17,7 @@ export interface ListItemProps extends Omit<BoxProps<'li'>, 'ref'> {
   endIcon?: ReactElement;
   endIconColor?: ColorName;
   endIconSize?: IconSize;
+  onClick?: MouseEventHandler<HTMLElement>;
   onEndIconClick?: MouseEventHandler<HTMLButtonElement>;
   onStartIconClick?: MouseEventHandler<HTMLButtonElement>;
   primaryText?: string;
@@ -30,6 +35,7 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
       endIcon,
       endIconColor = 'textSecondary',
       endIconSize = 'md',
+      onClick,
       onEndIconClick,
       onStartIconClick,
       primaryText,
@@ -43,44 +49,60 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
       ...rest
     } = props;
 
+    const iconPaddingCorrection = useMemo(
+      () => (secondaryText && primaryText ? -1 : -3),
+      [primaryText, secondaryText],
+    );
+
     return (
       <Box
         component="li"
         ref={ref}
         paddingX={4}
         paddingY={4}
-        sx={merge<CSSObject, CSSObject | undefined>(
+        sx={merge(
           {
+            display: 'flex',
             label: 'ListItem',
             listStyle: 'none',
+            minHeight: 48,
             position: 'relative',
           },
           sx,
         )}
         {...rest}
       >
-        <Box
-          isInteractive
-          sx={{
-            bottom: 0,
-            left: 0,
-            position: 'absolute',
-            right: 0,
-            top: 0,
-            zIndex: 1,
-          }}
-        />
-        <Stack align="center" direction="row" space={2}>
+        {onClick && (
+          <Box
+            isInteractive
+            onClick={onClick}
+            sx={{
+              bottom: 0,
+              left: 0,
+              position: 'absolute',
+              right: 0,
+              top: 0,
+              zIndex: 1,
+            }}
+          />
+        )}
+        <Stack align="center" direction="row" space={2} sx={{ flex: 1 }}>
           {startIcon && (
             <IconButton
               color={startIconColor}
               icon={startIcon}
-              marginLeft={-1}
+              marginLeft={iconPaddingCorrection}
+              marginY={iconPaddingCorrection}
               onClick={onStartIconClick}
               size={startIconSize}
+              sx={{
+                pointerEvents: onStartIconClick ? undefined : 'none',
+                position: 'relative',
+                zIndex: 2,
+              }}
             />
           )}
-          <Stack space={3}>
+          <Stack space={3} sx={{ flex: 1 }}>
             {primaryText && (
               <Box>
                 <Text color={primaryTextColor} variant="label">
@@ -96,10 +118,15 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
             <IconButton
               color={endIconColor}
               icon={endIcon}
-              marginRight={-1}
+              marginRight={iconPaddingCorrection}
+              marginY={iconPaddingCorrection}
               onClick={onEndIconClick}
               size={endIconSize}
-              sx={{ position: 'relative', zIndex: 3 }}
+              sx={{
+                pointerEvents: onEndIconClick ? undefined : 'none',
+                position: 'relative',
+                zIndex: 2,
+              }}
             />
           )}
         </Stack>
