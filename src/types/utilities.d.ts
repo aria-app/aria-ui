@@ -1,3 +1,5 @@
+export type Merge<T, U> = Omit<T, keyof U> & U;
+
 /**
  * Recursive Partial taken from here: https://stackoverflow.com/a/51365037
  */
