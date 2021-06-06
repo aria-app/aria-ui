@@ -1,19 +1,13 @@
 import { useTheme } from '@emotion/react';
 import { merge } from 'lodash';
-import React, {
-  cloneElement,
-  ElementType,
-  forwardRef,
-  ReactElement,
-  Ref,
-} from 'react';
+import React, { cloneElement, forwardRef, ReactElement, Ref } from 'react';
 
 import { ColorName } from '../types';
 import { Box, BoxProps } from './Box';
 
 export type IconSize = 'lg' | 'md' | 'sm';
 
-export interface IconProps extends Omit<BoxProps<ElementType>, 'size'> {
+export interface IconProps extends Omit<BoxProps<'span'>, 'size'> {
   color?: ColorName;
   colorIsBackground?: boolean;
   icon?: ReactElement;
@@ -24,15 +18,7 @@ export const Icon = forwardRef<HTMLElement, IconProps>(function Icon(
   props,
   ref,
 ) {
-  const {
-    color,
-    colorIsBackground,
-    component = 'span',
-    icon,
-    size = 'md',
-    sx,
-    ...rest
-  } = props;
+  const { color, colorIsBackground, icon, size = 'md', sx, ...rest } = props;
   const theme = useTheme();
 
   const themeColor = colorIsBackground
@@ -43,7 +29,7 @@ export const Icon = forwardRef<HTMLElement, IconProps>(function Icon(
 
   return (
     <Box
-      component={component}
+      as="span"
       ref={ref as Ref<HTMLDivElement>}
       size={{ lg: 8, md: 6, sm: 4 }[size]}
       sx={merge(

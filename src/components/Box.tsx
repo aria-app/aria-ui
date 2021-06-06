@@ -38,7 +38,6 @@ export type BoxOwnProps = {
   borderWidth?: CSS.Properties<number | string>['borderWidth'];
   bottom?: SpacingProp;
   childColor?: ColorName;
-  component?: ElementType;
   height?: SpacingProp;
   isInteractive?: boolean;
   left?: SpacingProp;
@@ -154,12 +153,7 @@ export const Box: PolymorphicForwardRefExoticComponent<
   ref: ForwardedRef<Element>,
 ): JSX.Element {
   const [isKeyDown, setIsKeyDown] = useState<boolean>();
-  const {
-    component = defaultElement,
-    isInteractive,
-    style: styleProp = {},
-    ...rest
-  } = props;
+  const { isInteractive, style: styleProp = {}, ...rest } = props;
   const theme = useTheme();
   const bottomValue = useResponsivePropValue(props.bottom);
   const heightValue = useResponsivePropValue(props.height);
@@ -251,7 +245,7 @@ export const Box: PolymorphicForwardRefExoticComponent<
 
   return (
     <StyledBox
-      as={component}
+      as={defaultElement}
       isInteractive={isInteractive}
       isKeyDown={!!isKeyDown}
       onKeyDown={handleKeyDown}

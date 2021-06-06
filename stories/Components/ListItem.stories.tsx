@@ -7,8 +7,6 @@ import React from 'react';
 
 import { Box, ListItem, ListItemProps, Stack, Text } from '../../src';
 
-// const ListItemStoryBG = '';
-
 export default {
   title: 'Components/ListItem',
   component: ListItem,

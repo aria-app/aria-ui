@@ -58,7 +58,7 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
 
     return (
       <Box
-        component="li"
+        as="li"
         ref={ref}
         paddingX={4}
         paddingY={4}

@@ -1,5 +1,11 @@
 import { useTheme } from '@emotion/react';
-import React, { ElementType, forwardRef, ReactElement, useMemo } from 'react';
+import React, {
+  ElementType,
+  forwardRef,
+  ReactElement,
+  Ref,
+  useMemo,
+} from 'react';
 
 import { Box, BoxProps } from './Box';
 import { Icon, IconSize } from './Icon';
@@ -8,9 +14,10 @@ import { Text } from './Text';
 
 export type ButtonVariant = 'contained' | 'minimal' | 'outlined';
 
-export interface ButtonProps extends BoxProps<ElementType> {
+export interface ButtonProps extends BoxProps<'a' | 'button'> {
   color?: BoxProps<ElementType>['backgroundColor'];
-  component?: 'a' | 'button';
+  disabled?: boolean;
+  element?: 'a' | 'button';
   endIcon?: ReactElement;
   endIconSize?: IconSize;
   startIcon?: ReactElement;
@@ -26,7 +33,7 @@ export const Button = forwardRef<
 >(function Button(props, ref) {
   const {
     color = 'textPrimary',
-    component = 'button',
+    element = 'button',
     disabled,
     endIcon,
     endIconSize = 'md',
@@ -38,6 +45,8 @@ export const Button = forwardRef<
     ...rest
   } = props;
   const theme = useTheme();
+
+  const elementProps = element === 'button' ? { disabled } : {};
 
   const variantProps = useMemo(
     () =>
@@ -63,14 +72,14 @@ export const Button = forwardRef<
 
   return (
     <Box
+      as={element}
       borderRadius="md"
       childColor={variant !== 'contained' ? color : undefined}
-      component={component}
-      disabled={disabled}
       height={12}
       isInteractive={!disabled}
       paddingX={text ? 4 : undefined}
-      ref={ref}
+      ref={ref as Ref<HTMLButtonElement>}
+      {...elementProps}
       {...variantProps}
       sx={{
         alignItems: 'center',

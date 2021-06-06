@@ -17,11 +17,13 @@ export type StackDirection =
   | 'row'
   | 'row-reverse';
 
-export interface StackProps extends Omit<BoxProps<'div'>, 'ref'> {
+export interface StackProps
+  extends Omit<BoxProps<keyof JSX.IntrinsicElements>, 'ref'> {
   align?: ResponsiveProp<StackAlignment | undefined>;
   alignSelf?: ResponsiveProp<StackAlignment | undefined>;
   direction?: ResponsiveProp<StackDirection | undefined>;
   dividerThickness?: DividerThickness;
+  element?: keyof JSX.IntrinsicElements;
   isDivided?: boolean;
   space?: ResponsiveProp<Spacing | undefined>;
 }
@@ -34,7 +36,7 @@ export const Stack = forwardRef<HTMLElement, StackProps>(function Stack(
     align,
     alignSelf,
     children,
-    component = 'div',
+    element = 'div',
     direction,
     dividerThickness,
     isDivided,
@@ -52,8 +54,7 @@ export const Stack = forwardRef<HTMLElement, StackProps>(function Stack(
 
   return (
     <Box
-      as={component}
-      component={component}
+      as={element}
       ref={ref}
       sx={merge(
         {

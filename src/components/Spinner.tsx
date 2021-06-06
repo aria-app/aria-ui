@@ -43,8 +43,8 @@ export const Spinner = forwardRef<HTMLDivElement, SpinnerProps>(
 
     return (
       <Box
+        as="div"
         aria-busy="true"
-        component="div"
         ref={ref}
         role="alert"
         size={{ lg: 12, md: 8, sm: 6 }[size]}

@@ -21,8 +21,8 @@ export type TextFieldType =
   | 'number'
   | 'password'
   | 'search'
-  | 'text'
   | 'tel'
+  | 'text'
   | 'url';
 
 export interface TextFieldProps extends FormGroupProps {
@@ -114,25 +114,11 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
               />
             </Box>
           )}
-          {/* <Box
-            class="absolute"
-            :class="{ 'right-0': iconSide === 'right' }"
-            :marginLeft="iconMarginLeft"
-            :marginRight="iconMarginRight"
-          >
-            <Icon
-              v-if="iconName"
-              :class="{ 'cursor-pointer': !!onIconClick }"
-              :name="iconName"
-              :size="adjustedIconSize"
-              @click.native="onIconClick"
-            />
-          </Box> */}
           <Box
             borderRadius="md"
             borderColor={borderColor}
             borderWidth={3}
-            component="input"
+            as="input"
             disabled={disabled}
             height={12}
             id={id || label?.replace(/ /g, '') || undefined}
