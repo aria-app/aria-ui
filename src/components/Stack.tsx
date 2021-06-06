@@ -26,7 +26,7 @@ export interface StackProps extends Omit<BoxProps<'div'>, 'ref'> {
   space?: ResponsiveProp<Spacing | undefined>;
 }
 
-export const Stack = forwardRef<HTMLDivElement, StackProps>(function Stack(
+export const Stack = forwardRef<HTMLElement, StackProps>(function Stack(
   props,
   ref,
 ) {
