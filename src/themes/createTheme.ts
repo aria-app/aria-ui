@@ -24,6 +24,10 @@ const textVariants = {
     fontSize: 72,
     fontWeight: 600,
   },
+  emphasized: {
+    fontSize: 18,
+    fontWeight: 600,
+  },
   field: {
     fontSize: 16,
     fontWeight: 600,

@@ -40,6 +40,7 @@ export interface ThemeBase {
     body: TextVariant;
     button: TextVariant;
     display: TextVariant;
+    emphasized: TextVariant;
     field: TextVariant;
     header: TextVariant;
     helper: TextVariant;
