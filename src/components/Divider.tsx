@@ -41,7 +41,7 @@ export const Divider = forwardRef<HTMLHRElement, DividerProps>(function Divider(
 
   return (
     <Box
-      component="hr"
+      as="hr"
       ref={ref}
       sx={merge(
         {

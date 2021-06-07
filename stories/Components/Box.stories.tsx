@@ -1,5 +1,5 @@
 import { Meta, Story } from '@storybook/react';
-import React, { ElementType } from 'react';
+import React from 'react';
 
 import { Box, BoxProps, Text, useScreenSizeType } from '../../src';
 import { borderRadius, color as colorArgType, spacing } from '../argTypes';
@@ -41,14 +41,13 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<BoxProps<ElementType>> = args => <Box {...args} />;
+export const Default: Story<BoxProps<'div'>> = args => <Box {...args} />;
 
 Default.args = {
   children: 'The quick brown fox jumps over the lazy dog',
-  component: 'div',
 };
 
-export const Responsive: Story<BoxProps<ElementType>> = args => {
+export const Responsive: Story<BoxProps<'div'>> = args => {
   const screenSizeType = useScreenSizeType();
 
   return (
@@ -61,5 +60,4 @@ export const Responsive: Story<BoxProps<ElementType>> = args => {
 Responsive.args = {
   backgroundColor: 'backgroundContrast',
   borderRadius: 'md',
-  component: 'div',
 };

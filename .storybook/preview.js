@@ -20,13 +20,13 @@ export const parameters = {
 };
 
 export const decorators = [
-  (Story, context) => {
+  (storyFn, context) => {
     return (
       <ThemeProvider
         theme={context.globals.theme === 'dark' ? darkTheme : lightTheme}
       >
         <GlobalStyles />
-        <Story />
+        {storyFn()}
       </ThemeProvider>
     );
   },

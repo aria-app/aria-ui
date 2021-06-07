@@ -1,5 +1,5 @@
 import { merge } from 'lodash';
-import React, { forwardRef, KeyboardEventHandler } from 'react';
+import React, { forwardRef, MouseEventHandler } from 'react';
 
 import { Button } from './Button';
 import { Stack, StackProps } from './Stack';
@@ -9,8 +9,8 @@ export interface BannerProps extends StackProps {
   confirmText?: string;
   dismissText?: string;
   message?: string;
-  onConfirm?: KeyboardEventHandler<HTMLDivElement>;
-  onDismiss?: KeyboardEventHandler<HTMLDivElement>;
+  onConfirm?: MouseEventHandler<HTMLButtonElement>;
+  onDismiss?: MouseEventHandler<HTMLButtonElement>;
 }
 
 export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner(

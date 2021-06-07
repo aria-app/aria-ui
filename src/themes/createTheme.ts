@@ -1,6 +1,6 @@
 import { isNumber, merge } from 'lodash';
-import readableColor from 'polished/lib/color/readableColor';
 
+import { isLightColor } from '../helpers';
 import { Theme, ThemeBase, ThemeOptions } from '../types';
 
 const borderRadii = {
@@ -55,24 +55,32 @@ export function createTheme(themeOptions: ThemeOptions): Theme {
       unitsPerEm: 1000,
     },
     getBorderRadius: borderRadius => borderRadius && borderRadii[borderRadius],
-    getColor: color => {
-      if (!color) return color;
+    getColor: colorName => {
+      if (!colorName) return colorName;
 
-      const themeColor = themeOptions.colors[color as keyof Theme['colors']];
+      const themeColor =
+        themeOptions.colors[colorName as keyof Theme['colors']];
 
-      if (!themeColor) return color;
+      if (!themeColor) return colorName;
 
       return themeColor;
     },
-    getForegroundColor: backgroundColor => {
+    getForegroundColor: backgroundColorName => {
       const themeColor =
-        themeOptions.colors[backgroundColor as keyof Theme['colors']] ||
-        backgroundColor;
+        themeOptions.colors[backgroundColorName as keyof Theme['colors']] ||
+        backgroundColorName;
 
-      if (!themeColor || backgroundColor === 'transparent')
+      if (!themeColor || backgroundColorName === 'transparent')
         return themeOptions.colors.textPrimary;
 
-      return readableColor(themeColor, themeOptions.colors.textPrimary);
+      const isLightTheme = isLightColor(
+        themeOptions.colors.backgroundContrast || 'white',
+      );
+      const darkColor = isLightTheme
+        ? themeOptions.colors.textPrimary
+        : 'black';
+
+      return isLightColor(themeColor) ? darkColor : '#fff';
     },
     getTextVariant: textVariant =>
       textVariant && textVariants[textVariant]

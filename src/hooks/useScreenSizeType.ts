@@ -1,22 +1,19 @@
 import { useTheme } from '@emotion/react';
+import { isEmpty } from 'lodash';
 import { useMediaQuery } from 'react-responsive';
 
+import { lightTheme } from '../themes';
 import { Theme } from '../types';
 
 export function useScreenSizeType(): keyof Theme['screenSizes'] {
   const theme = useTheme();
-
-  if (!theme) {
-    throw new Error(
-      'A theme must be provided to use the useScreenSizeType hook.',
-    );
-  }
+  const { screenSizes } = isEmpty(theme) ? lightTheme : theme;
 
   const isLg = useMediaQuery({
-    query: `(min-width: ${theme.screenSizes.lg}px)`,
+    query: `(min-width: ${screenSizes.lg}px)`,
   });
   const isMd = useMediaQuery({
-    query: `(min-width: ${theme.screenSizes.sm}px)`,
+    query: `(min-width: ${screenSizes.sm}px)`,
   });
 
   if (isLg) return 'lg';

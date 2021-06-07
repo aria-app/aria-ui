@@ -9,6 +9,7 @@ import { Box, BoxProps } from './Box';
 export interface TextProps extends BoxProps<ElementType> {
   color?: ColorName;
   colorIsBackground?: boolean;
+  element?: keyof JSX.IntrinsicElements;
   variant?: keyof Theme['textVariants'];
 }
 
@@ -19,7 +20,7 @@ export const Text = forwardRef<HTMLElement, TextProps>(function Text(
   const {
     color,
     colorIsBackground,
-    component = 'span',
+    element = 'span',
     sx,
     variant = 'body',
     ...rest
@@ -34,7 +35,7 @@ export const Text = forwardRef<HTMLElement, TextProps>(function Text(
 
   return (
     <Box
-      component={component}
+      as={element}
       ref={ref}
       sx={merge(
         {

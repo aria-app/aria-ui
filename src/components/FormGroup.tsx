@@ -5,6 +5,7 @@ import { Stack, StackProps } from './Stack';
 import { Text } from './Text';
 
 export interface FormGroupProps extends Omit<StackProps, 'ref'> {
+  element?: 'div' | 'fieldset';
   error?: string;
   label?: string;
   secondaryLabel?: string;
@@ -16,6 +17,7 @@ export const FormGroup = forwardRef<HTMLFieldSetElement, FormGroupProps>(
   function FormGroup(props, ref) {
     const {
       children,
+      element = 'fieldset',
       error,
       label,
       secondaryLabel,
@@ -28,7 +30,7 @@ export const FormGroup = forwardRef<HTMLFieldSetElement, FormGroupProps>(
 
     return (
       <Stack
-        component="fieldset"
+        as={element}
         ref={ref as Ref<HTMLDivElement>}
         space={space}
         sx={merge(

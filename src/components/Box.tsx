@@ -1,14 +1,13 @@
 import { CSSObject, useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import CSS from 'csstype';
-import { merge } from 'lodash';
+import { isNil, merge, omitBy } from 'lodash';
 import React, {
   ElementType,
   ForwardedRef,
   forwardRef,
   KeyboardEventHandler,
   useCallback,
-  useMemo,
   useState,
 } from 'react';
 import {
@@ -16,6 +15,7 @@ import {
   PolymorphicPropsWithRef,
 } from 'react-polymorphic-types';
 
+import { isLightColor } from '../helpers';
 import { useResponsivePropValue } from '../hooks';
 import { ColorName, ResponsiveProp, Spacing, Theme } from '../types';
 
@@ -24,19 +24,19 @@ type SpacingProp = ResponsiveProp<Spacing | undefined>;
 // Component-specific props should be specified separately
 export type BoxOwnProps = {
   backgroundColor?: ColorName;
-  borderBottomLeftRadius?: keyof Theme['borderRadii'];
-  borderBottomRightRadius?: keyof Theme['borderRadii'];
+  borderBottomLeftRadius?: ResponsiveProp<keyof Theme['borderRadii']>;
+  borderBottomRightRadius?: ResponsiveProp<keyof Theme['borderRadii']>;
   borderBottomWidth?: CSS.Properties<number | string>['borderBottomWidth'];
   borderColor?: ColorName;
   borderLeftWidth?: CSS.Properties<number | string>['borderLeftWidth'];
-  borderRadius?: keyof Theme['borderRadii'];
+  borderRadius?: ResponsiveProp<keyof Theme['borderRadii']>;
   borderRightWidth?: CSS.Properties<number | string>['borderRightWidth'];
-  borderTopLeftRadius?: keyof Theme['borderRadii'];
-  borderTopRightRadius?: keyof Theme['borderRadii'];
+  borderTopLeftRadius?: ResponsiveProp<keyof Theme['borderRadii']>;
+  borderTopRightRadius?: ResponsiveProp<keyof Theme['borderRadii']>;
   borderTopWidth?: CSS.Properties<number | string>['borderTopWidth'];
   borderWidth?: CSS.Properties<number | string>['borderWidth'];
   bottom?: SpacingProp;
-  component?: ElementType;
+  childColor?: ColorName;
   height?: SpacingProp;
   isInteractive?: boolean;
   left?: SpacingProp;
@@ -47,6 +47,7 @@ export type BoxOwnProps = {
   marginTop?: SpacingProp;
   marginX?: SpacingProp;
   marginY?: SpacingProp;
+  minHeight?: SpacingProp;
   padding?: SpacingProp;
   paddingBottom?: SpacingProp;
   paddingLeft?: SpacingProp;
@@ -54,6 +55,7 @@ export type BoxOwnProps = {
   paddingTop?: SpacingProp;
   paddingX?: SpacingProp;
   paddingY?: SpacingProp;
+  parentColor?: ColorName;
   right?: SpacingProp;
   size?: SpacingProp;
   sx?: CSSObject;
@@ -61,19 +63,43 @@ export type BoxOwnProps = {
   width?: SpacingProp;
 };
 
-const StyledBox = styled.div<BoxOwnProps & { isKeyDown: boolean }>(props => {
+interface StyledBoxProps {
+  borderRadiusValue?: keyof Theme['borderRadii'];
+  borderBottomLeftRadiusValue?: keyof Theme['borderRadii'];
+  borderBottomRightRadiusValue?: keyof Theme['borderRadii'];
+  borderTopLeftRadiusValue?: keyof Theme['borderRadii'];
+  borderTopRightRadiusValue?: keyof Theme['borderRadii'];
+  isKeyDown?: boolean;
+}
+
+const StyledBox = styled.div<BoxOwnProps & StyledBoxProps>(props => {
   const getInteractiveStyles = () => {
     if (!props.isInteractive) return {};
 
-    const foregroundColor = props.theme.getForegroundColor(
-      props.backgroundColor,
-    );
+    const foregroundColor = props.childColor
+      ? props.theme.getColor(props.childColor)
+      : props.theme.getForegroundColor(
+          props.parentColor || props.backgroundColor,
+        );
 
     return {
       cursor: 'pointer',
       position: 'relative',
       '&::after': {
         backgroundColor: foregroundColor,
+        borderRadius: props.theme.getBorderRadius(props.borderRadiusValue),
+        borderBottomLeftRadius: props.theme.getBorderRadius(
+          props.borderBottomLeftRadiusValue,
+        ),
+        borderBottomRightRadius: props.theme.getBorderRadius(
+          props.borderBottomRightRadiusValue,
+        ),
+        borderTopLeftRadius: props.theme.getBorderRadius(
+          props.borderTopLeftRadiusValue,
+        ),
+        borderTopRightRadius: props.theme.getBorderRadius(
+          props.borderTopRightRadiusValue,
+        ),
         bottom: 0,
         content: '""',
         left: 0,
@@ -88,29 +114,14 @@ const StyledBox = styled.div<BoxOwnProps & { isKeyDown: boolean }>(props => {
               opacity: '0.25',
             }
           : {}),
-        ...borderRadii,
       },
       '&:hover::after, &:focus::after': {
-        opacity: '0.1',
+        opacity: isLightColor(foregroundColor || 'white') ? '0.2' : '0.1',
       },
       '&:active::after': {
-        opacity: '0.25',
+        opacity: isLightColor(foregroundColor || 'white') ? '0.4' : '0.25',
       },
     };
-  };
-
-  const borderRadii = {
-    borderRadius: props.theme.getBorderRadius(props.borderRadius),
-    borderBottomLeftRadius: props.theme.getBorderRadius(
-      props.borderBottomLeftRadius,
-    ),
-    borderBottomRightRadius: props.theme.getBorderRadius(
-      props.borderBottomRightRadius,
-    ),
-    borderTopLeftRadius: props.theme.getBorderRadius(props.borderTopLeftRadius),
-    borderTopRightRadius: props.theme.getBorderRadius(
-      props.borderTopRightRadius,
-    ),
   };
 
   return merge(
@@ -125,7 +136,6 @@ const StyledBox = styled.div<BoxOwnProps & { isKeyDown: boolean }>(props => {
       borderBottomWidth: props.borderBottomWidth,
       borderLeftWidth: props.borderLeftWidth,
       //-------------------------------------------------------
-      ...borderRadii,
       label: 'Box',
     },
     getInteractiveStyles(),
@@ -139,97 +149,82 @@ export type BoxProps<E extends ElementType> = PolymorphicPropsWithRef<
   E
 >;
 
-const defaultElement = 'div';
+export const defaultBoxElement = 'div';
 
 export const Box: PolymorphicForwardRefExoticComponent<
   BoxOwnProps,
-  typeof defaultElement
-> = forwardRef(function Box<E extends ElementType = typeof defaultElement>(
+  typeof defaultBoxElement
+> = forwardRef(function Box<E extends ElementType = typeof defaultBoxElement>(
   props: BoxProps<E>,
   ref: ForwardedRef<Element>,
 ): JSX.Element {
   const [isKeyDown, setIsKeyDown] = useState<boolean>();
   const {
-    component = defaultElement,
+    borderRadius,
+    borderBottomLeftRadius,
+    borderBottomRightRadius,
+    borderTopLeftRadius,
+    borderTopRightRadius,
+    bottom,
+    height,
     isInteractive,
+    left,
+    margin,
+    marginBottom,
+    marginLeft,
+    marginRight,
+    marginTop,
+    marginX,
+    marginY,
+    minHeight,
+    padding,
+    paddingBottom,
+    paddingLeft,
+    paddingRight,
+    paddingTop,
+    paddingX,
+    paddingY,
+    right,
+    size,
     style: styleProp = {},
+    top,
+    width,
     ...rest
   } = props;
   const theme = useTheme();
-  const bottomValue = useResponsivePropValue(props.bottom);
-  const heightValue = useResponsivePropValue(props.height);
-  const leftValue = useResponsivePropValue(props.left);
-  const marginValue = useResponsivePropValue(props.margin);
-  const marginBottomValue = useResponsivePropValue(props.marginBottom);
-  const marginLeftValue = useResponsivePropValue(props.marginLeft);
-  const marginRightValue = useResponsivePropValue(props.marginRight);
-  const marginTopValue = useResponsivePropValue(props.marginTop);
-  const marginXValue = useResponsivePropValue(props.marginX);
-  const marginYValue = useResponsivePropValue(props.marginY);
-  const paddingValue = useResponsivePropValue(props.padding);
-  const paddingBottomValue = useResponsivePropValue(props.paddingBottom);
-  const paddingLeftValue = useResponsivePropValue(props.paddingLeft);
-  const paddingRightValue = useResponsivePropValue(props.paddingRight);
-  const paddingTopValue = useResponsivePropValue(props.paddingTop);
-  const paddingXValue = useResponsivePropValue(props.paddingX);
-  const paddingYValue = useResponsivePropValue(props.paddingY);
-  const rightValue = useResponsivePropValue(props.right);
-  const sizeValue = useResponsivePropValue(props.size);
-  const topValue = useResponsivePropValue(props.top);
-  const widthValue = useResponsivePropValue(props.width);
-
-  const style = useMemo(
-    () => ({
-      bottom: theme.space(bottomValue),
-      height: theme.space(sizeValue || heightValue),
-      left: theme.space(leftValue),
-      marginBottom: theme.space(
-        marginBottomValue || marginYValue || marginValue,
-      ),
-      marginLeft: theme.space(marginLeftValue || marginXValue || marginValue),
-      marginRight: theme.space(marginRightValue || marginXValue || marginValue),
-      marginTop: theme.space(marginTopValue || marginYValue || marginValue),
-      paddingBottom: theme.space(
-        paddingBottomValue || paddingYValue || paddingValue,
-      ),
-      paddingLeft: theme.space(
-        paddingLeftValue || paddingXValue || paddingValue,
-      ),
-      paddingRight: theme.space(
-        paddingRightValue || paddingXValue || paddingValue,
-      ),
-      paddingTop: theme.space(paddingTopValue || paddingYValue || paddingValue),
-      right: theme.space(rightValue),
-      top: theme.space(topValue),
-      width: theme.space(sizeValue || widthValue),
-      ...styleProp,
-    }),
-    [
-      bottomValue,
-      heightValue,
-      leftValue,
-      marginBottomValue,
-      marginLeftValue,
-      marginRightValue,
-      marginTopValue,
-      marginValue,
-      marginXValue,
-      marginYValue,
-      paddingBottomValue,
-      paddingLeftValue,
-      paddingRightValue,
-      paddingTopValue,
-      paddingValue,
-      paddingXValue,
-      paddingYValue,
-      rightValue,
-      sizeValue,
-      styleProp,
-      theme,
-      topValue,
-      widthValue,
-    ],
+  const borderRadiusValue = useResponsivePropValue(borderRadius);
+  const borderBottomLeftRadiusValue = useResponsivePropValue(
+    borderBottomLeftRadius,
   );
+  const borderBottomRightRadiusValue = useResponsivePropValue(
+    borderBottomRightRadius,
+  );
+  const borderTopLeftRadiusValue = useResponsivePropValue(borderTopLeftRadius);
+  const borderTopRightRadiusValue = useResponsivePropValue(
+    borderTopRightRadius,
+  );
+  const bottomValue = useResponsivePropValue(bottom);
+  const heightValue = useResponsivePropValue(height);
+  const leftValue = useResponsivePropValue(left);
+  const marginValue = useResponsivePropValue(margin);
+  const marginBottomValue = useResponsivePropValue(marginBottom);
+  const marginLeftValue = useResponsivePropValue(marginLeft);
+  const marginRightValue = useResponsivePropValue(marginRight);
+  const marginTopValue = useResponsivePropValue(marginTop);
+  const marginXValue = useResponsivePropValue(marginX);
+  const marginYValue = useResponsivePropValue(marginY);
+  const minHeightValue = useResponsivePropValue(minHeight);
+  const paddingValue = useResponsivePropValue(padding);
+  const paddingBottomValue = useResponsivePropValue(paddingBottom);
+  const paddingLeftValue = useResponsivePropValue(paddingLeft);
+  const paddingRightValue = useResponsivePropValue(paddingRight);
+  const paddingTopValue = useResponsivePropValue(paddingTop);
+  const paddingXValue = useResponsivePropValue(paddingX);
+  const paddingYValue = useResponsivePropValue(paddingY);
+  const rightValue = useResponsivePropValue(right);
+  const sizeValue = useResponsivePropValue(size);
+  const topValue = useResponsivePropValue(top);
+  const widthValue = useResponsivePropValue(width);
 
   const handleKeyDown = useCallback<KeyboardEventHandler<HTMLElement>>(
     e => {
@@ -246,13 +241,63 @@ export const Box: PolymorphicForwardRefExoticComponent<
 
   return (
     <StyledBox
-      as={component}
+      as={defaultBoxElement}
+      borderRadiusValue={borderRadiusValue}
+      borderBottomLeftRadiusValue={borderBottomLeftRadiusValue}
+      borderBottomRightRadiusValue={borderBottomRightRadiusValue}
+      borderTopLeftRadiusValue={borderTopLeftRadiusValue}
+      borderTopRightRadiusValue={borderTopRightRadiusValue}
       isInteractive={isInteractive}
       isKeyDown={!!isKeyDown}
       onKeyDown={handleKeyDown}
       onKeyUp={handleKeyUp}
       ref={ref as ForwardedRef<HTMLDivElement>}
-      style={style}
+      style={omitBy(
+        {
+          borderRadius: theme.getBorderRadius(borderRadiusValue),
+          borderBottomLeftRadius: theme.getBorderRadius(
+            borderBottomLeftRadiusValue,
+          ),
+          borderBottomRightRadius: theme.getBorderRadius(
+            borderBottomRightRadiusValue,
+          ),
+          borderTopLeftRadius: theme.getBorderRadius(borderTopLeftRadiusValue),
+          borderTopRightRadius: theme.getBorderRadius(
+            borderTopRightRadiusValue,
+          ),
+          bottom: theme.space(bottomValue),
+          height: theme.space(sizeValue || heightValue),
+          left: theme.space(leftValue),
+          marginBottom: theme.space(
+            marginBottomValue || marginYValue || marginValue,
+          ),
+          marginLeft: theme.space(
+            marginLeftValue || marginXValue || marginValue,
+          ),
+          marginRight: theme.space(
+            marginRightValue || marginXValue || marginValue,
+          ),
+          marginTop: theme.space(marginTopValue || marginYValue || marginValue),
+          minHeight: theme.space(minHeightValue),
+          paddingBottom: theme.space(
+            paddingBottomValue || paddingYValue || paddingValue,
+          ),
+          paddingLeft: theme.space(
+            paddingLeftValue || paddingXValue || paddingValue,
+          ),
+          paddingRight: theme.space(
+            paddingRightValue || paddingXValue || paddingValue,
+          ),
+          paddingTop: theme.space(
+            paddingTopValue || paddingYValue || paddingValue,
+          ),
+          right: theme.space(rightValue),
+          top: theme.space(topValue),
+          width: theme.space(sizeValue || widthValue),
+          ...styleProp,
+        },
+        isNil,
+      )}
       {...rest}
     ></StyledBox>
   );
