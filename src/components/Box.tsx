@@ -1,7 +1,7 @@
 import { CSSObject, useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import CSS from 'csstype';
-import { merge } from 'lodash';
+import { isNil, merge, omitBy } from 'lodash';
 import React, {
   ElementType,
   ForwardedRef,
@@ -78,11 +78,19 @@ const StyledBox = styled.div<BoxOwnProps & { isKeyDown: boolean }>(props => {
       position: 'relative',
       '&::after': {
         backgroundColor: foregroundColor,
-        borderRadius: props.borderRadius,
-        borderBottomLeftRadius: props.borderBottomLeftRadius,
-        borderBottomRightRadius: props.borderBottomRightRadius,
-        borderTopLeftRadius: props.borderTopLeftRadius,
-        borderTopRightRadius: props.borderTopRightRadius,
+        // borderRadius: props.theme.getBorderRadius(props.borderRadius),
+        // borderBottomLeftRadius: props.theme.getBorderRadius(
+        //   props.borderBottomLeftRadius,
+        // ),
+        // borderBottomRightRadius: props.theme.getBorderRadius(
+        //   props.borderBottomRightRadius,
+        // ),
+        // borderTopLeftRadius: props.theme.getBorderRadius(
+        //   props.borderTopLeftRadius,
+        // ),
+        // borderTopRightRadius: props.theme.getBorderRadius(
+        //   props.borderTopRightRadius,
+        // ),
         bottom: 0,
         content: '""',
         left: 0,
@@ -235,45 +243,52 @@ export const Box: PolymorphicForwardRefExoticComponent<
       onKeyDown={handleKeyDown}
       onKeyUp={handleKeyUp}
       ref={ref as ForwardedRef<HTMLDivElement>}
-      style={{
-        borderRadius: theme.getBorderRadius(borderRadiusValue),
-        borderBottomLeftRadius: theme.getBorderRadius(
-          borderBottomLeftRadiusValue,
-        ),
-        borderBottomRightRadius: theme.getBorderRadius(
-          borderBottomRightRadiusValue,
-        ),
-        borderTopLeftRadius: theme.getBorderRadius(borderTopLeftRadiusValue),
-        borderTopRightRadius: theme.getBorderRadius(borderTopRightRadiusValue),
-        bottom: theme.space(bottomValue),
-        height: theme.space(sizeValue || heightValue),
-        left: theme.space(leftValue),
-        marginBottom: theme.space(
-          marginBottomValue || marginYValue || marginValue,
-        ),
-        marginLeft: theme.space(marginLeftValue || marginXValue || marginValue),
-        marginRight: theme.space(
-          marginRightValue || marginXValue || marginValue,
-        ),
-        marginTop: theme.space(marginTopValue || marginYValue || marginValue),
-        minHeight: theme.space(minHeightValue),
-        paddingBottom: theme.space(
-          paddingBottomValue || paddingYValue || paddingValue,
-        ),
-        paddingLeft: theme.space(
-          paddingLeftValue || paddingXValue || paddingValue,
-        ),
-        paddingRight: theme.space(
-          paddingRightValue || paddingXValue || paddingValue,
-        ),
-        paddingTop: theme.space(
-          paddingTopValue || paddingYValue || paddingValue,
-        ),
-        right: theme.space(rightValue),
-        top: theme.space(topValue),
-        width: theme.space(sizeValue || widthValue),
-        ...styleProp,
-      }}
+      style={omitBy(
+        {
+          borderRadius: theme.getBorderRadius(borderRadiusValue),
+          borderBottomLeftRadius: theme.getBorderRadius(
+            borderBottomLeftRadiusValue,
+          ),
+          borderBottomRightRadius: theme.getBorderRadius(
+            borderBottomRightRadiusValue,
+          ),
+          borderTopLeftRadius: theme.getBorderRadius(borderTopLeftRadiusValue),
+          borderTopRightRadius: theme.getBorderRadius(
+            borderTopRightRadiusValue,
+          ),
+          bottom: theme.space(bottomValue),
+          height: theme.space(sizeValue || heightValue),
+          left: theme.space(leftValue),
+          marginBottom: theme.space(
+            marginBottomValue || marginYValue || marginValue,
+          ),
+          marginLeft: theme.space(
+            marginLeftValue || marginXValue || marginValue,
+          ),
+          marginRight: theme.space(
+            marginRightValue || marginXValue || marginValue,
+          ),
+          marginTop: theme.space(marginTopValue || marginYValue || marginValue),
+          minHeight: theme.space(minHeightValue),
+          paddingBottom: theme.space(
+            paddingBottomValue || paddingYValue || paddingValue,
+          ),
+          paddingLeft: theme.space(
+            paddingLeftValue || paddingXValue || paddingValue,
+          ),
+          paddingRight: theme.space(
+            paddingRightValue || paddingXValue || paddingValue,
+          ),
+          paddingTop: theme.space(
+            paddingTopValue || paddingYValue || paddingValue,
+          ),
+          right: theme.space(rightValue),
+          top: theme.space(topValue),
+          width: theme.space(sizeValue || widthValue),
+          ...styleProp,
+        },
+        isNil,
+      )}
       {...rest}
     ></StyledBox>
   );
