@@ -4,7 +4,7 @@ export const lightTheme = createTheme({
   colors: {
     backgroundContrast: '#fff',
     backgroundDefault: '#e3e3fc',
-    border: '#f5f5ff',
+    border: '#efeff5',
     brandContrast: '#2f2a9b',
     brandPrimary: '#5944ff',
     brandSubtle: '#9b9bf9',

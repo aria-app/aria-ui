@@ -93,7 +93,12 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         ref={rootRef}
         space={3}
         success={success}
-        sx={merge({}, sx)}
+        sx={merge(
+          {
+            opacity: disabled ? 0.5 : 1,
+          },
+          sx,
+        )}
         warning={warning}
         {...rest}
       >
@@ -133,7 +138,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
               color: theme.colors.textPrimary,
               fontFamily: 'inherit',
               label: 'TextField',
-              opacity: disabled ? 0.5 : 1,
               outline: 0,
               '&, & *': {
                 cursor: disabled ? 'not-allowed' : undefined,
