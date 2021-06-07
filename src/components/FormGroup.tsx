@@ -45,7 +45,7 @@ export const FormGroup = forwardRef<HTMLFieldSetElement, FormGroupProps>(
           <Stack space={2.5}>
             {label && <Text variant="label">{label}</Text>}
             {secondaryLabel && (
-              <Text color="textSecondary" variant="caption">
+              <Text color="textSecondary" variant="helper">
                 {secondaryLabel}
               </Text>
             )}
@@ -55,17 +55,17 @@ export const FormGroup = forwardRef<HTMLFieldSetElement, FormGroupProps>(
         {(error || success || warning) && (
           <Stack space={2.5}>
             {error && (
-              <Text color="error" variant="caption">
+              <Text color="error" variant="helper">
                 {error}
               </Text>
             )}
             {warning && (
-              <Text color="warning" variant="caption">
+              <Text color="warning" variant="helper">
                 {warning}
               </Text>
             )}
             {success && (
-              <Text color="success" variant="caption">
+              <Text color="success" variant="helper">
                 {success}
               </Text>
             )}

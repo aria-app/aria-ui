@@ -34,7 +34,7 @@ const textVariants = {
   },
   helper: {
     fontSize: 14,
-    fontWeight: 400,
+    fontWeight: 600,
   },
   label: {
     fontSize: 16,
