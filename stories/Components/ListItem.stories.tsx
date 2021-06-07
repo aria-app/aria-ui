@@ -5,7 +5,7 @@ import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
 import CloseIcon from 'mdi-react/CloseIcon';
 import React from 'react';
 
-import { Box, ListItem, ListItemProps, Stack, Text } from '../../src';
+import { Box, ListItem, ListItemProps, Notice, Stack } from '../../src';
 
 export default {
   title: 'Components/ListItem',
@@ -126,9 +126,9 @@ export const OnlySecondaryText: Story<ListItemProps> = args => (
         />
       ))}
     </Box>
-    <Text color="textSecondary" variant="helper">
-      *This is not recommended but the component will handle it gracefully.
-    </Text>
+    <Notice size="sm" status="warning">
+      This is not recommended but the component will handle it gracefully.
+    </Notice>
   </Stack>
 );
 
