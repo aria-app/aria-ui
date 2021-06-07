@@ -1,5 +1,3 @@
-import { useMemo } from 'react';
-
 import { getResponsivePropValue } from '../helpers';
 import { ResponsiveProp } from '../types';
 import { useScreenSizeType } from './useScreenSizeType';
@@ -9,10 +7,5 @@ export function useResponsivePropValue<PropType = any>(
 ): PropType | undefined {
   const screenSizeType = useScreenSizeType();
 
-  const value = useMemo(
-    () => getResponsivePropValue(responsiveProp, screenSizeType),
-    [responsiveProp, screenSizeType],
-  );
-
-  return value;
+  return getResponsivePropValue(responsiveProp, screenSizeType);
 }

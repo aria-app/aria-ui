@@ -63,7 +63,16 @@ export type BoxOwnProps = {
   width?: SpacingProp;
 };
 
-const StyledBox = styled.div<BoxOwnProps & { isKeyDown: boolean }>(props => {
+interface StyledBoxProps {
+  borderRadiusValue?: keyof Theme['borderRadii'];
+  borderBottomLeftRadiusValue?: keyof Theme['borderRadii'];
+  borderBottomRightRadiusValue?: keyof Theme['borderRadii'];
+  borderTopLeftRadiusValue?: keyof Theme['borderRadii'];
+  borderTopRightRadiusValue?: keyof Theme['borderRadii'];
+  isKeyDown?: boolean;
+}
+
+const StyledBox = styled.div<BoxOwnProps & StyledBoxProps>(props => {
   const getInteractiveStyles = () => {
     if (!props.isInteractive) return {};
 
@@ -78,19 +87,19 @@ const StyledBox = styled.div<BoxOwnProps & { isKeyDown: boolean }>(props => {
       position: 'relative',
       '&::after': {
         backgroundColor: foregroundColor,
-        // borderRadius: props.theme.getBorderRadius(props.borderRadius),
-        // borderBottomLeftRadius: props.theme.getBorderRadius(
-        //   props.borderBottomLeftRadius,
-        // ),
-        // borderBottomRightRadius: props.theme.getBorderRadius(
-        //   props.borderBottomRightRadius,
-        // ),
-        // borderTopLeftRadius: props.theme.getBorderRadius(
-        //   props.borderTopLeftRadius,
-        // ),
-        // borderTopRightRadius: props.theme.getBorderRadius(
-        //   props.borderTopRightRadius,
-        // ),
+        borderRadius: props.theme.getBorderRadius(props.borderRadiusValue),
+        borderBottomLeftRadius: props.theme.getBorderRadius(
+          props.borderBottomLeftRadiusValue,
+        ),
+        borderBottomRightRadius: props.theme.getBorderRadius(
+          props.borderBottomRightRadiusValue,
+        ),
+        borderTopLeftRadius: props.theme.getBorderRadius(
+          props.borderTopLeftRadiusValue,
+        ),
+        borderTopRightRadius: props.theme.getBorderRadius(
+          props.borderTopRightRadiusValue,
+        ),
         bottom: 0,
         content: '""',
         left: 0,
@@ -233,11 +242,11 @@ export const Box: PolymorphicForwardRefExoticComponent<
   return (
     <StyledBox
       as={defaultBoxElement}
-      borderRadius={borderRadius}
-      borderBottomLeftRadius={borderBottomLeftRadius}
-      borderBottomRightRadius={borderBottomRightRadius}
-      borderTopLeftRadius={borderTopLeftRadius}
-      borderTopRightRadius={borderTopRightRadius}
+      borderRadiusValue={borderRadiusValue}
+      borderBottomLeftRadiusValue={borderBottomLeftRadiusValue}
+      borderBottomRightRadiusValue={borderBottomRightRadiusValue}
+      borderTopLeftRadiusValue={borderTopLeftRadiusValue}
+      borderTopRightRadiusValue={borderTopRightRadiusValue}
       isInteractive={isInteractive}
       isKeyDown={!!isKeyDown}
       onKeyDown={handleKeyDown}

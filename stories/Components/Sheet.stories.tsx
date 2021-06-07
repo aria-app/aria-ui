@@ -36,48 +36,28 @@ Default.args = {
   rightPanelWidth: 80,
 };
 
-export const OpenDesktop: Story<SheetProps & { contentHeight?: number }> = ({
+export const Open: Story<SheetProps & { contentHeight?: number }> = ({
   contentHeight,
   ...rest
 }) => (
   <>
     Main content behind the sheet
-    <Sheet isOpen={true} {...rest}>
+    <Sheet {...rest}>
       <Box height={contentHeight}>Sheet Content</Box>
     </Sheet>
   </>
 );
 
-OpenDesktop.args = {
+Open.args = {
   contentHeight: 400,
+  isOpen: true,
 };
 
-OpenDesktop.parameters = {
-  chromatic: { viewports: [1024, 768] },
-  viewport: {
-    defaultViewport: 'responsive',
+Open.parameters = {
+  chromatic: {
+    viewports: [479, 1024],
   },
-};
-
-export const OpenMobile: Story<SheetProps & { contentHeight?: number }> = ({
-  contentHeight,
-  ...rest
-}) => (
-  <>
-    Main content behind the sheet
-    <Sheet isOpen={true} {...rest}>
-      <Box height={contentHeight}>Sheet Content</Box>
-    </Sheet>
-  </>
-);
-
-OpenMobile.args = {
-  contentHeight: 400,
-};
-
-OpenMobile.parameters = {
-  chromatic: { viewports: [480, 640] },
-  viewport: {
-    defaultViewport: 'mobile2',
+  viewports: {
+    defaultViewport: 'responsive',
   },
 };
