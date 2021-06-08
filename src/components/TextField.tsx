@@ -1,5 +1,4 @@
 import { useTheme } from '@emotion/react';
-import { merge } from 'lodash';
 import React, {
   ChangeEvent,
   ChangeEventHandler,
@@ -11,6 +10,7 @@ import React, {
   useMemo,
 } from 'react';
 
+import { mergeSX } from '../helpers';
 import { ColorName } from '../types';
 import { Box, BoxProps } from './Box';
 import { FormGroup, FormGroupProps } from './FormGroup';
@@ -93,7 +93,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         ref={rootRef}
         space={3}
         success={success}
-        sx={merge(
+        sx={mergeSX(
           {
             label: 'TextField',
             opacity: disabled ? 0.5 : 1,

@@ -1,7 +1,7 @@
 import { AnimatePresence } from 'framer-motion';
-import { merge } from 'lodash';
 import React, { forwardRef } from 'react';
 
+import { mergeSX } from '../helpers';
 import { MotionBox, MotionBoxProps } from './MotionBox';
 
 export interface OverlayProps extends MotionBoxProps<'div'> {
@@ -23,7 +23,7 @@ export const Overlay = forwardRef<HTMLDivElement, OverlayProps>(
             exit={{ opacity: 0 }}
             initial={{ opacity: 0 }}
             ref={ref}
-            sx={merge(
+            sx={mergeSX(
               {
                 bottom: 0,
                 label: 'Overlay',

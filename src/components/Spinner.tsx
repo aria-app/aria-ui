@@ -1,7 +1,7 @@
 import { keyframes, useTheme } from '@emotion/react';
-import { merge } from 'lodash';
 import React, { forwardRef } from 'react';
 
+import { mergeSX } from '../helpers';
 import { ColorName } from '../types';
 import { Box, BoxProps } from './Box';
 
@@ -48,7 +48,7 @@ export const Spinner = forwardRef<HTMLDivElement, SpinnerProps>(
         ref={ref}
         role="alert"
         size={{ lg: 12, md: 8, sm: 6 }[size]}
-        sx={merge(
+        sx={mergeSX(
           {
             animation: `${rotateAnimation.toString()} 1500ms linear infinite`,
             animationDelay: '200ms',

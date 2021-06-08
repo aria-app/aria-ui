@@ -1,9 +1,9 @@
 import { useTheme } from '@emotion/react';
 import CSS from 'csstype';
-import { flatten, merge } from 'lodash';
+import { flatten } from 'lodash';
 import React, { Children, forwardRef } from 'react';
 
-import { getResponsivePropValue } from '../helpers';
+import { getResponsivePropValue, mergeSX } from '../helpers';
 import { useScreenSizeType } from '../hooks';
 import { ResponsiveProp, Spacing } from '../types';
 import { Box, BoxProps } from './Box';
@@ -56,7 +56,7 @@ export const Stack = forwardRef<HTMLElement, StackProps>(function Stack(
     <Box
       as={element}
       ref={ref}
-      sx={merge(
+      sx={mergeSX(
         {
           alignItems: stackAlignToCSS(alignValue),
           alignSelf: stackAlignToCSS(alignSelfValue),

@@ -1,6 +1,6 @@
-import { merge } from 'lodash';
 import React, { forwardRef, MouseEventHandler } from 'react';
 
+import { mergeSX } from '../helpers';
 import { Button } from './Button';
 import { Stack, StackProps } from './Stack';
 import { Text } from './Text';
@@ -36,7 +36,7 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner(
       ref={ref}
       role="alert"
       space={6}
-      sx={merge({ label: 'Banner', width: '100%' }, sx)}
+      sx={mergeSX({ label: 'Banner', width: '100%' }, sx)}
       {...rest}
     >
       <Stack

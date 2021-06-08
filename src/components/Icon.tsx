@@ -1,7 +1,7 @@
 import { useTheme } from '@emotion/react';
-import { merge } from 'lodash';
 import React, { cloneElement, forwardRef, ReactElement, Ref } from 'react';
 
+import { mergeSX } from '../helpers';
 import { ColorName } from '../types';
 import { Box, BoxProps } from './Box';
 
@@ -32,7 +32,7 @@ export const Icon = forwardRef<HTMLElement, IconProps>(function Icon(
       as="span"
       ref={ref as Ref<HTMLDivElement>}
       size={{ lg: 8, md: 6, sm: 4 }[size]}
-      sx={merge(
+      sx={mergeSX(
         {
           color: themeColor,
           label: 'Icon',

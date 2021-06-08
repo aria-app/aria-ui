@@ -1,6 +1,6 @@
-import { merge } from 'lodash';
 import React, { forwardRef, Ref } from 'react';
 
+import { mergeSX } from '../helpers';
 import { Box, BoxProps } from './Box';
 import { Icon, IconProps } from './Icon';
 
@@ -41,7 +41,7 @@ export const IconButton = forwardRef<
       padding={2}
       parentColor={colorIsBackground ? color : undefined}
       ref={ref as Ref<HTMLButtonElement>}
-      sx={merge(
+      sx={mergeSX(
         {
           border: 0,
           cursor: disabled ? 'not-allowed' : undefined,

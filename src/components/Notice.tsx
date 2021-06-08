@@ -1,10 +1,10 @@
-import { merge } from 'lodash';
 import AlertCircleIcon from 'mdi-react/AlertCircleIcon';
 import AlertCircleOutlineIcon from 'mdi-react/AlertCircleOutlineIcon';
 import CheckCircleIcon from 'mdi-react/CheckCircleIcon';
 import InformationIcon from 'mdi-react/InformationIcon';
 import React, { forwardRef } from 'react';
 
+import { mergeSX } from '../helpers';
 import { Status } from '../types';
 import { Box, BoxProps } from './Box';
 import { Icon } from './Icon';
@@ -40,7 +40,7 @@ export const Notice = forwardRef<HTMLDivElement, NoticeProps>(function Notice(
       }
       ref={ref}
       role="alert"
-      sx={merge(
+      sx={mergeSX(
         {
           label: 'Notice',
         },

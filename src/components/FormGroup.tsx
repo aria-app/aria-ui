@@ -1,6 +1,6 @@
-import { merge } from 'lodash';
 import React, { forwardRef, Ref } from 'react';
 
+import { mergeSX } from '../helpers';
 import { Stack, StackProps } from './Stack';
 import { Text } from './Text';
 
@@ -33,7 +33,7 @@ export const FormGroup = forwardRef<HTMLFieldSetElement, FormGroupProps>(
         as={element}
         ref={ref as Ref<HTMLDivElement>}
         space={space}
-        sx={merge(
+        sx={mergeSX(
           {
             border: 0,
           },

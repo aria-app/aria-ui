@@ -1,8 +1,8 @@
 import { useTheme } from '@emotion/react';
 import capsize from 'capsize';
-import { merge } from 'lodash';
 import React, { ElementType, forwardRef } from 'react';
 
+import { mergeSX } from '../helpers';
 import { ColorName, Theme } from '../types';
 import { Box, BoxProps } from './Box';
 
@@ -37,7 +37,7 @@ export const Text = forwardRef<HTMLElement, TextProps>(function Text(
     <Box
       as={element}
       ref={ref}
-      sx={merge(
+      sx={mergeSX(
         {
           color: themeColor || 'inherit',
           fontFamily: theme.fontFamily,

@@ -1,7 +1,7 @@
 import { useTheme } from '@emotion/react';
-import { merge } from 'lodash';
 import React, { forwardRef } from 'react';
 
+import { mergeSX } from '../helpers';
 import { Box, BoxProps } from './Box';
 
 export type DividerOrientation = 'horizontal' | 'vertical';
@@ -43,7 +43,7 @@ export const Divider = forwardRef<HTMLHRElement, DividerProps>(function Divider(
     <Box
       as="hr"
       ref={ref}
-      sx={merge(
+      sx={mergeSX(
         {
           backgroundColor: theme.colors.border,
           border: 0,

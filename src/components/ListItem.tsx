@@ -1,4 +1,3 @@
-import { merge } from 'lodash';
 import React, {
   forwardRef,
   MouseEventHandler,
@@ -6,6 +5,7 @@ import React, {
   useMemo,
 } from 'react';
 
+import { mergeSX } from '../helpers';
 import { ColorName } from '../types';
 import { Box, BoxProps } from './Box';
 import { IconSize } from './Icon';
@@ -62,7 +62,7 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
         ref={ref}
         paddingX={4}
         paddingY={4}
-        sx={merge(
+        sx={mergeSX(
           {
             display: 'flex',
             label: 'ListItem',

@@ -1,7 +1,7 @@
 import { CSSObject, useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import CSS from 'csstype';
-import { isNil, merge, omitBy } from 'lodash';
+import { isNil, omitBy } from 'lodash';
 import React, {
   ElementType,
   ForwardedRef,
@@ -15,7 +15,7 @@ import {
   PolymorphicPropsWithRef,
 } from 'react-polymorphic-types';
 
-import { isLightColor } from '../helpers';
+import { isLightColor, mergeSX } from '../helpers';
 import { useResponsivePropValue } from '../hooks';
 import { ColorName, ResponsiveProp, Spacing, Theme } from '../types';
 
@@ -73,7 +73,7 @@ interface StyledBoxProps {
 }
 
 const StyledBox = styled.div<BoxOwnProps & StyledBoxProps>(props => {
-  const getInteractiveStyles = () => {
+  function getInteractiveStyles(): CSSObject {
     if (!props.isInteractive) return {};
 
     const foregroundColor = props.childColor
@@ -122,9 +122,9 @@ const StyledBox = styled.div<BoxOwnProps & StyledBoxProps>(props => {
         opacity: isLightColor(foregroundColor || 'white') ? '0.4' : '0.25',
       },
     };
-  };
+  }
 
-  return merge(
+  return mergeSX(
     {
       backgroundColor: props.theme.getColor(props.backgroundColor),
       borderColor: props.theme.getColor(props.borderColor),

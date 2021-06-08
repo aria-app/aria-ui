@@ -1,7 +1,7 @@
 import { AnimatePresence } from 'framer-motion';
-import { merge } from 'lodash';
 import React, { forwardRef, MouseEventHandler, useMemo } from 'react';
 
+import { mergeSX } from '../helpers';
 import { useScreenSizeType } from '../hooks';
 import { Spacing } from '../types';
 import { Box, BoxProps } from './Box';
@@ -71,7 +71,7 @@ export const Sheet = forwardRef<HTMLDivElement, SheetProps>(function Sheet(
   return (
     <Box
       ref={ref}
-      sx={merge(
+      sx={mergeSX(
         {
           height: '100%',
           label: 'Sheet',

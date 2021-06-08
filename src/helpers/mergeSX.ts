@@ -3,7 +3,7 @@ import { merge } from 'lodash';
 
 export function mergeSX(
   mainSX?: CSSObject,
-  overridesSX?: CSSObject,
+  ...overridesSX: (CSSObject | undefined)[]
 ): CSSObject | undefined {
-  return merge(mainSX, overridesSX);
+  return merge(mainSX, ...overridesSX);
 }
