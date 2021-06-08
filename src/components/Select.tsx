@@ -50,6 +50,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       label,
       onValueChange,
       options = [],
+      placeholder,
       rootRef,
       startIcon,
       startIconColor = 'textSecondary',
@@ -57,7 +58,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       selectProps = {},
       success,
       sx,
-      value,
+      value = '',
       warning,
       ...rest
     } = props;
@@ -71,8 +72,13 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     }, [error, success, warning]);
 
     const handleChange: ChangeEventHandler<HTMLSelectElement> = e => {
-      onValueChange?.(options[e.target.selectedIndex].value, e);
+      const selectedIndex = placeholder
+        ? e.target.selectedIndex - 1
+        : e.target.selectedIndex;
+      onValueChange?.(options[selectedIndex].value, e);
     };
+
+    const selectedOption = options.find(option => option.value === value);
 
     return (
       <FormGroup
@@ -101,14 +107,16 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           }}
         >
           {startIcon && (
-            <Box marginLeft={3.75} sx={{ position: 'absolute' }}>
+            <Box
+              marginLeft={3.75}
+              sx={{ pointerEvents: 'none', position: 'absolute' }}
+            >
               <Icon
                 color={startIconColor}
                 icon={startIcon}
                 size={startIconSize}
                 sx={{
                   display: 'block',
-                  pointerEvents: 'none',
                   width: '100%',
                 }}
               />
@@ -130,31 +138,41 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               ...theme.textVariants.field,
               appearance: 'none',
               backgroundColor: theme.colors.border,
-              color: theme.colors.textPrimary,
+              color: !!selectedOption
+                ? theme.colors.textPrimary
+                : theme.colors.textSecondary,
               fontFamily: 'inherit',
               outline: 0,
               width: '100%',
               '&, & *': {
-                cursor: disabled ? 'not-allowed' : undefined,
+                cursor: disabled ? 'not-allowed' : 'pointer',
               },
             }}
-            value={value}
+            value={selectedOption ? value : ''}
             {...selectProps}
           >
+            {placeholder && (
+              <option
+                key="ARIA_SELECT_PLACEHOLDER_OPTION"
+                label={placeholder}
+                value=""
+              />
+            )}
             {options.map(({ label, value }, index) => (
               <option key={`${value}-${index}`} label={label} value={value} />
             ))}
           </Box>
           {endIcon && (
-            <Box marginRight={3.75} right={0} sx={{ position: 'absolute' }}>
+            <Box
+              marginRight={3.75}
+              right={0}
+              sx={{ pointerEvents: 'none', position: 'absolute' }}
+            >
               <Icon
                 color={endIconColor}
                 icon={endIcon}
                 size={endIconSize}
-                sx={{
-                  display: 'block',
-                  pointerEvents: 'none',
-                }}
+                sx={{ display: 'block' }}
               />
             </Box>
           )}
