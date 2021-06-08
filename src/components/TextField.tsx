@@ -95,7 +95,9 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         success={success}
         sx={merge(
           {
+            label: 'TextField',
             opacity: disabled ? 0.5 : 1,
+            width: '100%',
           },
           sx,
         )}
@@ -103,7 +105,12 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         {...rest}
       >
         <Box
-          sx={{ alignItems: 'center', display: 'flex', position: 'relative' }}
+          sx={{
+            alignItems: 'center',
+            display: 'flex',
+            position: 'relative',
+            width: '100%',
+          }}
         >
           {startIcon && (
             <Box marginLeft={3.75} sx={{ position: 'absolute' }}>
@@ -137,8 +144,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
               backgroundColor: theme.colors.border,
               color: theme.colors.textPrimary,
               fontFamily: 'inherit',
-              label: 'TextField',
               outline: 0,
+              width: '100%',
               '&, & *': {
                 cursor: disabled ? 'not-allowed' : undefined,
               },

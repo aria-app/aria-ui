@@ -20,7 +20,12 @@ export default {
 } as Meta;
 
 export const Default: Story<TextFieldProps> = args => (
-  <Box backgroundColor="backgroundContrast" borderRadius="md" padding={8}>
+  <Box
+    backgroundColor="backgroundContrast"
+    borderRadius="md"
+    padding={8}
+    sx={{ maxWidth: 320, width: '100vw' }}
+  >
     <TextField {...args} />
   </Box>
 );
