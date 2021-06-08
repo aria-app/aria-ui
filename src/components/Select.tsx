@@ -1,72 +1,64 @@
 import { useTheme } from '@emotion/react';
-import { merge } from 'lodash';
+import ChevronDownIcon from 'mdi-react/ChevronDownIcon';
 import React, {
   ChangeEvent,
   ChangeEventHandler,
   forwardRef,
-  MouseEventHandler,
   ReactElement,
   Ref,
-  useCallback,
   useMemo,
 } from 'react';
 
+import { mergeSX } from '../helpers';
 import { ColorName } from '../types';
 import { Box, BoxProps } from './Box';
 import { FormGroup, FormGroupProps } from './FormGroup';
 import { Icon, IconSize } from './Icon';
 
-export type TextFieldType =
-  | 'email'
-  | 'number'
-  | 'password'
-  | 'search'
-  | 'tel'
-  | 'text'
-  | 'url';
+export interface SelectOption<ValueType = any> {
+  disabled?: boolean;
+  label?: string;
+  value?: ValueType;
+}
 
-export interface TextFieldProps extends FormGroupProps {
+export interface SelectProps extends FormGroupProps {
   disabled?: boolean;
   endIcon?: ReactElement;
   endIconColor?: ColorName;
   endIconSize?: IconSize;
   id?: string;
-  inputProps?: BoxProps<'input'>;
-  onEndIconClick?: MouseEventHandler<HTMLSpanElement>;
-  onStartIconClick?: MouseEventHandler<HTMLSpanElement>;
-  onValueChange?: (value: string, e: ChangeEvent<HTMLInputElement>) => void;
+  onValueChange?: (value: any, event: ChangeEvent<HTMLSelectElement>) => void;
+  options?: SelectOption[];
   placeholder?: string;
   rootRef?: Ref<HTMLFieldSetElement>;
+  selectProps?: BoxProps<'select'>;
   startIcon?: ReactElement;
   startIconColor?: ColorName;
   startIconSize?: IconSize;
-  type?: TextFieldType;
-  value?: string;
+  value?: any;
 }
 
-export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
-  function TextField(props, ref) {
+export const Select = forwardRef<HTMLSelectElement, SelectProps>(
+  function Select(props, ref) {
     const {
       disabled,
-      endIcon,
+      endIcon = <ChevronDownIcon />,
       endIconColor = 'textSecondary',
       endIconSize,
       error,
       id,
-      inputProps = {},
       label,
-      onEndIconClick,
-      onStartIconClick,
       onValueChange,
+      options = [],
       placeholder,
       rootRef,
       startIcon,
       startIconColor = 'textSecondary',
       startIconSize,
+      selectProps = {},
       success,
       sx,
-      type = 'text',
-      value,
+      value = '',
       warning,
       ...rest
     } = props;
@@ -79,23 +71,26 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       return 'transparent';
     }, [error, success, warning]);
 
-    const handleInputChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
-      e => {
-        onValueChange?.(e.currentTarget.value, e);
-      },
-      [onValueChange],
-    );
+    const handleChange: ChangeEventHandler<HTMLSelectElement> = e => {
+      const selectedIndex = placeholder
+        ? e.target.selectedIndex - 1
+        : e.target.selectedIndex;
+      onValueChange?.(options[selectedIndex].value, e);
+    };
+
+    const selectedOption = options.find(option => option.value === value);
 
     return (
       <FormGroup
         error={error}
         label={label}
-        ref={rootRef}
         space={3}
         success={success}
-        sx={merge(
+        ref={rootRef}
+        sx={mergeSX(
           {
-            label: 'TextField',
+            appearance: 'none',
+            label: 'Select',
             opacity: disabled ? 0.5 : 1,
             width: '100%',
           },
@@ -109,72 +104,75 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             alignItems: 'center',
             display: 'flex',
             position: 'relative',
-            width: '100%',
           }}
         >
           {startIcon && (
-            <Box marginLeft={3.75} sx={{ position: 'absolute' }}>
+            <Box
+              marginLeft={3.75}
+              sx={{ pointerEvents: 'none', position: 'absolute' }}
+            >
               <Icon
                 color={startIconColor}
                 icon={startIcon}
-                onClick={onStartIconClick}
                 size={startIconSize}
                 sx={{
-                  cursor: onStartIconClick ? 'pointer' : undefined,
                   display: 'block',
+                  width: '100%',
                 }}
               />
             </Box>
           )}
           <Box
-            borderRadius="md"
+            as="select"
             borderColor={borderColor}
+            borderRadius="md"
             borderWidth={3}
-            as="input"
             disabled={disabled}
             height={12}
             id={id || label?.replace(/ /g, '') || undefined}
-            onChange={handleInputChange}
+            onChange={handleChange}
+            ref={ref}
             paddingLeft={startIcon ? 12 : 3}
             paddingRight={endIcon ? 12 : 3}
-            placeholder={placeholder}
-            ref={ref}
             sx={{
               ...theme.textVariants.field,
+              appearance: 'none',
               backgroundColor: theme.colors.border,
-              color: theme.colors.textPrimary,
+              color: !!selectedOption
+                ? theme.colors.textPrimary
+                : theme.colors.textSecondary,
               fontFamily: 'inherit',
               outline: 0,
               width: '100%',
               '&, & *': {
-                cursor: disabled ? 'not-allowed' : undefined,
-              },
-              '&::-moz-placeholder': {
-                color: theme.colors.textSecondary,
-                opacity: 1,
-              },
-              '&:-ms-input-placeholder': {
-                color: theme.colors.textSecondary,
-              },
-              '&::-webkit-input-placeholder': {
-                color: theme.colors.textSecondary,
+                cursor: disabled ? 'not-allowed' : 'pointer',
               },
             }}
-            type={type}
-            value={value}
-            {...inputProps}
-          />
+            value={selectedOption ? value : ''}
+            {...selectProps}
+          >
+            {placeholder && (
+              <option
+                key="ARIA_SELECT_PLACEHOLDER_OPTION"
+                label={placeholder}
+                value=""
+              />
+            )}
+            {options.map(({ label, value }, index) => (
+              <option key={`${value}-${index}`} label={label} value={value} />
+            ))}
+          </Box>
           {endIcon && (
-            <Box marginRight={3.75} right={0} sx={{ position: 'absolute' }}>
+            <Box
+              marginRight={3.75}
+              right={0}
+              sx={{ pointerEvents: 'none', position: 'absolute' }}
+            >
               <Icon
                 color={endIconColor}
                 icon={endIcon}
-                onClick={onEndIconClick}
                 size={endIconSize}
-                sx={{
-                  cursor: onEndIconClick ? 'pointer' : undefined,
-                  display: 'block',
-                }}
+                sx={{ display: 'block' }}
               />
             </Box>
           )}
