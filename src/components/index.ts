@@ -10,6 +10,7 @@ export * from './ListItem';
 export * from './MotionBox';
 export * from './Notice';
 export * from './Overlay';
+export * from './Select';
 export * from './Sheet';
 export * from './Spinner';
 export * from './Stack';
