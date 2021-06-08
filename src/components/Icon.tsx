@@ -1,7 +1,7 @@
-import { useTheme } from '@emotion/react';
 import React, { cloneElement, forwardRef, ReactElement, Ref } from 'react';
 
 import { mergeSX } from '../helpers';
+import { useThemeWithDefault } from '../hooks';
 import { ColorName } from '../types';
 import { Box, BoxProps } from './Box';
 
@@ -19,7 +19,7 @@ export const Icon = forwardRef<HTMLElement, IconProps>(function Icon(
   ref,
 ) {
   const { color, colorIsBackground, icon, size = 'md', sx, ...rest } = props;
-  const theme = useTheme();
+  const theme = useThemeWithDefault();
 
   const themeColor = colorIsBackground
     ? theme.getForegroundColor(color)

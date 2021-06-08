@@ -1,10 +1,9 @@
-import { useTheme } from '@emotion/react';
 import CSS from 'csstype';
 import { flatten } from 'lodash';
 import React, { Children, forwardRef } from 'react';
 
 import { getResponsivePropValue, mergeSX } from '../helpers';
-import { useScreenSizeType } from '../hooks';
+import { useScreenSizeType, useThemeWithDefault } from '../hooks';
 import { ResponsiveProp, Spacing } from '../types';
 import { Box, BoxProps } from './Box';
 import { Divider, DividerThickness } from './Divider';
@@ -44,7 +43,7 @@ export const Stack = forwardRef<HTMLElement, StackProps>(function Stack(
     sx,
     ...rest
   } = props;
-  const theme = useTheme();
+  const theme = useThemeWithDefault();
   const screenSizeType = useScreenSizeType();
   const alignValue = getResponsivePropValue(align, screenSizeType) || 'stretch';
   const alignSelfValue = getResponsivePropValue(alignSelf, screenSizeType);

@@ -7,7 +7,6 @@ export const globalTypes = {
     defaultValue: 'light',
     toolbar: {
       icon: 'circlehollow',
-      // Array of plain string values or MenuItem shape (see below)
       items: ['light', 'dark'],
     },
   },

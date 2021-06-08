@@ -1,4 +1,3 @@
-import { useTheme } from '@emotion/react';
 import React, {
   ElementType,
   forwardRef,
@@ -7,6 +6,7 @@ import React, {
   useMemo,
 } from 'react';
 
+import { useThemeWithDefault } from '../hooks';
 import { Box, BoxProps } from './Box';
 import { Icon, IconSize } from './Icon';
 import { Spinner } from './Spinner';
@@ -44,7 +44,7 @@ export const Button = forwardRef<
     variant = 'outlined',
     ...rest
   } = props;
-  const theme = useTheme();
+  const theme = useThemeWithDefault();
 
   const elementProps = element === 'button' ? { disabled } : {};
 

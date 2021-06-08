@@ -1,13 +1,10 @@
-import { useTheme } from '@emotion/react';
-import { isEmpty } from 'lodash';
 import { useMediaQuery } from 'react-responsive';
 
-import { lightTheme } from '../themes';
 import { Theme } from '../types';
+import { useThemeWithDefault } from './useThemeWithDefault';
 
 export function useScreenSizeType(): keyof Theme['screenSizes'] {
-  const theme = useTheme();
-  const { screenSizes } = isEmpty(theme) ? lightTheme : theme;
+  const { screenSizes } = useThemeWithDefault();
 
   const isLg = useMediaQuery({
     query: `(min-width: ${screenSizes.lg}px)`,

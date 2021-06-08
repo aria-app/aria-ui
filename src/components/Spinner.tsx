@@ -1,7 +1,8 @@
-import { keyframes, useTheme } from '@emotion/react';
+import { keyframes } from '@emotion/react';
 import React, { forwardRef } from 'react';
 
 import { mergeSX } from '../helpers';
+import { useThemeWithDefault } from '../hooks';
 import { ColorName } from '../types';
 import { Box, BoxProps } from './Box';
 
@@ -29,7 +30,7 @@ export const Spinner = forwardRef<HTMLDivElement, SpinnerProps>(
       sx,
       ...rest
     } = props;
-    const theme = useTheme();
+    const theme = useThemeWithDefault();
 
     const themeColor = colorIsBackground
       ? theme.getForegroundColor(color)

@@ -1,4 +1,3 @@
-import { useTheme } from '@emotion/react';
 import ChevronDownIcon from 'mdi-react/ChevronDownIcon';
 import React, {
   ChangeEvent,
@@ -10,6 +9,7 @@ import React, {
 } from 'react';
 
 import { mergeSX } from '../helpers';
+import { useThemeWithDefault } from '../hooks';
 import { ColorName } from '../types';
 import { Box, BoxProps } from './Box';
 import { FormGroup, FormGroupProps } from './FormGroup';
@@ -62,7 +62,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       warning,
       ...rest
     } = props;
-    const theme = useTheme();
+    const theme = useThemeWithDefault();
 
     const borderColor = useMemo(() => {
       if (error) return 'error';

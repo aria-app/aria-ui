@@ -1,8 +1,8 @@
-import { useTheme } from '@emotion/react';
 import capsize from 'capsize';
 import React, { ElementType, forwardRef } from 'react';
 
 import { mergeSX } from '../helpers';
+import { useThemeWithDefault } from '../hooks';
 import { ColorName, Theme } from '../types';
 import { Box, BoxProps } from './Box';
 
@@ -25,7 +25,7 @@ export const Text = forwardRef<HTMLElement, TextProps>(function Text(
     variant = 'body',
     ...rest
   } = props;
-  const theme = useTheme();
+  const theme = useThemeWithDefault();
 
   const { fontSize, fontWeight, leading } = theme.getTextVariant(variant);
 

@@ -1,4 +1,4 @@
-import { CSSObject, useTheme } from '@emotion/react';
+import { CSSObject } from '@emotion/react';
 import styled from '@emotion/styled';
 import CSS from 'csstype';
 import { isNil, omitBy } from 'lodash';
@@ -16,7 +16,7 @@ import {
 } from 'react-polymorphic-types';
 
 import { isLightColor, mergeSX } from '../helpers';
-import { useResponsivePropValue } from '../hooks';
+import { useResponsivePropValue, useThemeWithDefault } from '../hooks';
 import { ColorName, ResponsiveProp, Spacing, Theme } from '../types';
 
 type SpacingProp = ResponsiveProp<Spacing | undefined>;
@@ -191,7 +191,7 @@ export const Box: PolymorphicForwardRefExoticComponent<
     width,
     ...rest
   } = props;
-  const theme = useTheme();
+  const theme = useThemeWithDefault();
   const borderRadiusValue = useResponsivePropValue(borderRadius);
   const borderBottomLeftRadiusValue = useResponsivePropValue(
     borderBottomLeftRadius,
@@ -298,6 +298,7 @@ export const Box: PolymorphicForwardRefExoticComponent<
         },
         isNil,
       )}
+      theme={theme}
       {...rest}
     ></StyledBox>
   );

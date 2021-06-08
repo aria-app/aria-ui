@@ -1,7 +1,7 @@
-import { useTheme } from '@emotion/react';
 import React, { forwardRef } from 'react';
 
 import { mergeSX } from '../helpers';
+import { useThemeWithDefault } from '../hooks';
 import { Box, BoxProps } from './Box';
 
 export type DividerOrientation = 'horizontal' | 'vertical';
@@ -18,7 +18,7 @@ export const Divider = forwardRef<HTMLHRElement, DividerProps>(function Divider(
   ref,
 ) {
   const { orientation = 'horizontal', thickness = 'md', sx, ...rest } = props;
-  const theme = useTheme();
+  const theme = useThemeWithDefault();
 
   const thicknessStyles =
     orientation === 'horizontal'
