@@ -5,14 +5,14 @@ import { Box, BoxProps } from './Box';
 import { NavigationItem, NavigationItemItem } from './NavigationItem';
 import { Stack } from './Stack';
 
-export interface BottomNavigationProps extends BoxProps<'nav'> {
+export interface NavigationRailProps extends BoxProps<'nav'> {
   items?: NavigationItemItem[];
   onSelectedNameChange: (name: string, e: MouseEvent<HTMLElement>) => void;
   selectedName?: string;
 }
 
-export const BottomNavigation = forwardRef<HTMLElement, BottomNavigationProps>(
-  function BottomNavigation(props, ref) {
+export const NavigationRail = forwardRef<HTMLElement, NavigationRailProps>(
+  function NavigationRail(props, ref) {
     const {
       items = [],
       onSelectedNameChange,
@@ -44,24 +44,20 @@ export const BottomNavigation = forwardRef<HTMLElement, BottomNavigationProps>(
           {
             display: 'flex',
             flex: 0,
-            justifyContent: 'center',
-            label: 'BottomNavigation',
+            flexDirection: 'column',
+            label: 'NavigationRail',
           },
           sx,
         )}
         {...rest}
       >
-        <Stack direction="row" sx={{ maxWidth: 480, width: '100%' }}>
+        <Stack as="ul">
           {items.map((item, index) => (
             <NavigationItem
               isSelected={getIsSelected(item)}
               item={item}
               key={`${item.label}${index}`}
               onSelect={handleItemSelect}
-              sx={{
-                flexBasis: `${(1 / items.length) * 100}%`,
-                label: 'BottomNavigationItem',
-              }}
             />
           ))}
         </Stack>
