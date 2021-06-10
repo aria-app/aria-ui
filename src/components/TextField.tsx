@@ -91,7 +91,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         error={error}
         label={label}
         ref={rootRef}
-        space={3}
+        space={2}
         success={success}
         sx={mergeSX(
           {

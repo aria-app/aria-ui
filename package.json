@@ -14,7 +14,7 @@
     "analyze": "size-limit --why",
     "build-storybook": "build-storybook",
     "build": "tsdx build",
-    "ci": "yarn lint && yarn build && yarn test",
+    "ci": "yarn lint && yarn build && yarn test && yarn build-storybook",
     "clean": "rimraf build-storybook.log coverage dist storybook-static yarn-error.log",
     "lint": "tsdx lint src stories test --fix",
     "plop": "plop",
@@ -29,6 +29,7 @@
   "dependencies": {
     "capsize": "^2.0.0",
     "csstype": "3.0.8",
+    "focus-trap-react": "^8.5.1",
     "framer-motion": "^4.1.17",
     "lodash-es": "^4.17.21",
     "mdi-react": "^7.5.0",

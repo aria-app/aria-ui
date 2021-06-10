@@ -24,6 +24,7 @@ export interface ButtonProps extends BoxProps<'a' | 'button'> {
   startIconSize?: IconSize;
   isLoading?: boolean;
   text?: string;
+  type?: BoxProps<'button'>['type'];
   variant?: ButtonVariant;
 }
 
@@ -41,6 +42,7 @@ export const Button = forwardRef<
     startIcon,
     startIconSize = 'md',
     text,
+    type = 'button',
     variant = 'outlined',
     ...rest
   } = props;
@@ -98,6 +100,7 @@ export const Button = forwardRef<
           margin: variant === 'outlined' ? -3 : undefined,
         },
       }}
+      type={type}
       {...rest}
     >
       {startIcon && (
