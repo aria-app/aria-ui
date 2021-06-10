@@ -14,7 +14,7 @@
     "analyze": "size-limit --why",
     "build-storybook": "build-storybook",
     "build": "tsdx build",
-    "ci": "yarn lint && yarn build && yarn test",
+    "ci": "yarn lint && yarn build && yarn test && yarn build-storybook",
     "clean": "rimraf build-storybook.log coverage dist storybook-static yarn-error.log",
     "lint": "tsdx lint src stories test --fix",
     "plop": "plop",

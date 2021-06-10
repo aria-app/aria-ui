@@ -21,6 +21,7 @@ export interface DialogProps extends Omit<BoxProps<'aside'>, 'title'> {
   confirmText?: string;
   id?: any;
   isContentPadded?: boolean;
+  isFocusTrapped?: boolean;
   isFullWidth?: boolean;
   isOpen?: boolean;
   maxWidth?: DialogMaxWidth;
@@ -44,6 +45,7 @@ export const Dialog = forwardRef<HTMLElement, DialogProps>(function Dialog(
     confirmText = 'Confirm',
     id: idProp,
     isContentPadded = true,
+    isFocusTrapped,
     isFullWidth = true,
     isOpen,
     maxWidth = 'md',
@@ -135,7 +137,7 @@ export const Dialog = forwardRef<HTMLElement, DialogProps>(function Dialog(
       )}
       <AnimatePresence>
         {isOpen && (
-          <FocusTrap>
+          <FocusTrap active={isFocusTrapped || !!onCancel || !!onConfirm}>
             <MotionBox
               animate={{ opacity: 1, scale: 1, x: '-50%', y: '-50%' }}
               aria-labelledby={`${id}__title`}
