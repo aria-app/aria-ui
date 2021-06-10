@@ -9,6 +9,7 @@ export * from './Icon';
 export * from './IconButton';
 export * from './ListItem';
 export * from './MotionBox';
+export * from './BottomNavigation';
 export * from './Notice';
 export * from './Overlay';
 export * from './Select';
