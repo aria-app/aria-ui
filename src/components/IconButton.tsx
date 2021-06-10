@@ -19,7 +19,7 @@ export const IconButton = forwardRef<
   IconButtonProps
 >(function IconButton(props, ref) {
   const {
-    color,
+    color = 'textSecondary',
     colorIsBackground,
     disabled,
     element = 'button',
@@ -45,6 +45,7 @@ export const IconButton = forwardRef<
         {
           border: 0,
           cursor: disabled ? 'not-allowed' : undefined,
+          flex: 0,
           label: 'IconButton',
           opacity: disabled ? 0.5 : undefined,
           outline: 'none',
