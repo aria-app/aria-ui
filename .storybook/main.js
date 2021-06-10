@@ -5,7 +5,7 @@ module.exports = {
   addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
   typescript: {
     check: true,
-    docgen: 'none',
+    reactDocgen: 'react-docgen',
     reactDocgenTypescriptOptions: {
       include: ['src/**/*.tsx', 'stories/**/*.tsx'],
     },
