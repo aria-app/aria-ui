@@ -84,9 +84,9 @@ export const Notice = forwardRef<HTMLDivElement, NoticeProps>(function Notice(
             color="textSecondary"
             variant={
               {
-                lg: 'emphasized',
-                md: 'label',
-                sm: 'helper',
+                lg: 'emphasized' as const,
+                md: 'label' as const,
+                sm: 'helper' as const,
               }[size]
             }
           >

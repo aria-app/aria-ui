@@ -1,12 +1,12 @@
 import capsize from 'capsize';
-import React, { ElementType, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 
 import { mergeSX } from '../helpers';
 import { useThemeWithDefault } from '../hooks';
 import { ColorName, Theme } from '../types';
 import { Box, BoxProps } from './Box';
 
-export interface TextProps extends BoxProps<ElementType> {
+export interface TextProps extends BoxProps<'a' | 'button' | 'span'> {
   color?: ColorName;
   colorIsBackground?: boolean;
   element?: keyof JSX.IntrinsicElements;
