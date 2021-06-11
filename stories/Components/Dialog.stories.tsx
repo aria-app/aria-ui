@@ -105,12 +105,6 @@ ConfirmOnly.argTypes = {
   onConfirm: { action: 'onConfirm' },
 };
 
-ConfirmOnly.parameters = {
-  chromatic: {
-    viewports: [479, 1024],
-  },
-};
-
 export const CancelOnly: Story<DialogProps> = args => <Dialog {...args} />;
 
 CancelOnly.args = {
@@ -122,22 +116,10 @@ CancelOnly.argTypes = {
   onCancel: { action: 'onCancel' },
 };
 
-CancelOnly.parameters = {
-  chromatic: {
-    viewports: [479, 1024],
-  },
-};
-
 export const NoActions: Story<DialogProps> = args => <Dialog {...args} />;
 
 NoActions.args = {
   ...Default.args,
-};
-
-NoActions.parameters = {
-  chromatic: {
-    viewports: [479, 1024],
-  },
 };
 
 export const ContentOnly: Story<DialogProps> = args => <Dialog {...args} />;

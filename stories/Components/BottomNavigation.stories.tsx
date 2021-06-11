@@ -52,3 +52,9 @@ Default.argTypes = {
     options: [undefined, 'home', 'likes', 'profile'],
   },
 };
+
+Default.parameters = {
+  chromatic: {
+    viewports: [479, 1024],
+  },
+};
