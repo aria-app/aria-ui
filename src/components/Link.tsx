@@ -24,6 +24,7 @@ export const Link = forwardRef<
   return (
     <Box
       as="a"
+      block
       borderRadius="sm"
       isInteractive
       marginX={-1}
@@ -35,7 +36,6 @@ export const Link = forwardRef<
         {
           color: 'unset',
           cursor: 'pointer',
-          display: 'block',
           label: 'Link',
         },
         sx,

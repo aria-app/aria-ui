@@ -60,6 +60,7 @@ export const Notice = forwardRef<HTMLDivElement, NoticeProps>(function Notice(
         }
       >
         <Icon
+          block
           color={color}
           icon={
             {
@@ -69,7 +70,6 @@ export const Notice = forwardRef<HTMLDivElement, NoticeProps>(function Notice(
               warning: <AlertCircleOutlineIcon />,
             }[status]
           }
-          sx={{ display: 'block' }}
         />
         <Box
           paddingY={

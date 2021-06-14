@@ -115,13 +115,13 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           {startIcon && (
             <Box marginLeft={3.75} sx={{ position: 'absolute' }}>
               <Icon
+                block
                 color={startIconColor}
                 icon={startIcon}
                 onClick={onStartIconClick}
                 size={startIconSize}
                 sx={{
                   cursor: onStartIconClick ? 'pointer' : undefined,
-                  display: 'block',
                 }}
               />
             </Box>
@@ -167,13 +167,13 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           {endIcon && (
             <Box marginRight={3.75} right={0} sx={{ position: 'absolute' }}>
               <Icon
+                block
                 color={endIconColor}
                 icon={endIcon}
                 onClick={onEndIconClick}
                 size={endIconSize}
                 sx={{
                   cursor: onEndIconClick ? 'pointer' : undefined,
-                  display: 'block',
                 }}
               />
             </Box>

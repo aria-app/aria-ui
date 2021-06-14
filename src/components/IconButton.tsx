@@ -56,11 +56,11 @@ export const IconButton = forwardRef<
       {...rest}
     >
       <Icon
+        block
         color={color}
         colorIsBackground={colorIsBackground}
         icon={icon}
         size={size}
-        sx={{ display: 'block' }}
       />
     </Box>
   );

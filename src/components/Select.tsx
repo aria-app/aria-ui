@@ -112,11 +112,11 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               sx={{ pointerEvents: 'none', position: 'absolute' }}
             >
               <Icon
+                block
                 color={startIconColor}
                 icon={startIcon}
                 size={startIconSize}
                 sx={{
-                  display: 'block',
                   width: '100%',
                 }}
               />
@@ -169,10 +169,10 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               sx={{ pointerEvents: 'none', position: 'absolute' }}
             >
               <Icon
+                block
                 color={endIconColor}
                 icon={endIcon}
                 size={endIconSize}
-                sx={{ display: 'block' }}
               />
             </Box>
           )}
