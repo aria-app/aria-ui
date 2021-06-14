@@ -24,6 +24,7 @@ type SpacingProp = ResponsiveProp<Spacing | undefined>;
 // Component-specific props should be specified separately
 export type BoxOwnProps = {
   backgroundColor?: ColorName;
+  block?: boolean;
   borderBottomLeftRadius?: ResponsiveProp<keyof Theme['borderRadii']>;
   borderBottomRightRadius?: ResponsiveProp<keyof Theme['borderRadii']>;
   borderBottomWidth?: CSS.Properties<number | string>['borderBottomWidth'];
@@ -135,6 +136,7 @@ const StyledBox = styled.div<BoxOwnProps & StyledBoxProps>(props => {
       borderTopWidth: props.borderTopWidth,
       borderBottomWidth: props.borderBottomWidth,
       borderLeftWidth: props.borderLeftWidth,
+      display: props.block ? 'block' : undefined,
       //-------------------------------------------------------
       label: 'Box',
     },
