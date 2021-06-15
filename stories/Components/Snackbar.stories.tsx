@@ -9,6 +9,7 @@ export default {
   component: Snackbar,
   argTypes: {
     message: { control: { type: 'text' } },
+    onDismiss: { action: 'onDismiss' },
     status: argTypes.status,
   },
 } as Meta;
@@ -16,28 +17,14 @@ export default {
 export const Default: Story<SnackbarProps> = args => <Snackbar {...args} />;
 
 Default.args = {
-  actionText: 'Action',
+  message: 'Snackbar message',
+};
+
+export const StatusIcon: Story<SnackbarProps> = args => <Snackbar {...args} />;
+
+StatusIcon.args = {
   message: 'Snackbar message',
   status: 'warning',
-};
-
-Default.argTypes = {
-  onActionClick: { action: 'onActionClick' },
-};
-
-export const WithoutAction: Story<SnackbarProps> = args => (
-  <Snackbar {...args} />
-);
-
-WithoutAction.args = {
-  message: 'Snackbar message',
-  status: 'warning',
-};
-
-export const MessageOnly: Story<SnackbarProps> = args => <Snackbar {...args} />;
-
-MessageOnly.args = {
-  message: 'Snackbar message',
 };
 
 export const LongMessage: Story<SnackbarProps> = args => (

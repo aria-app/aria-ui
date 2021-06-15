@@ -1,34 +1,46 @@
 import AlertCircleIcon from 'mdi-react/AlertCircleIcon';
 import AlertCircleOutlineIcon from 'mdi-react/AlertCircleOutlineIcon';
 import CheckCircleIcon from 'mdi-react/CheckCircleIcon';
-import React, { forwardRef, MouseEventHandler } from 'react';
+import CloseIcon from 'mdi-react/CloseIcon';
+import React, { forwardRef, MouseEvent, MouseEventHandler } from 'react';
 
 import { mergeSX } from '../helpers';
 import { Status } from '../types';
 import { Box, BoxProps } from './Box';
-import { Button } from './Button';
 import { Icon } from './Icon';
+import { IconButton } from './IconButton';
 import { Stack } from './Stack';
 import { Text } from './Text';
 
+export type SnackbarOnDismiss = (
+  dismissedId: number,
+  e: MouseEvent<HTMLButtonElement>,
+) => void;
+
 export interface SnackbarProps extends BoxProps<'div'> {
-  actionText?: string;
   message?: string;
-  onActionClick: MouseEventHandler<HTMLButtonElement>;
+  messageId: number;
+  onDismiss?: SnackbarOnDismiss;
   status?: Status;
 }
 
 export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
   function Snackbar(props, ref) {
     const {
-      actionText,
       message,
-      onActionClick,
+      messageId,
+      onDismiss,
       status = 'info',
       sx,
       ...rest
     } = props;
+
+    const handleDismissButtonClick: MouseEventHandler<HTMLButtonElement> = e => {
+      onDismiss?.(messageId, e);
+    };
+
     const statusColor = status === 'info' ? 'textSecondary' : status;
+
     const statusIcon =
       status === 'info'
         ? undefined
@@ -43,8 +55,7 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
         as="div"
         backgroundColor="backgroundContrast"
         borderRadius="md"
-        paddingX={4}
-        paddingY={4}
+        padding={4}
         ref={ref}
         role="alert"
         sx={mergeSX(
@@ -64,17 +75,14 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
               marginY={-1}
             />
           )}
-          <Text>{message}</Text>
-          {onActionClick && (
-            <Button
-              color="textPrimary"
-              marginRight={-4}
-              marginY={-4}
-              onClick={onActionClick}
-              text={actionText}
-              variant="minimal"
-            />
-          )}
+          <Text sx={{ flex: 1 }}>{message}</Text>
+          <IconButton
+            icon={<CloseIcon />}
+            marginRight={-3}
+            marginY={-3}
+            onClick={handleDismissButtonClick}
+            sx={{ alignSelf: 'flex-start' }}
+          />
         </Stack>
       </Box>
     );
