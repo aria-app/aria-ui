@@ -41,6 +41,7 @@ export const IconButton = forwardRef<
       padding={2}
       parentColor={colorIsBackground ? color : undefined}
       ref={ref as Ref<HTMLButtonElement>}
+      role="button"
       sx={mergeSX(
         {
           border: 0,

@@ -19,6 +19,8 @@ export * from './Notice';
 export * from './Overlay';
 export * from './Select';
 export * from './Sheet';
+export * from './Snackbar';
+export * from './SnackbarStack';
 export * from './Spinner';
 export * from './Stack';
 export * from './Text';
