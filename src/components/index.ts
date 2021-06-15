@@ -26,3 +26,4 @@ export * from './Stack';
 export * from './Text';
 export * from './TextField';
 export * from './Toolbar';
+export * from './Wizard';

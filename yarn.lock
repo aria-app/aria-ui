@@ -14239,11 +14239,6 @@ react-textarea-autosize@^8.3.0:
     use-composed-ref "^1.0.0"
     use-latest "^1.0.0"
 
-react-use-wizard@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/react-use-wizard/-/react-use-wizard-1.1.2.tgz#4daf70f7afc39574b8b313c073f03db1f72a3fa1"
-  integrity sha512-gIAUg0kddD7fkL/T0ooFVWRsfbTVbO1Iwo7ez24/CHa7dupax8jej7IyMVJ99k9bEuMl7NSKMoN9/nT77kdz0g==
-
 react@^16.14.0, react@^16.8.3:
   version "16.14.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
