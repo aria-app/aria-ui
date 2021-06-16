@@ -75,11 +75,11 @@
   "size-limit": [
     {
       "path": "dist/aria-ui.cjs.production.min.js",
-      "limit": "100 KB"
+      "limit": "150 KB"
     },
     {
       "path": "dist/aria-ui.esm.js",
-      "limit": "100 KB"
+      "limit": "150 KB"
     }
   ],
   "devDependencies": {
