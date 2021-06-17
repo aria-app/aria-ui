@@ -49,6 +49,7 @@ export type BoxOwnProps = {
   marginX?: SpacingProp;
   marginY?: SpacingProp;
   minHeight?: SpacingProp;
+  onKeyDown?: KeyboardEventHandler<HTMLElement>;
   padding?: SpacingProp;
   paddingBottom?: SpacingProp;
   paddingLeft?: SpacingProp;
@@ -83,6 +84,14 @@ const StyledBox = styled.div<BoxOwnProps & StyledBoxProps>(props => {
           props.parentColor || props.backgroundColor,
         );
 
+    const hoveredStyles = {
+      opacity: isLightColor(foregroundColor || 'white') ? '0.2' : '0.1',
+    };
+
+    const pressedStyles = {
+      opacity: isLightColor(foregroundColor || 'white') ? '0.4' : '0.25',
+    };
+
     return {
       cursor: 'pointer',
       position: 'relative',
@@ -110,18 +119,15 @@ const StyledBox = styled.div<BoxOwnProps & StyledBoxProps>(props => {
         right: 0,
         top: 0,
         transition: 'opacity 100ms ease-in-out',
-        ...(props.isKeyDown
-          ? {
-              opacity: '0.25',
-            }
-          : {}),
       },
-      '&:hover::after, &:focus::after': {
-        opacity: isLightColor(foregroundColor || 'white') ? '0.2' : '0.1',
-      },
-      '&:active::after': {
-        opacity: isLightColor(foregroundColor || 'white') ? '0.4' : '0.25',
-      },
+      '&:hover::after, &:focus::after': hoveredStyles,
+      '&:hover:active::after': pressedStyles,
+
+      ...(props.isKeyDown
+        ? {
+            '&:focus::after': pressedStyles,
+          }
+        : {}),
     };
   }
 
@@ -179,6 +185,7 @@ export const Box: PolymorphicForwardRefExoticComponent<
     marginX,
     marginY,
     minHeight,
+    onKeyDown,
     padding,
     paddingBottom,
     paddingLeft,
@@ -230,11 +237,12 @@ export const Box: PolymorphicForwardRefExoticComponent<
 
   const handleKeyDown = useCallback<KeyboardEventHandler<HTMLElement>>(
     e => {
-      if (isInteractive && e.key === ' ') {
+      if (!e.repeat && isInteractive && e.key === ' ') {
         setIsKeyDown(true);
       }
+      onKeyDown?.(e);
     },
-    [isInteractive, setIsKeyDown],
+    [isInteractive, onKeyDown, setIsKeyDown],
   );
 
   const handleKeyUp = useCallback<KeyboardEventHandler<HTMLElement>>(() => {
