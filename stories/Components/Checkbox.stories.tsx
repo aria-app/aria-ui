@@ -7,6 +7,10 @@ export default {
   title: 'Components/Checkbox',
   component: Checkbox,
   argTypes: {
+    labelSide: {
+      control: { type: 'inline-radio' },
+      options: ['left', 'right'],
+    },
     onIsCheckedChange: { action: 'onIsCheckedChange' },
   },
 } as Meta;
@@ -16,6 +20,7 @@ export const Default: Story<CheckboxProps> = args => <Checkbox {...args} />;
 Default.args = {
   isChecked: true,
   label: 'Checkbox label',
+  labelSide: 'right',
 };
 
 export const MultilineLabel: Story<CheckboxProps> = args => (

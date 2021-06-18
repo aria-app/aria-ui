@@ -17,10 +17,13 @@ import { MotionBox } from './MotionBox';
 import { Stack } from './Stack';
 import { Text } from './Text';
 
+export type CheckboxLabelSide = 'left' | 'right';
+
 export interface CheckboxProps extends BoxProps<'div'> {
   id?: string;
   isChecked?: boolean;
   label?: string;
+  labelSide?: CheckboxLabelSide;
   onIsCheckedChange?: (
     isChecked: boolean,
     e: KeyboardEvent<HTMLDivElement> | MouseEvent<HTMLDivElement>,
@@ -33,6 +36,7 @@ export const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
       id,
       isChecked = false,
       label,
+      labelSide = 'right',
       onIsCheckedChange,
       sx,
       ...rest
@@ -75,7 +79,11 @@ export const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
         tabIndex={0}
         {...rest}
       >
-        <Stack align="start" direction="row" space={4}>
+        <Stack
+          align="start"
+          direction={labelSide === 'right' ? 'row' : 'row-reverse'}
+          space={4}
+        >
           <MotionBox
             animate={
               isChecked
