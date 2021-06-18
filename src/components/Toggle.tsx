@@ -95,21 +95,21 @@ export const Toggle = forwardRef<HTMLDivElement, ToggleProps>(function Toggle(
               : { backgroundColor: theme.colors.textSecondary }
           }
           borderRadius="full"
-          height={6}
+          height={5}
           initial={false}
           sx={{ alignItems: 'center', display: 'flex', flexShrink: 0 }}
-          width={12}
+          width={10}
         >
           <MotionBox
-            animate={isChecked ? { x: theme.space(7) } : { x: theme.space(1) }}
+            animate={isChecked ? { x: theme.space(6) } : { x: theme.space(1) }}
             backgroundColor={theme.getForegroundColor('brandPrimary')}
             borderRadius="full"
             initial={false}
-            size={4}
+            size={3}
           />
         </MotionBox>
         {label && (
-          <Text marginTop={1.5} sx={{}} variant="label">
+          <Text marginTop={1} variant="label">
             {label}
           </Text>
         )}

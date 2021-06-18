@@ -1,4 +1,3 @@
-import CheckIcon from 'mdi-react/CheckIcon';
 import React, {
   forwardRef,
   KeyboardEvent,
@@ -12,35 +11,32 @@ import React, {
 import { mergeSX } from '../helpers';
 import { useThemeWithDefault } from '../hooks';
 import { Box, BoxProps } from './Box';
-import { Icon } from './Icon';
 import { MotionBox } from './MotionBox';
 import { Stack } from './Stack';
 import { Text } from './Text';
 
-export type CheckboxLabelSide = 'left' | 'right';
-
-export interface CheckboxProps extends BoxProps<'div'> {
+export interface RadioButtonProps extends Omit<BoxProps<'div'>, 'onSelect'> {
   disabled?: boolean;
   id?: string;
   isChecked?: boolean;
   label?: string;
-  labelSide?: CheckboxLabelSide;
-  onIsCheckedChange?: (
-    isChecked: boolean,
+  onSelect?: (
+    value: any,
     e: KeyboardEvent<HTMLDivElement> | MouseEvent<HTMLDivElement>,
   ) => void;
+  value?: any;
 }
 
-export const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
-  function Checkbox(props, ref) {
+export const RadioButton = forwardRef<HTMLDivElement, RadioButtonProps>(
+  function RadioButton(props, ref) {
     const {
       disabled,
       id,
       isChecked = false,
       label,
-      labelSide = 'right',
-      onIsCheckedChange,
+      onSelect,
       sx,
+      value,
       ...rest
     } = props;
     const elementRef = useRef<HTMLDivElement>(null);
@@ -49,13 +45,13 @@ export const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
     useImperativeHandle(ref, () => elementRef.current as HTMLDivElement);
 
     const handleClick: MouseEventHandler<HTMLDivElement> = e => {
-      if (disabled) return;
-      onIsCheckedChange?.(!isChecked, e);
+      if (isChecked || disabled) return;
+      onSelect?.(value, e);
     };
 
     const handleKeyDown: KeyboardEventHandler<HTMLDivElement> = e => {
-      if (disabled || e.repeat || e.key !== ' ') return;
-      onIsCheckedChange?.(!isChecked, e);
+      if (isChecked || disabled || e.repeat || e.key !== ' ') return;
+      onSelect?.(value, e);
     };
 
     return (
@@ -74,7 +70,7 @@ export const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
         sx={mergeSX(
           {
             cursor: disabled ? 'not-allowed' : 'pointer',
-            label: 'Checkbox',
+            label: 'RadioButton',
             opacity: disabled ? 0.5 : 1,
             outline: 'none',
           },
@@ -83,18 +79,14 @@ export const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
         tabIndex={disabled ? -1 : 0}
         {...rest}
       >
-        <Stack
-          align="start"
-          direction={labelSide === 'right' ? 'row' : 'row-reverse'}
-          space={4}
-        >
+        <Stack align="start" direction="row" space={4}>
           <MotionBox
             animate={
               isChecked
                 ? { backgroundColor: theme.colors.brandPrimary }
                 : { backgroundColor: theme.colors.textSecondary }
             }
-            borderRadius="md"
+            borderRadius="full"
             initial={false}
             size={5}
             sx={{
@@ -108,16 +100,11 @@ export const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
               animate={
                 isChecked ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }
               }
+              backgroundColor={theme.getForegroundColor('brandPrimary')}
+              borderRadius="full"
               initial={false}
-            >
-              <Icon
-                block
-                color="brandPrimary"
-                colorIsBackground
-                icon={<CheckIcon />}
-                size="sm"
-              />
-            </MotionBox>
+              size={2}
+            />
           </MotionBox>
           {label && (
             <Text marginTop={1} variant="label">

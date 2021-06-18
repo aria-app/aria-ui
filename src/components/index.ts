@@ -18,6 +18,7 @@ export * from './NavigationItem';
 export * from './NavigationRail';
 export * from './Notice';
 export * from './Overlay';
+export * from './RadioButton';
 export * from './Select';
 export * from './Sheet';
 export * from './Snackbar';
