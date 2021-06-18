@@ -20,6 +20,7 @@ import { Text } from './Text';
 export type CheckboxLabelSide = 'left' | 'right';
 
 export interface CheckboxProps extends BoxProps<'div'> {
+  disabled?: boolean;
   id?: string;
   isChecked?: boolean;
   label?: string;
@@ -33,6 +34,7 @@ export interface CheckboxProps extends BoxProps<'div'> {
 export const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
   function Checkbox(props, ref) {
     const {
+      disabled,
       id,
       isChecked = false,
       label,
@@ -47,11 +49,12 @@ export const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
     useImperativeHandle(ref, () => elementRef.current as HTMLDivElement);
 
     const handleClick: MouseEventHandler<HTMLDivElement> = e => {
+      if (disabled) return;
       onIsCheckedChange?.(!isChecked, e);
     };
 
     const handleKeyDown: KeyboardEventHandler<HTMLDivElement> = e => {
-      if (e.repeat || e.key !== ' ') return;
+      if (disabled || e.repeat || e.key !== ' ') return;
       onIsCheckedChange?.(!isChecked, e);
     };
 
@@ -61,7 +64,7 @@ export const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
         as="div"
         borderRadius="md"
         childColor="brandContrast"
-        isInteractive
+        isInteractive={!disabled}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         margin={-2}
@@ -70,13 +73,14 @@ export const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
         role="checkbox"
         sx={mergeSX(
           {
-            cursor: 'pointer',
+            cursor: disabled ? 'not-allowed' : 'pointer',
             label: 'Checkbox',
+            opacity: disabled ? 0.5 : 1,
             outline: 'none',
           },
           sx,
         )}
-        tabIndex={0}
+        tabIndex={disabled ? -1 : 0}
         {...rest}
       >
         <Stack

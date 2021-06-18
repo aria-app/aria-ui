@@ -26,5 +26,6 @@ export * from './Spinner';
 export * from './Stack';
 export * from './Text';
 export * from './TextField';
+export * from './Toggle';
 export * from './Toolbar';
 export * from './Wizard';

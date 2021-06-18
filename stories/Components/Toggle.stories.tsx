@@ -1,11 +1,11 @@
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
-import { Box, Checkbox, CheckboxProps } from '../../src';
+import { Box, Toggle, ToggleProps } from '../../src';
 
 export default {
-  title: 'Components/Checkbox',
-  component: Checkbox,
+  title: 'Components/Toggle',
+  component: Toggle,
   argTypes: {
     labelSide: {
       control: { type: 'inline-radio' },
@@ -15,30 +15,30 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<CheckboxProps> = args => <Checkbox {...args} />;
+export const Default: Story<ToggleProps> = args => <Toggle {...args} />;
 
 Default.args = {
   disabled: false,
   isChecked: true,
-  label: 'Checkbox label',
+  label: 'Toggle label',
   labelSide: 'right',
 };
 
-export const Disabled: Story<CheckboxProps> = args => <Checkbox {...args} />;
+export const Disabled: Story<ToggleProps> = args => <Toggle {...args} />;
 
 Disabled.args = {
   ...Default.args,
   disabled: true,
 };
 
-export const MultilineLabel: Story<CheckboxProps> = args => (
+export const MultilineLabel: Story<ToggleProps> = args => (
   <Box sx={{ maxWidth: 320 }}>
-    <Checkbox {...args} />
+    <Toggle {...args} />
   </Box>
 );
 
 MultilineLabel.args = {
   ...Default.args,
   label:
-    'This is a long label that will cause wrapping when the checkbox is used',
+    'This is a long label that will cause wrapping when the toggle is used',
 };
