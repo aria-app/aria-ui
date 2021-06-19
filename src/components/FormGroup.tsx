@@ -13,7 +13,7 @@ export interface FormGroupProps extends Omit<StackProps, 'ref'> {
   warning?: string;
 }
 
-export const FormGroup = forwardRef<HTMLFieldSetElement, FormGroupProps>(
+export const FormGroup = forwardRef<HTMLElement, FormGroupProps>(
   function FormGroup(props, ref) {
     const {
       children,

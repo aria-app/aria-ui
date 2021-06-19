@@ -15,15 +15,17 @@ import { MotionBox } from './MotionBox';
 import { Stack } from './Stack';
 import { Text } from './Text';
 
+export type RadioButtonOnSelect = (
+  value: any,
+  e: KeyboardEvent<HTMLDivElement> | MouseEvent<HTMLDivElement>,
+) => void;
+
 export interface RadioButtonProps extends Omit<BoxProps<'div'>, 'onSelect'> {
   disabled?: boolean;
   id?: string;
   isChecked?: boolean;
   label?: string;
-  onSelect?: (
-    value: any,
-    e: KeyboardEvent<HTMLDivElement> | MouseEvent<HTMLDivElement>,
-  ) => void;
+  onSelect?: RadioButtonOnSelect;
   value?: any;
 }
 
@@ -61,9 +63,10 @@ export const RadioButton = forwardRef<HTMLDivElement, RadioButtonProps>(
         borderRadius="md"
         childColor="brandContrast"
         isInteractive={!disabled}
+        marginBottom={-2}
+        marginX={-2}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
-        margin={-2}
         padding={2}
         ref={elementRef}
         role="checkbox"
