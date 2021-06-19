@@ -17018,6 +17018,11 @@ w3c-hr-time@^1.0.2:
   dependencies:
     browser-process-hrtime "^1.0.0"
 
+w3c-keys@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/w3c-keys/-/w3c-keys-1.0.3.tgz#822e055545943427d94b4233661aeb277db4846a"
+  integrity sha512-us/8uEJL9s/TXLgkJ+MCIh4/ceena10XW/Bl+7trCYCxLcUigspZkcqpRPTxTs4x4usm04BGfex7dENoTQ6JaA==
+
 w3c-xmlserializer@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/w3c-xmlserializer/-/w3c-xmlserializer-2.0.0.tgz#3e7104a05b75146cc60f564380b7f683acf1020a"
