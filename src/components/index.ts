@@ -26,6 +26,8 @@ export * from './Snackbar';
 export * from './SnackbarStack';
 export * from './Spinner';
 export * from './Stack';
+export * from './Tab';
+export * from './Tabs';
 export * from './Text';
 export * from './TextField';
 export * from './Toggle';
