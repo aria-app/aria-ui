@@ -27,6 +27,7 @@
     "test:watch": "tsdx test --coverage --watch"
   },
   "dependencies": {
+    "@tippyjs/react": "^4.2.5",
     "capsize": "^2.0.0",
     "csstype": "3.0.8",
     "focus-trap-react": "^8.5.1",

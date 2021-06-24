@@ -32,4 +32,5 @@ export * from './Text';
 export * from './TextField';
 export * from './Toggle';
 export * from './Toolbar';
+export * from './Tooltip';
 export * from './Wizard';
