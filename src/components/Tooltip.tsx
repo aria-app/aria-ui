@@ -4,12 +4,12 @@ import React, { FC, ReactElement, ReactNode } from 'react';
 import { Instance } from 'tippy.js';
 
 import { mergeSX } from '../helpers';
-import { Box, BoxProps } from './Box';
+import { MotionBox, MotionBoxProps } from './MotionBox';
 import { Text } from './Text';
 
 export interface TooltipProps extends TippyProps {
   content?: ReactNode;
-  popupProps?: BoxProps<'div'>;
+  popupProps?: MotionBoxProps<'div'>;
   text?: string;
 }
 
@@ -43,10 +43,11 @@ export const Tooltip: FC<TooltipProps> = function Tooltip(props) {
       onHide={onHide}
       onMount={onMount}
       render={(attributes: any) => (
-        <Box
+        <MotionBox
           backgroundColor="backgroundContrast"
           borderRadius="md"
           padding={2}
+          style={{ scale, opacity }}
           sx={mergeSX(
             {
               label: 'Tooltip',
@@ -59,7 +60,7 @@ export const Tooltip: FC<TooltipProps> = function Tooltip(props) {
         >
           {text && !content && <Text variant="helper">{text}</Text>}
           {content}
-        </Box>
+        </MotionBox>
       )}
       {...rest}
     >

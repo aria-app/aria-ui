@@ -16,4 +16,26 @@ export const Default: Story<TooltipProps> = args => (
 
 Default.args = {
   text: 'Tooltip Text',
+  visible: true,
+};
+
+export const Closed: Story<TooltipProps> = args => (
+  <Tooltip {...args}>
+    <Text>Hover me</Text>
+  </Tooltip>
+);
+
+Closed.args = {
+  ...Default.args,
+  visible: false,
+};
+
+export const CustomContent: Story<TooltipProps> = args => (
+  <Tooltip content={<Text color="error">Something went wrong!</Text>} {...args}>
+    <Text>Hover me</Text>
+  </Tooltip>
+);
+
+CustomContent.args = {
+  ...Default.args,
 };
