@@ -1,11 +1,12 @@
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
-import { Text, Tooltip, TooltipProps } from '../../src';
+import { Box, Text, Tooltip, TooltipProps } from '../../src';
 
 export default {
   title: 'Components/Tooltip',
   component: Tooltip,
+  decorators: [Story => <Box padding={16}>{Story()}</Box>],
 } as Meta;
 
 export const Default: Story<TooltipProps> = args => (
