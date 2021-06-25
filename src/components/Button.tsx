@@ -48,7 +48,8 @@ export const Button = forwardRef<
   } = props;
   const theme = useThemeWithDefault();
 
-  const elementProps = element === 'button' ? { disabled } : {};
+  const elementProps =
+    element === 'button' ? { disabled: disabled || isLoading } : {};
 
   const variantProps = useMemo(
     () =>
@@ -78,7 +79,7 @@ export const Button = forwardRef<
       borderRadius="md"
       childColor={variant !== 'contained' ? color : undefined}
       height={12}
-      isInteractive={!disabled}
+      isInteractive={!(disabled || isLoading)}
       paddingX={text ? 4 : undefined}
       ref={ref as Ref<HTMLButtonElement>}
       {...elementProps}
@@ -94,7 +95,6 @@ export const Button = forwardRef<
         minWidth: text ? theme.space(6) : undefined,
         opacity: disabled ? 0.5 : undefined,
         outline: 'none',
-        pointerEvents: isLoading ? 'none' : undefined,
         position: 'relative',
         '&::after': {
           margin: variant === 'outlined' ? -3 : undefined,

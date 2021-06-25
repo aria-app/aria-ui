@@ -3025,6 +3025,11 @@
     prettier "~2.2.1"
     regenerator-runtime "^0.13.7"
 
+"@storybook/testing-react@^0.0.17":
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/@storybook/testing-react/-/testing-react-0.0.17.tgz#632dd22f8815743f78c182b126f444cf51d92d71"
+  integrity sha512-93nbA/JSWDEys1msd438+wzETRFDEgT2aFqJL2y46++zsyv8g2mCYKZkf9E36KQHMQbO1uJBHT8CmrLQa8VmZw==
+
 "@storybook/theming@5.3.21":
   version "5.3.21"
   resolved "https://registry.yarnpkg.com/@storybook/theming/-/theming-5.3.21.tgz#ae2dc101aa57c3be4df1724ae729e11bad118e0b"
@@ -3275,6 +3280,13 @@
   dependencies:
     "@babel/runtime" "^7.12.5"
     "@testing-library/dom" "^7.28.1"
+
+"@testing-library/user-event@^13.1.9":
+  version "13.1.9"
+  resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-13.1.9.tgz#29e49a42659ac3c1023565ff56819e0153a82e99"
+  integrity sha512-NZr0zL2TMOs2qk+dNlqrAdbaRW5dAmYwd1yuQ4r7HpkVEOj0MWuUjDWwKhcLd/atdBy8ZSMHSKp+kXSQe47ezg==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
 
 "@tippyjs/react@^4.2.5":
   version "4.2.5"

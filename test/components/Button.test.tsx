@@ -1,42 +1,40 @@
+import { composeStories } from '@storybook/testing-react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import { Button } from '../../src';
-import { fireEvent, render, screen } from '../../src/testUtils';
+import { render, screen } from '../../src/testUtils';
+import * as stories from '../../stories/Components/Button.stories';
+
+const { Default, Disabled, Loading } = composeStories(stories);
 
 describe('Button', () => {
-  test('should contain passed text', () => {
-    render(<Button text="testText" />);
-
-    expect(screen.getByRole('button')).toHaveTextContent('testText');
-  });
-
-  test('should accept mouse events when not disabled', () => {
+  test('should accept mouse events by default', () => {
     const handleClick = jest.fn();
 
-    render(<Button onClick={handleClick} />);
+    render(<Default onClick={handleClick} />);
 
-    fireEvent.click(screen.getByRole('button'));
+    userEvent.click(screen.getByRole('button'));
 
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
-  test('should not accept mouse events when not disabled', () => {
+  test('should not accept mouse events when disabled', () => {
     const handleClick = jest.fn();
 
-    render(<Button disabled onClick={handleClick} />);
+    render(<Disabled onClick={handleClick} />);
 
-    fireEvent.click(screen.getByRole('button'));
+    userEvent.click(screen.getByRole('button'));
 
     expect(handleClick).not.toHaveBeenCalled();
   });
 
-  test('should contain a spinner when loading', () => {
-    const { rerender } = render(<Button />);
+  test('should not accept mouse events when loading', () => {
+    const handleClick = jest.fn();
 
-    expect(screen.queryByRole('alert')).toBeNull();
+    render(<Loading onClick={handleClick} />);
 
-    rerender(<Button isLoading />);
+    userEvent.click(screen.getByRole('button'));
 
-    expect(screen.queryByRole('alert')).toBeDefined();
+    expect(handleClick).not.toHaveBeenCalled();
   });
 });
