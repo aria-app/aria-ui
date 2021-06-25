@@ -37,7 +37,7 @@ export const IconButton = forwardRef<
       backgroundColor="transparent"
       borderRadius="md"
       childColor={colorIsBackground ? undefined : color}
-      isInteractive
+      isInteractive={!disabled}
       padding={2}
       parentColor={colorIsBackground ? color : undefined}
       ref={ref as Ref<HTMLButtonElement>}

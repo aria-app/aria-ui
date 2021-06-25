@@ -123,6 +123,7 @@ export const Dialog = forwardRef<HTMLElement, DialogProps>(function Dialog(
       <Overlay isVisible={isOpen} sx={{ zIndex: 1 }} />
       {isOpen && onOverlayClick && (
         <Box
+          data-testid="aria-ui-dialog-overlay"
           onClick={onOverlayClick}
           sx={{
             bottom: 0,

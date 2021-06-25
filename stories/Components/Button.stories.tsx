@@ -1,5 +1,4 @@
 import { Meta, Story } from '@storybook/react';
-import { orderBy } from 'lodash';
 import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
 import SearchIcon from 'mdi-react/SearchIcon';
 import React from 'react';
@@ -37,8 +36,24 @@ export default {
 export const Default: Story<ButtonProps> = args => <Button {...args} />;
 
 Default.args = {
+  disabled: false,
+  isLoading: false,
   text: 'Click me',
   variant: 'outlined',
+};
+
+export const Disabled: Story<ButtonProps> = args => <Button {...args} />;
+
+Disabled.args = {
+  ...Default.args,
+  disabled: true,
+};
+
+export const Loading: Story<ButtonProps> = args => <Button {...args} />;
+
+Loading.args = {
+  ...Default.args,
+  isLoading: true,
 };
 
 export const Variants: Story<ButtonProps> = ({
@@ -48,11 +63,7 @@ export const Variants: Story<ButtonProps> = ({
   ...rest
 }) => (
   <Stack space={4}>
-    {orderBy(
-      buttonVariants,
-      buttonVariant => buttonVariants[buttonVariant],
-      'desc',
-    ).map(buttonVariant => (
+    {buttonVariants.map(buttonVariant => (
       <Button
         key={buttonVariant}
         variant={buttonVariant}
