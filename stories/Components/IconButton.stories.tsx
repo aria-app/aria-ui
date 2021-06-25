@@ -26,3 +26,12 @@ export const Default: Story<IconButtonProps> = args => (
 Default.args = {
   size: 'md',
 };
+
+export const Disabled: Story<IconButtonProps> = args => (
+  <IconButton icon={<StarIcon />} {...args} />
+);
+
+Disabled.args = {
+  ...Default.args,
+  disabled: true,
+};

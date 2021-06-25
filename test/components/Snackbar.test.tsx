@@ -1,21 +1,19 @@
+import { composeStories } from '@storybook/testing-react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import { Snackbar } from '../../src';
-import { fireEvent, render, screen } from '../../src/testUtils';
+import { render, screen } from '../../src/testUtils';
+import * as stories from '../../stories/Components/Snackbar.stories';
+
+const { Default } = composeStories(stories);
 
 describe('Snackbar', () => {
-  test('should render message text', () => {
-    render(<Snackbar message="testMessage" messageId={7} />);
-
-    expect(screen.getByText('testMessage')).not.toBeNull();
-  });
-
-  test('should accept mouse events when not disabled', () => {
+  test('should trigger dismiss action when dismiss button is pressed', () => {
     const handleDismiss = jest.fn();
 
-    render(<Snackbar messageId={7} onDismiss={handleDismiss} />);
+    render(<Default onDismiss={handleDismiss} />);
 
-    fireEvent.click(screen.getByRole('button'));
+    userEvent.click(screen.getByRole('button'));
 
     expect(handleDismiss).toHaveBeenCalled();
   });
