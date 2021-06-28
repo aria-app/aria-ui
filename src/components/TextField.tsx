@@ -120,7 +120,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
                 color={startIconColor}
                 icon={startIcon}
                 onClick={onStartIconClick}
-                role="button"
+                role={onStartIconClick ? 'button' : undefined}
                 size={startIconSize}
                 sx={{
                   cursor: onStartIconClick ? 'pointer' : undefined,
@@ -173,7 +173,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
                 color={endIconColor}
                 icon={endIcon}
                 onClick={onEndIconClick}
-                role="button"
+                role={onEndIconClick ? 'button' : undefined}
                 size={endIconSize}
                 sx={{
                   cursor: onEndIconClick ? 'pointer' : undefined,
