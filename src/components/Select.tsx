@@ -159,7 +159,9 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               />
             )}
             {options.map(({ label, value }, index) => (
-              <option key={`${value}-${index}`} label={label} value={value} />
+              <option key={`${value}-${index}`} value={value}>
+                {label}
+              </option>
             ))}
           </Box>
           {endIcon && (
