@@ -89,6 +89,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     return (
       <FormGroup
         error={error}
+        htmlFor={id}
         label={label}
         ref={rootRef}
         space={2}
@@ -119,6 +120,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
                 color={startIconColor}
                 icon={startIcon}
                 onClick={onStartIconClick}
+                role="button"
                 size={startIconSize}
                 sx={{
                   cursor: onStartIconClick ? 'pointer' : undefined,
@@ -171,6 +173,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
                 color={endIconColor}
                 icon={endIcon}
                 onClick={onEndIconClick}
+                role="button"
                 size={endIconSize}
                 sx={{
                   cursor: onEndIconClick ? 'pointer' : undefined,

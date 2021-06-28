@@ -6,10 +6,11 @@ import { useThemeWithDefault } from '../hooks';
 import { ColorName, Theme } from '../types';
 import { Box, BoxProps } from './Box';
 
-export interface TextProps extends BoxProps<'a' | 'button' | 'span'> {
+export interface TextProps extends BoxProps<'a' | 'button' | 'label' | 'span'> {
   color?: ColorName;
   colorIsBackground?: boolean;
   element?: keyof JSX.IntrinsicElements;
+  htmlFor?: string;
   variant?: keyof Theme['textVariants'];
 }
 

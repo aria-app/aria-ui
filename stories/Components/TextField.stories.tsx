@@ -34,6 +34,7 @@ export default {
 export const Default: Story<TextFieldProps> = args => <TextField {...args} />;
 
 Default.args = {
+  id: 'default',
   label: 'Label',
   secondaryLabel: 'Secondary label',
   value: 'Value',
