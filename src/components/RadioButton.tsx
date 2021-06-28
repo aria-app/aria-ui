@@ -69,7 +69,7 @@ export const RadioButton = forwardRef<HTMLDivElement, RadioButtonProps>(
         onKeyDown={handleKeyDown}
         padding={2}
         ref={elementRef}
-        role="checkbox"
+        role="radio"
         sx={mergeSX(
           {
             cursor: disabled ? 'not-allowed' : 'pointer',
