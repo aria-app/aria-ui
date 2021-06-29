@@ -1,6 +1,7 @@
 import React, { forwardRef, Ref } from 'react';
 
 import { mergeSX } from '../helpers';
+import { useThemeWithDefault } from '../hooks';
 import { Box, BoxProps } from './Box';
 import { Icon, IconProps } from './Icon';
 
@@ -28,6 +29,7 @@ export const IconButton = forwardRef<
     sx,
     ...rest
   } = props;
+  const theme = useThemeWithDefault();
 
   const elementProps = element === 'button' ? { disabled } : {};
 
@@ -48,7 +50,7 @@ export const IconButton = forwardRef<
           cursor: disabled ? 'not-allowed' : undefined,
           flex: 0,
           label: 'IconButton',
-          opacity: disabled ? 0.5 : undefined,
+          opacity: disabled ? theme.disabledOpacity : undefined,
           outline: 'none',
         },
         sx,

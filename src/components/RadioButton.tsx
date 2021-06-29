@@ -74,7 +74,7 @@ export const RadioButton = forwardRef<HTMLDivElement, RadioButtonProps>(
           {
             cursor: disabled ? 'not-allowed' : 'pointer',
             label: 'RadioButton',
-            opacity: disabled ? 0.5 : 1,
+            opacity: disabled ? theme.disabledOpacity : undefined,
             outline: 'none',
           },
           sx,

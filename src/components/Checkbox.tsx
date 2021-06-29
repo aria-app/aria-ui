@@ -75,7 +75,7 @@ export const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
           {
             cursor: disabled ? 'not-allowed' : 'pointer',
             label: 'Checkbox',
-            opacity: disabled ? 0.5 : 1,
+            opacity: disabled ? theme.disabledOpacity : undefined,
             outline: 'none',
           },
           sx,

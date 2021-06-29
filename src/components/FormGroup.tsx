@@ -1,10 +1,12 @@
 import React, { forwardRef, Ref } from 'react';
 
 import { mergeSX } from '../helpers';
+import { useThemeWithDefault } from '../hooks';
 import { Stack, StackProps } from './Stack';
 import { Text } from './Text';
 
 export interface FormGroupProps extends Omit<StackProps, 'ref'> {
+  disabled?: boolean;
   element?: 'div' | 'fieldset';
   error?: string;
   htmlFor?: string;
@@ -18,6 +20,7 @@ export const FormGroup = forwardRef<HTMLElement, FormGroupProps>(
   function FormGroup(props, ref) {
     const {
       children,
+      disabled,
       element = 'fieldset',
       error,
       htmlFor,
@@ -29,6 +32,11 @@ export const FormGroup = forwardRef<HTMLElement, FormGroupProps>(
       warning,
       ...rest
     } = props;
+    const theme = useThemeWithDefault();
+
+    const disabledProps = disabled
+      ? { sx: { opacity: theme.disabledOpacity } }
+      : {};
 
     return (
       <Stack
@@ -44,7 +52,7 @@ export const FormGroup = forwardRef<HTMLElement, FormGroupProps>(
         {...rest}
       >
         {(label || secondaryLabel) && (
-          <Stack space={2.5}>
+          <Stack space={2.5} {...disabledProps}>
             {label && (
               <Text element="label" htmlFor={htmlFor} variant="label">
                 {label}
@@ -64,7 +72,7 @@ export const FormGroup = forwardRef<HTMLElement, FormGroupProps>(
         )}
         {children}
         {(error || success || warning) && (
-          <Stack space={2.5}>
+          <Stack space={2.5} {...disabledProps}>
             {error && (
               <Text color="error" variant="helper">
                 {error}

@@ -75,7 +75,7 @@ export const Toggle = forwardRef<HTMLDivElement, ToggleProps>(function Toggle(
         {
           cursor: disabled ? 'not-allowed' : 'pointer',
           label: 'Toggle',
-          opacity: disabled ? 0.5 : 1,
+          opacity: disabled ? theme.disabledOpacity : undefined,
           outline: 'none',
         },
         sx,
