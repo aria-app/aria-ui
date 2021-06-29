@@ -9,12 +9,12 @@ const { Default } = composeStories(stories);
 
 describe('Chip', () => {
   test('should toggle when clicked', () => {
-    const handleOnDelete = jest.fn();
+    const handleDelete = jest.fn();
 
-    render(<Default onDelete={handleOnDelete} />);
+    render(<Default onDelete={handleDelete} />);
 
     userEvent.click(screen.getByRole('button'));
 
-    expect(handleOnDelete).toHaveBeenCalledWith(expect.any(Object));
+    expect(handleDelete).toHaveBeenCalledWith(expect.any(Object));
   });
 });
