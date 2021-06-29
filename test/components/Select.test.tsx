@@ -18,6 +18,6 @@ describe('Select', () => {
       screen.getByText('Option 1'),
     );
 
-    expect(handleValueChange).toHaveBeenCalledWith(1, expect.anything());
+    expect(handleValueChange).toHaveBeenCalledWith(1, expect.any(Object));
   });
 });

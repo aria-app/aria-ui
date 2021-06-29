@@ -15,6 +15,6 @@ describe('Chip', () => {
 
     userEvent.click(screen.getByRole('button'));
 
-    expect(handleOnDelete).toHaveBeenCalledWith(expect.anything());
+    expect(handleOnDelete).toHaveBeenCalledWith(expect.any(Object));
   });
 });

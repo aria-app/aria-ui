@@ -19,7 +19,7 @@ describe('TextField', () => {
 
     expect(handleValueChange).toHaveBeenCalledWith(
       `${Default.args?.value}!`,
-      expect.anything(),
+      expect.any(Object),
     );
   });
 
@@ -40,7 +40,7 @@ describe('TextField', () => {
 
     userEvent.click(screen.getByRole('button'));
 
-    expect(handleEndIconClick).toHaveBeenCalledWith(expect.anything());
+    expect(handleEndIconClick).toHaveBeenCalledWith(expect.any(Object));
   });
 
   test('should handle start icon clicking', () => {
@@ -50,6 +50,6 @@ describe('TextField', () => {
 
     userEvent.click(screen.getByRole('button'));
 
-    expect(handleStartIconClick).toHaveBeenCalledWith(expect.anything());
+    expect(handleStartIconClick).toHaveBeenCalledWith(expect.any(Object));
   });
 });

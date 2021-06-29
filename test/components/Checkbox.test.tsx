@@ -17,7 +17,7 @@ describe('Checkbox', () => {
 
     expect(handleIsCheckedChange).toHaveBeenCalledWith(
       false,
-      expect.anything(),
+      expect.any(Object),
     );
   });
 

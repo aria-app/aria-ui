@@ -15,7 +15,7 @@ describe('Banner', () => {
 
     userEvent.click(screen.getByText('Confirm'));
 
-    expect(handleConfirm).toHaveBeenCalledWith(expect.anything());
+    expect(handleConfirm).toHaveBeenCalledWith(expect.any(Object));
   });
 
   test('should handle dismiss click', () => {
@@ -25,6 +25,6 @@ describe('Banner', () => {
 
     userEvent.click(screen.getByText('Dismiss'));
 
-    expect(handleDismiss).toHaveBeenCalledWith(expect.anything());
+    expect(handleDismiss).toHaveBeenCalledWith(expect.any(Object));
   });
 });

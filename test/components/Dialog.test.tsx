@@ -15,7 +15,7 @@ describe('Dialog', () => {
 
     userEvent.click(screen.getByText('Confirm'));
 
-    expect(handleConfirm).toHaveBeenCalledWith(expect.anything());
+    expect(handleConfirm).toHaveBeenCalledWith(expect.any(Object));
   });
 
   test('should handle clicking cancel', () => {
@@ -25,7 +25,7 @@ describe('Dialog', () => {
 
     userEvent.click(screen.getByText('Cancel'));
 
-    expect(handleCancel).toHaveBeenCalledWith(expect.anything());
+    expect(handleCancel).toHaveBeenCalledWith(expect.any(Object));
   });
 
   test('should handle overlay clicks by default', () => {
@@ -35,7 +35,7 @@ describe('Dialog', () => {
 
     userEvent.click(screen.getByTestId('aria-ui-dialog-overlay'));
 
-    expect(handleOverlayClick).toHaveBeenCalledWith(expect.anything());
+    expect(handleOverlayClick).toHaveBeenCalledWith(expect.any(Object));
   });
 
   test('should not render clickable overlay when closed', () => {

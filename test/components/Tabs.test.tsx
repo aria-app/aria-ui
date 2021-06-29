@@ -15,7 +15,7 @@ describe('Tabs', () => {
 
     userEvent.click(screen.getAllByRole('tab')[1]);
 
-    expect(handleValueChange).toHaveBeenCalledWith('b', expect.anything());
+    expect(handleValueChange).toHaveBeenCalledWith('b', expect.any(Object));
   });
 
   test('should not allow switching to a disabled tab', () => {

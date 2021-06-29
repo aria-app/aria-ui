@@ -15,7 +15,7 @@ describe('RadioGroup', () => {
 
     userEvent.click(screen.getAllByRole('radio')[1]);
 
-    expect(handleValueChange).toHaveBeenCalledWith('b', expect.anything());
+    expect(handleValueChange).toHaveBeenCalledWith('b', expect.any(Object));
   });
 
   test('should change value to value of button above selected button when the up arrow key is pressed', () => {
@@ -25,7 +25,7 @@ describe('RadioGroup', () => {
 
     userEvent.type(screen.getByRole('radiogroup'), '{arrowup}');
 
-    expect(handleValueChange).toHaveBeenCalledWith('a', expect.anything());
+    expect(handleValueChange).toHaveBeenCalledWith('a', expect.any(Object));
   });
 
   test('should change value to value of button below selected button when the down arrow key is pressed', () => {
@@ -35,7 +35,7 @@ describe('RadioGroup', () => {
 
     userEvent.type(screen.getByRole('radiogroup'), '{arrowdown}');
 
-    expect(handleValueChange).toHaveBeenCalledWith('c', expect.anything());
+    expect(handleValueChange).toHaveBeenCalledWith('c', expect.any(Object));
   });
 
   test('should change value to value of last button when there is no selected button and the up arrow key is pressed', () => {
@@ -45,7 +45,7 @@ describe('RadioGroup', () => {
 
     userEvent.type(screen.getByRole('radiogroup'), '{arrowup}');
 
-    expect(handleValueChange).toHaveBeenCalledWith('c', expect.anything());
+    expect(handleValueChange).toHaveBeenCalledWith('c', expect.any(Object));
   });
 
   test('should change value to value of first button when there is no selected button and the down arrow key is pressed', () => {
@@ -55,7 +55,7 @@ describe('RadioGroup', () => {
 
     userEvent.type(screen.getByRole('radiogroup'), '{arrowdown}');
 
-    expect(handleValueChange).toHaveBeenCalledWith('a', expect.anything());
+    expect(handleValueChange).toHaveBeenCalledWith('a', expect.any(Object));
   });
 
   test('should not change value when clicking selected radio button', () => {
