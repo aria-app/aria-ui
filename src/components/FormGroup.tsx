@@ -7,6 +7,7 @@ import { Text } from './Text';
 export interface FormGroupProps extends Omit<StackProps, 'ref'> {
   element?: 'div' | 'fieldset';
   error?: string;
+  htmlFor?: string;
   label?: string;
   secondaryLabel?: string;
   success?: string;
@@ -19,6 +20,7 @@ export const FormGroup = forwardRef<HTMLElement, FormGroupProps>(
       children,
       element = 'fieldset',
       error,
+      htmlFor,
       label,
       secondaryLabel,
       space = 4,
@@ -43,9 +45,18 @@ export const FormGroup = forwardRef<HTMLElement, FormGroupProps>(
       >
         {(label || secondaryLabel) && (
           <Stack space={2.5}>
-            {label && <Text variant="label">{label}</Text>}
+            {label && (
+              <Text element="label" htmlFor={htmlFor} variant="label">
+                {label}
+              </Text>
+            )}
             {secondaryLabel && (
-              <Text color="textSecondary" variant="helper">
+              <Text
+                color="textSecondary"
+                element="label"
+                htmlFor={htmlFor}
+                variant="helper"
+              >
                 {secondaryLabel}
               </Text>
             )}

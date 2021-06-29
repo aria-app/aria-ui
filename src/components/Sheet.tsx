@@ -105,6 +105,7 @@ export const Sheet = forwardRef<HTMLDivElement, SheetProps>(function Sheet(
       >
         {isOpen && onOverlayClick && (
           <Box
+            data-testid="aria-ui-sheet-overlay"
             onClick={onOverlayClick}
             sx={{
               bottom: 0,

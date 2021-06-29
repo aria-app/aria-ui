@@ -8,6 +8,10 @@ export default {
   component: RadioGroup,
   argTypes: {
     onValueChange: { action: 'onValueChange' },
+    value: {
+      control: { type: 'inline-radio' },
+      options: [undefined, 'a', 'b', 'c'],
+    },
   },
 } as Meta;
 
@@ -24,13 +28,6 @@ Default.args = {
   value: 'a',
 };
 
-Default.argTypes = {
-  value: {
-    control: { type: 'inline-radio' },
-    options: [undefined, 'a', 'b', 'c'],
-  },
-};
-
 export const Disabled: Story<RadioGroupProps> = args => (
   <RadioGroup {...args}>
     <RadioButton label="Alpha" value="a" />
@@ -44,8 +41,16 @@ Disabled.args = {
   disabled: true,
 };
 
-Disabled.argTypes = {
-  ...Default.argTypes,
+export const DisabledButton: Story<RadioGroupProps> = args => (
+  <RadioGroup {...args}>
+    <RadioButton label="Alpha" value="a" />
+    <RadioButton label="Bravo" value="b" />
+    <RadioButton disabled label="Charlie" value="c" />
+  </RadioGroup>
+);
+
+DisabledButton.args = {
+  ...Default.args,
 };
 
 export const WithError: Story<RadioGroupProps> = args => (
@@ -59,8 +64,4 @@ export const WithError: Story<RadioGroupProps> = args => (
 WithError.args = {
   ...Default.args,
   error: 'Wrong choice',
-};
-
-WithError.argTypes = {
-  ...Default.argTypes,
 };

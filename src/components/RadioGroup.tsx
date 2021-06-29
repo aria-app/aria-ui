@@ -102,6 +102,7 @@ export const RadioGroup = forwardRef<HTMLElement, RadioGroupProps>(
         element="div"
         onKeyDown={handleKeyDown}
         ref={ref}
+        role="radiogroup"
         sx={mergeSX(
           {
             label: 'RadioGroup',
@@ -109,15 +110,17 @@ export const RadioGroup = forwardRef<HTMLElement, RadioGroupProps>(
           },
           sx,
         )}
+        tabIndex={0}
         {...rest}
       >
         <Stack space={2}>
           {radioButtonChildren.map(child =>
             isValidElement(child)
               ? cloneElement(child, {
-                  disabled: disabled || undefined,
+                  disabled: disabled || child.props.disabled,
                   isChecked: child.props.value === value,
                   onSelect: handleRadioButtonSelect,
+                  tabIndex: -1,
                 } as Partial<RadioButtonProps>)
               : child,
           )}

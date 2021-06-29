@@ -47,6 +47,7 @@ export const Tooltip: FC<TooltipProps> = function Tooltip(props) {
           backgroundColor="backgroundContrast"
           borderRadius="md"
           padding={2}
+          role="tooltip"
           style={{ scale, opacity }}
           sx={mergeSX(
             {

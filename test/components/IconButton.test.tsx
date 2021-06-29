@@ -15,7 +15,7 @@ describe('IconButton', () => {
 
     userEvent.click(screen.getByRole('button'));
 
-    expect(handleClick).toHaveBeenCalledTimes(1);
+    expect(handleClick).toHaveBeenCalledWith(expect.any(Object));
   });
 
   test('should not allow clicking when disabled', () => {
