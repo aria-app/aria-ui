@@ -33,10 +33,11 @@ export const Default: Story<SheetProps & { contentHeight?: number }> = ({
 
 Default.args = {
   contentHeight: 400,
+  isOpen: true,
   rightPanelWidth: 80,
 };
 
-export const Open: Story<SheetProps & { contentHeight?: number }> = ({
+export const Closed: Story<SheetProps & { contentHeight?: number }> = ({
   contentHeight,
   ...rest
 }) => (
@@ -48,12 +49,12 @@ export const Open: Story<SheetProps & { contentHeight?: number }> = ({
   </>
 );
 
-Open.args = {
+Closed.args = {
   contentHeight: 400,
-  isOpen: true,
+  isOpen: false,
 };
 
-Open.parameters = {
+Closed.parameters = {
   chromatic: {
     viewports: [479, 1024],
   },
