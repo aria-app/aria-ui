@@ -88,6 +88,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
     return (
       <FormGroup
+        disabled={disabled}
         error={error}
         htmlFor={id}
         label={label}
@@ -97,7 +98,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         sx={mergeSX(
           {
             label: 'TextField',
-            opacity: disabled ? 0.5 : 1,
             width: '100%',
           },
           sx,
@@ -109,6 +109,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           sx={{
             alignItems: 'center',
             display: 'flex',
+            opacity: disabled ? theme.disabledOpacity : undefined,
             position: 'relative',
             width: '100%',
           }}

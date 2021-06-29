@@ -62,8 +62,11 @@ export interface ThemeColors {
   warning: CSS.Properties['color'];
 }
 
-export interface Theme extends ThemeBase {
+export interface ThemeDetails {
   colors: ThemeColors;
+  disabledOpacity: number;
 }
 
-export type ThemeOptions = RecursivePartial<Theme> & { colors: ThemeColors };
+export type Theme = ThemeBase & ThemeDetails;
+
+export type ThemeOptions = RecursivePartial<ThemeBase> & ThemeDetails;

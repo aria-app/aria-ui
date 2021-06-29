@@ -93,7 +93,7 @@ export const Button = forwardRef<
         justifyContent: 'center',
         label: 'Button',
         minWidth: text ? theme.space(6) : undefined,
-        opacity: disabled ? 0.5 : undefined,
+        opacity: disabled ? theme.disabledOpacity : undefined,
         outline: 'none',
         position: 'relative',
         '&::after': {

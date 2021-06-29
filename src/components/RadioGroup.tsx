@@ -99,6 +99,7 @@ export const RadioGroup = forwardRef<HTMLElement, RadioGroupProps>(
 
     return (
       <FormGroup
+        disabled={disabled}
         element="div"
         onKeyDown={handleKeyDown}
         ref={ref}
@@ -106,7 +107,6 @@ export const RadioGroup = forwardRef<HTMLElement, RadioGroupProps>(
         sx={mergeSX(
           {
             label: 'RadioGroup',
-            opacity: disabled ? 0.5 : 1,
           },
           sx,
         )}

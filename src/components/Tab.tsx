@@ -1,6 +1,7 @@
 import React, { forwardRef, MouseEvent, MouseEventHandler } from 'react';
 
 import { mergeSX } from '../helpers';
+import { useThemeWithDefault } from '../hooks';
 import { Box, BoxProps } from './Box';
 import { MotionBox } from './MotionBox';
 import { Text } from './Text';
@@ -23,6 +24,7 @@ export const Tab = forwardRef<HTMLDivElement, TabProps>(function Tab(
   ref,
 ) {
   const { disabled, isSelected, label, onSelect, sx, value, ...rest } = props;
+  const theme = useThemeWithDefault();
 
   const handleClick: MouseEventHandler<HTMLDivElement> = e => {
     if (disabled || isSelected) return;
@@ -47,7 +49,7 @@ export const Tab = forwardRef<HTMLDivElement, TabProps>(function Tab(
           display: 'flex',
           flexShrink: 0,
           label: 'Tab',
-          opacity: disabled ? 0.5 : 1,
+          opacity: disabled ? theme.disabledOpacity : undefined,
           position: 'relative',
         },
         sx,

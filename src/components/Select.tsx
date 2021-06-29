@@ -82,6 +82,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     return (
       <FormGroup
+        disabled={disabled}
         error={error}
         label={label}
         space={3}
@@ -91,7 +92,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           {
             appearance: 'none',
             label: 'Select',
-            opacity: disabled ? 0.5 : 1,
             width: '100%',
           },
           sx,
@@ -103,6 +103,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           sx={{
             alignItems: 'center',
             display: 'flex',
+            opacity: disabled ? theme.disabledOpacity : undefined,
             position: 'relative',
           }}
         >

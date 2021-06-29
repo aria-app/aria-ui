@@ -2,37 +2,37 @@ import React, { forwardRef, MouseEvent, useCallback } from 'react';
 
 import { mergeSX } from '../helpers';
 import { Box, BoxProps } from './Box';
-import { NavigationItem, NavigationItemItem } from './NavigationItem';
+import {
+  NavigationItem,
+  NavigationItemItem,
+  NavigationItemOnSelect,
+  NavigationItemValue,
+} from './NavigationItem';
 import { Stack } from './Stack';
 
 export interface BottomNavigationProps extends BoxProps<'nav'> {
   items?: NavigationItemItem[];
-  onSelectedNameChange: (name: string, e: MouseEvent<HTMLElement>) => void;
-  selectedName?: string;
+  onValueChange: (
+    value: NavigationItemValue,
+    e: MouseEvent<HTMLElement>,
+  ) => void;
+  value?: NavigationItemValue;
 }
 
 export const BottomNavigation = forwardRef<HTMLElement, BottomNavigationProps>(
   function BottomNavigation(props, ref) {
-    const {
-      items = [],
-      onSelectedNameChange,
-      selectedName,
-      sx,
-      ...rest
-    } = props;
+    const { items = [], onValueChange, sx, value, ...rest } = props;
 
-    const getIsSelected = useCallback<(item: NavigationItemItem) => boolean>(
-      ({ name }) => name === selectedName,
-      [selectedName],
+    const getIsSelected = useCallback<(item: NavigationItemValue) => boolean>(
+      itemValue => itemValue === value,
+      [value],
     );
 
-    const handleItemSelect = useCallback<
-      (item: NavigationItemItem, e: MouseEvent<HTMLElement>) => void
-    >(
-      ({ name }, e) => {
-        onSelectedNameChange(name, e);
+    const handleItemSelect = useCallback<NavigationItemOnSelect>(
+      (selectedValue, e) => {
+        onValueChange(selectedValue, e);
       },
-      [onSelectedNameChange],
+      [onValueChange],
     );
 
     return (
@@ -54,14 +54,16 @@ export const BottomNavigation = forwardRef<HTMLElement, BottomNavigationProps>(
         <Stack direction="row" sx={{ maxWidth: 480, width: '100%' }}>
           {items.map((item, index) => (
             <NavigationItem
-              isSelected={getIsSelected(item)}
-              item={item}
+              icon={item.icon}
+              label={item.label}
+              isSelected={getIsSelected(item.value)}
               key={`${item.label}${index}`}
               onSelect={handleItemSelect}
               sx={{
                 flexBasis: `${(1 / items.length) * 100}%`,
                 label: 'BottomNavigationItem',
               }}
+              value={item.value}
             />
           ))}
         </Stack>

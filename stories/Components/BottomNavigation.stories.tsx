@@ -26,7 +26,11 @@ export default {
   ],
   argTypes: {
     items: { table: { disable: true } },
-    onSelectedNameChange: { action: 'onSelectedNameChange' },
+    onValueChange: { action: 'onValueChange' },
+    value: {
+      control: { type: 'inline-radio' },
+      options: [undefined, 'home', 'likes', 'profile'],
+    },
   },
   parameters: {
     layout: 'fullscreen',
@@ -39,18 +43,11 @@ export const Default: Story<BottomNavigationProps> = args => (
 
 Default.args = {
   items: [
-    { icon: <HomeIcon />, label: 'Home', name: 'home' },
-    { icon: <HeartIcon />, label: 'Likes', name: 'likes' },
-    { icon: <AccountBoxIcon />, label: 'Profile', name: 'profile' },
+    { icon: <HomeIcon />, label: 'Home', value: 'home' },
+    { icon: <HeartIcon />, label: 'Likes', value: 'likes' },
+    { icon: <AccountBoxIcon />, label: 'Profile', value: 'profile' },
   ],
-  selectedName: 'home',
-};
-
-Default.argTypes = {
-  selectedName: {
-    control: { type: 'inline-radio' },
-    options: [undefined, 'home', 'likes', 'profile'],
-  },
+  value: 'home',
 };
 
 Default.parameters = {

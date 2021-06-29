@@ -14,4 +14,5 @@ export const lightTheme = createTheme({
     textSecondary: '#646487',
     warning: '#febb3f',
   },
+  disabledOpacity: 0.5,
 });

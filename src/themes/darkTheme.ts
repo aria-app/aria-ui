@@ -14,4 +14,5 @@ export const darkTheme = createTheme({
     textSecondary: '#9696b6',
     warning: '#febb3f',
   },
+  disabledOpacity: 0.5,
 });
