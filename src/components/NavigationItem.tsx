@@ -16,7 +16,7 @@ import { Text } from './Text';
 export interface NavigationItemItem {
   icon: ReactElement;
   label?: string;
-  name: string;
+  value: string;
 }
 
 export interface NavigationItemProps extends Omit<BoxProps<'li'>, 'onSelect'> {

@@ -7,32 +7,26 @@ import { Stack } from './Stack';
 
 export interface BottomNavigationProps extends BoxProps<'nav'> {
   items?: NavigationItemItem[];
-  onSelectedNameChange: (name: string, e: MouseEvent<HTMLElement>) => void;
-  selectedName?: string;
+  onValueChange: (value: string, e: MouseEvent<HTMLElement>) => void;
+  value?: string;
 }
 
 export const BottomNavigation = forwardRef<HTMLElement, BottomNavigationProps>(
   function BottomNavigation(props, ref) {
-    const {
-      items = [],
-      onSelectedNameChange,
-      selectedName,
-      sx,
-      ...rest
-    } = props;
+    const { items = [], onValueChange, sx, value, ...rest } = props;
 
     const getIsSelected = useCallback<(item: NavigationItemItem) => boolean>(
-      ({ name }) => name === selectedName,
-      [selectedName],
+      item => item.value === value,
+      [value],
     );
 
     const handleItemSelect = useCallback<
       (item: NavigationItemItem, e: MouseEvent<HTMLElement>) => void
     >(
-      ({ name }, e) => {
-        onSelectedNameChange(name, e);
+      (item, e) => {
+        onValueChange(item.value, e);
       },
-      [onSelectedNameChange],
+      [onValueChange],
     );
 
     return (
