@@ -32,11 +32,9 @@ export const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
 
     const handleClick = useCallback<MouseEventHandler<HTMLElement>>(
       e => {
-        if (isSelected) return;
-
         onSelect?.(item, e);
       },
-      [isSelected, item, onSelect],
+      [item, onSelect],
     );
 
     return (

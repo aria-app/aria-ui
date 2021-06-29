@@ -21,13 +21,16 @@ describe('NavigationRail', () => {
     );
   });
 
-  test('should not allow selecting a selected item', () => {
+  test('should still allow selecting a selected item', () => {
     const handleSelectedNameChange = jest.fn();
 
     render(<Default onSelectedNameChange={handleSelectedNameChange} />);
 
     userEvent.click(screen.getByText('Home'));
 
-    expect(handleSelectedNameChange).not.toHaveBeenCalled();
+    expect(handleSelectedNameChange).toHaveBeenCalledWith(
+      'home',
+      expect.any(Object),
+    );
   });
 });

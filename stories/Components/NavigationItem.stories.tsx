@@ -21,3 +21,12 @@ Default.args = {
   isSelected: false,
   item: { icon: <AccountBoxIcon />, label: 'Profile', name: 'profile' },
 };
+
+export const Selected: Story<NavigationItemProps> = args => (
+  <NavigationItem {...args} />
+);
+
+Selected.args = {
+  ...Default.args,
+  isSelected: true,
+};
