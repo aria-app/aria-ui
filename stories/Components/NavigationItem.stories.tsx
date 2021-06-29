@@ -8,7 +8,7 @@ export default {
   title: 'Components/NavigationItem',
   component: NavigationItem,
   argTypes: {
-    item: { table: { disable: true } },
+    icon: { table: { disable: true } },
     onSelect: { action: 'onSelect' },
   },
 } as Meta;
@@ -18,8 +18,10 @@ export const Default: Story<NavigationItemProps> = args => (
 );
 
 Default.args = {
+  icon: <AccountBoxIcon />,
   isSelected: false,
-  item: { icon: <AccountBoxIcon />, label: 'Profile', name: 'profile' },
+  label: 'Profile',
+  value: 'profile',
 };
 
 export const Selected: Story<NavigationItemProps> = args => (

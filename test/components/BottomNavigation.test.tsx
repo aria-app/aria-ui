@@ -9,28 +9,22 @@ const { Default } = composeStories(stories);
 
 describe('BottomNavigation', () => {
   test('should allow selecting an item', () => {
-    const handleSelectedNameChange = jest.fn();
+    const handleValueChange = jest.fn();
 
-    render(<Default onSelectedNameChange={handleSelectedNameChange} />);
+    render(<Default onValueChange={handleValueChange} />);
 
     userEvent.click(screen.getByText('Likes'));
 
-    expect(handleSelectedNameChange).toHaveBeenCalledWith(
-      'likes',
-      expect.any(Object),
-    );
+    expect(handleValueChange).toHaveBeenCalledWith('likes', expect.any(Object));
   });
 
   test('should still allow selecting a selected item', () => {
-    const handleSelectedNameChange = jest.fn();
+    const handleValueChange = jest.fn();
 
-    render(<Default onSelectedNameChange={handleSelectedNameChange} />);
+    render(<Default onValueChange={handleValueChange} />);
 
     userEvent.click(screen.getByText('Home'));
 
-    expect(handleSelectedNameChange).toHaveBeenCalledWith(
-      'home',
-      expect.any(Object),
-    );
+    expect(handleValueChange).toHaveBeenCalledWith('home', expect.any(Object));
   });
 });

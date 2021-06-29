@@ -15,11 +15,7 @@ describe('NavigationItem', () => {
 
     userEvent.click(screen.getByText('Profile'));
 
-    expect(handleSelect).toHaveBeenCalledWith(
-      expect.any(Object),
-      expect.any(Object),
-    );
-    // expect(handleSelect).toHaveBeenCalledWith('profile', expect.any(Object));
+    expect(handleSelect).toHaveBeenCalledWith('profile', expect.any(Object));
   });
 
   test('should still allow selection when selected', () => {
@@ -29,10 +25,6 @@ describe('NavigationItem', () => {
 
     userEvent.click(screen.getByText('Profile'));
 
-    expect(handleSelect).toHaveBeenCalledWith(
-      expect.any(Object),
-      expect.any(Object),
-    );
-    // expect(handleSelect).toHaveBeenCalledWith('profile', expect.any(Object));
+    expect(handleSelect).toHaveBeenCalledWith('profile', expect.any(Object));
   });
 });

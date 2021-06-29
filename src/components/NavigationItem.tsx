@@ -13,28 +13,36 @@ import { MotionBox } from './MotionBox';
 import { Stack } from './Stack';
 import { Text } from './Text';
 
+export type NavigationItemValue = number | string;
+
 export interface NavigationItemItem {
   icon: ReactElement;
   label?: string;
-  value: string;
+  value: NavigationItemValue;
 }
 
+export type NavigationItemOnSelect = (
+  selectedValue: NavigationItemValue,
+  e: MouseEvent<HTMLElement>,
+) => void;
+
 export interface NavigationItemProps extends Omit<BoxProps<'li'>, 'onSelect'> {
+  icon: ReactElement;
   isSelected?: boolean;
-  item: NavigationItemItem;
-  onSelect?: (item: NavigationItemItem, e: MouseEvent<HTMLElement>) => void;
+  label?: string;
+  value: NavigationItemValue;
+  onSelect?: NavigationItemOnSelect;
 }
 
 export const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
   function NavigationItem(props, ref) {
-    const { isSelected, item, onSelect, sx } = props;
-    const { icon, label } = item;
+    const { icon, isSelected, label, onSelect, sx, value, ...rest } = props;
 
     const handleClick = useCallback<MouseEventHandler<HTMLElement>>(
       e => {
-        onSelect?.(item, e);
+        onSelect?.(value, e);
       },
-      [item, onSelect],
+      [onSelect, value],
     );
 
     return (
@@ -51,6 +59,7 @@ export const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
           },
           sx,
         )}
+        {...rest}
       >
         <MotionBox
           animate={{ scale: isSelected ? 1 : 0.8 }}
