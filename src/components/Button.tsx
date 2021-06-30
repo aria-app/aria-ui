@@ -6,6 +6,7 @@ import React, {
   useMemo,
 } from 'react';
 
+import { mergeSX } from '../helpers';
 import { useThemeWithDefault } from '../hooks';
 import { Box, BoxProps } from './Box';
 import { Icon, IconSize } from './Icon';
@@ -41,6 +42,7 @@ export const Button = forwardRef<
     isLoading,
     startIcon,
     startIconSize = 'md',
+    sx,
     text,
     type = 'button',
     variant = 'outlined',
@@ -84,22 +86,25 @@ export const Button = forwardRef<
       ref={ref as Ref<HTMLButtonElement>}
       {...elementProps}
       {...variantProps}
-      sx={{
-        alignItems: 'center',
-        appearance: 'none',
-        cursor: disabled ? 'not-allowed' : undefined,
-        display: 'flex',
-        flex: 'none',
-        justifyContent: 'center',
-        label: 'Button',
-        minWidth: text ? theme.space(6) : undefined,
-        opacity: disabled ? theme.disabledOpacity : undefined,
-        outline: 'none',
-        position: 'relative',
-        '&::after': {
-          margin: variant === 'outlined' ? -3 : undefined,
+      sx={mergeSX(
+        {
+          alignItems: 'center',
+          appearance: 'none',
+          cursor: disabled ? 'not-allowed' : undefined,
+          display: 'flex',
+          flex: 'none',
+          justifyContent: 'center',
+          label: 'Button',
+          minWidth: text ? theme.space(6) : undefined,
+          opacity: disabled ? theme.disabledOpacity : undefined,
+          outline: 'none',
+          position: 'relative',
+          '&::after': {
+            margin: variant === 'outlined' ? -3 : undefined,
+          },
         },
-      }}
+        sx,
+      )}
       type={type}
       {...rest}
     >
