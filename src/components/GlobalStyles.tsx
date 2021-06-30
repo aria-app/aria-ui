@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 
 import { useThemeWithDefault } from '../hooks';
 
-export const GlobalStyles: FC<never> = () => {
+export const GlobalStyles: FC<any> = () => {
   const theme = useThemeWithDefault();
   return (
     <Global
