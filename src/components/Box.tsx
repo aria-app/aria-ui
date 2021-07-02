@@ -317,7 +317,6 @@ export const Box: PolymorphicForwardRefExoticComponent<
         },
         isNil,
       )}
-      theme={theme}
       {...rest}
     />
   );

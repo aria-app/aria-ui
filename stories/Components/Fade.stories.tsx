@@ -14,3 +14,10 @@ Default.args = {
   children: 'Now you see me...',
   in: true,
 };
+
+export const Invisible: Story<FadeProps> = args => <Fade {...args} />;
+
+Invisible.args = {
+  ...Default.args,
+  in: false,
+};
