@@ -17,7 +17,7 @@ import { Icon, IconSize } from './Icon';
 
 export interface SelectOption<ValueType = any> {
   disabled?: boolean;
-  label?: string;
+  label?: number | string;
   value?: ValueType;
 }
 
@@ -71,14 +71,14 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       return 'transparent';
     }, [error, success, warning]);
 
-    const handleChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
+    const handleChange: ChangeEventHandler<HTMLSelectElement> = e => {
       const selectedIndex = placeholder
         ? e.target.selectedIndex - 1
         : e.target.selectedIndex;
       onValueChange?.(options[selectedIndex].value, e);
     };
 
-    const selectedOption = options.find((option) => option.value === value);
+    const selectedOption = options.find(option => option.value === value);
 
     return (
       <FormGroup
