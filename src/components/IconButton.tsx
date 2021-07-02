@@ -38,6 +38,7 @@ export const IconButton = forwardRef<
       as={element}
       backgroundColor="transparent"
       borderRadius="md"
+      borderWidth={0}
       childColor={colorIsBackground ? undefined : color}
       isInteractive={!disabled}
       padding={2}
@@ -46,7 +47,6 @@ export const IconButton = forwardRef<
       role="button"
       sx={mergeSX(
         {
-          border: 0,
           cursor: disabled ? 'not-allowed' : undefined,
           flex: 0,
           label: 'IconButton',

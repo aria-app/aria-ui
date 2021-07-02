@@ -35,3 +35,13 @@ Disabled.args = {
   ...Default.args,
   disabled: true,
 };
+
+export const BorderOverride: Story<IconButtonProps> = (args) => (
+  <IconButton icon={<StarIcon />} {...args} />
+);
+
+BorderOverride.args = {
+  ...Default.args,
+  borderColor: 'brandPrimary',
+  borderWidth: 2,
+};
