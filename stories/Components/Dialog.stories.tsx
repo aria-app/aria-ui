@@ -28,7 +28,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<DialogProps> = (args) => <Dialog {...args} />;
+export const Default: Story<DialogProps> = args => <Dialog {...args} />;
 
 Default.args = {
   children: 'This is some text content to go inside the Dialog component.',
@@ -41,7 +41,7 @@ Default.argTypes = {
   onConfirm: { action: 'onConfirm' },
 };
 
-export const Form: Story<DialogProps> = (args) => (
+export const Form: Story<DialogProps> = args => (
   <Dialog {...args}>
     <Stack space={6}>
       <TextField inputProps={{ defaultValue: 'John Doe' }} label="Name" />
@@ -64,7 +64,7 @@ Form.argTypes = {
   onConfirm: { action: 'onConfirm' },
 };
 
-export const Closed: Story<DialogProps> = (args) => <Dialog {...args} />;
+export const Closed: Story<DialogProps> = args => <Dialog {...args} />;
 
 Closed.args = {
   ...Default.args,
@@ -79,7 +79,7 @@ Closed.parameters = {
   },
 };
 
-export const LongTitle: Story<DialogProps> = (args) => <Dialog {...args} />;
+export const LongTitle: Story<DialogProps> = args => <Dialog {...args} />;
 
 LongTitle.args = {
   ...Default.args,
@@ -94,7 +94,7 @@ LongTitle.parameters = {
   },
 };
 
-export const ConfirmOnly: Story<DialogProps> = (args) => <Dialog {...args} />;
+export const ConfirmOnly: Story<DialogProps> = args => <Dialog {...args} />;
 
 ConfirmOnly.args = {
   ...Default.args,
@@ -105,7 +105,7 @@ ConfirmOnly.argTypes = {
   onConfirm: { action: 'onConfirm' },
 };
 
-export const CancelOnly: Story<DialogProps> = (args) => <Dialog {...args} />;
+export const CancelOnly: Story<DialogProps> = args => <Dialog {...args} />;
 
 CancelOnly.args = {
   ...Default.args,
@@ -116,13 +116,23 @@ CancelOnly.argTypes = {
   onCancel: { action: 'onCancel' },
 };
 
-export const NoActions: Story<DialogProps> = (args) => <Dialog {...args} />;
+export const CloseButtonOnly: Story<DialogProps> = args => <Dialog {...args} />;
+
+CloseButtonOnly.args = {
+  ...Default.args,
+};
+
+CloseButtonOnly.argTypes = {
+  onClose: { action: 'onClose' },
+};
+
+export const NoActions: Story<DialogProps> = args => <Dialog {...args} />;
 
 NoActions.args = {
   ...Default.args,
 };
 
-export const ContentOnly: Story<DialogProps> = (args) => <Dialog {...args} />;
+export const ContentOnly: Story<DialogProps> = args => <Dialog {...args} />;
 
 ContentOnly.args = {
   ...Default.args,
@@ -136,7 +146,7 @@ ContentOnly.parameters = {
   },
 };
 
-export const ContentOnlyPadded: Story<DialogProps> = (args) => (
+export const ContentOnlyPadded: Story<DialogProps> = args => (
   <Dialog {...args} />
 );
 

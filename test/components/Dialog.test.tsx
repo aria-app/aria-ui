@@ -5,7 +5,7 @@ import React from 'react';
 import { render, screen } from '../../src/testUtils';
 import * as stories from '../../stories/Components/Dialog.stories';
 
-const { Closed, Default } = composeStories(stories);
+const { CloseButtonOnly, Closed, Default } = composeStories(stories);
 
 describe('Dialog', () => {
   test('should handle clicking confirm', () => {
@@ -26,6 +26,16 @@ describe('Dialog', () => {
     userEvent.click(screen.getByText('Cancel'));
 
     expect(handleCancel).toHaveBeenCalledWith(expect.any(Object));
+  });
+
+  test('should handle clicking close', () => {
+    const handleClose = jest.fn();
+
+    render(<CloseButtonOnly onClose={handleClose} />);
+
+    userEvent.click(screen.getByRole('button'));
+
+    expect(handleClose).toHaveBeenCalledWith(expect.any(Object));
   });
 
   test('should handle overlay clicks by default', () => {
