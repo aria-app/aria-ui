@@ -15,15 +15,13 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<ToolbarProps> = (args) => (
+export const Default: Story<ToolbarProps> = args => (
   <Toolbar {...args}>
-    <Stack align="center" direction="row" space={2}>
+    <Stack align="center" direction="row" grow space={2}>
       <IconButton icon={<ContentSaveIcon />} />
       <IconButton icon={<PencilIcon />} />
       <IconButton icon={<TrashIcon />} />
-    </Stack>
-    <Stack direction="row" space={2} sx={{ marginLeft: 'auto' }}>
-      <Button text="Action" />
+      <Button sx={{ marginLeft: 'auto ' }} text="Action" />
     </Stack>
   </Toolbar>
 );

@@ -80,7 +80,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     }, [error, success, warning]);
 
     const handleInputChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
-      (e) => {
+      e => {
         onValueChange?.(e.currentTarget.value, e);
       },
       [onValueChange],
@@ -135,7 +135,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             borderWidth={3}
             as="input"
             disabled={disabled}
-            height={12}
+            height={11}
             id={id || label?.replace(/ /g, '') || undefined}
             onChange={handleInputChange}
             paddingLeft={startIcon ? 12 : 3}

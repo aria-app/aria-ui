@@ -8,6 +8,7 @@ import React, {
   forwardRef,
   KeyboardEventHandler,
   useCallback,
+  useMemo,
   useState,
 } from 'react';
 import {
@@ -38,6 +39,7 @@ export type BoxOwnProps = {
   borderWidth?: CSS.Properties<number | string>['borderWidth'];
   bottom?: SpacingProp;
   childColor?: ColorName;
+  grow?: boolean;
   height?: SpacingProp;
   isInteractive?: boolean;
   left?: SpacingProp;
@@ -59,6 +61,7 @@ export type BoxOwnProps = {
   paddingY?: SpacingProp;
   parentColor?: ColorName;
   right?: SpacingProp;
+  shrink?: boolean;
   size?: SpacingProp;
   sx?: CSSObject;
   top?: SpacingProp;
@@ -174,6 +177,7 @@ export const Box: PolymorphicForwardRefExoticComponent<
     borderTopLeftRadius,
     borderTopRightRadius,
     bottom,
+    grow,
     height,
     isInteractive,
     left,
@@ -194,6 +198,7 @@ export const Box: PolymorphicForwardRefExoticComponent<
     paddingX,
     paddingY,
     right,
+    shrink,
     size,
     style: styleProp = {},
     top,
@@ -234,6 +239,18 @@ export const Box: PolymorphicForwardRefExoticComponent<
   const sizeValue = useResponsivePropValue(size);
   const topValue = useResponsivePropValue(top);
   const widthValue = useResponsivePropValue(width);
+
+  const flexGrow = useMemo(() => {
+    if (isNil(grow)) return undefined;
+
+    return grow ? 1 : 0;
+  }, [grow]);
+
+  const flexShrink = useMemo(() => {
+    if (isNil(shrink)) return undefined;
+
+    return shrink ? 1 : 0;
+  }, [shrink]);
 
   const handleKeyDown = useCallback<KeyboardEventHandler<HTMLElement>>(
     (e) => {
@@ -276,6 +293,8 @@ export const Box: PolymorphicForwardRefExoticComponent<
             borderTopRightRadiusValue,
           ),
           bottom: theme.space(bottomValue),
+          flexGrow,
+          flexShrink,
           height: theme.space(sizeValue || heightValue),
           left: theme.space(leftValue),
           marginBottom: theme.space(
