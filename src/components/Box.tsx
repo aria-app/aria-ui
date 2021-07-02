@@ -183,9 +183,7 @@ export const Box: PolymorphicForwardRefExoticComponent<
 
     const foregroundColor = childColor
       ? theme.getColor(childColor)
-      : theme.getForegroundColor(
-          parentColor || backgroundColor,
-        );
+      : theme.getForegroundColor(parentColor || backgroundColor);
 
     const hoveredStyles = {
       opacity: isLightColor(foregroundColor || 'white') ? '0.2' : '0.1',
@@ -207,12 +205,8 @@ export const Box: PolymorphicForwardRefExoticComponent<
         borderBottomRightRadius: theme.getBorderRadius(
           borderBottomRightRadiusValue,
         ),
-        borderTopLeftRadius: theme.getBorderRadius(
-          borderTopLeftRadiusValue,
-        ),
-        borderTopRightRadius: theme.getBorderRadius(
-          borderTopRightRadiusValue,
-        ),
+        borderTopLeftRadius: theme.getBorderRadius(borderTopLeftRadiusValue),
+        borderTopRightRadius: theme.getBorderRadius(borderTopRightRadiusValue),
         bottom: 0,
         content: '""',
         left: 0,
@@ -226,7 +220,7 @@ export const Box: PolymorphicForwardRefExoticComponent<
       '&:hover::after, &:focus::after': hoveredStyles,
       '&:hover:active::after': pressedStyles,
 
-      ...(props.isKeyDown
+      ...(isKeyDown
         ? {
             '&:focus::after': pressedStyles,
           }
@@ -252,24 +246,26 @@ export const Box: PolymorphicForwardRefExoticComponent<
 
   return (
     <Component
-      className={css(mergeSX(
-        {
-          backgroundColor: theme.getColor(backgroundColor),
-          borderColor: theme.getColor(borderColor),
-          borderStyle: borderColor && 'solid',
-          //----Group border widths to enable proper overriding----
-          borderWidth,
-          borderRightWidth,
-          borderTopWidth,
-          borderBottomWidth,
-          borderLeftWidth,
-          display: block ? 'block' : undefined,
-          //-------------------------------------------------------
-          label: 'Box',
-        },
-        getInteractiveStyles(),
-        sx,
-      ) as any)}
+      className={css(
+        mergeSX(
+          {
+            backgroundColor: theme.getColor(backgroundColor),
+            borderColor: theme.getColor(borderColor),
+            borderStyle: borderColor && 'solid',
+            //----Group border widths to enable proper overriding----
+            borderWidth,
+            borderRightWidth,
+            borderTopWidth,
+            borderBottomWidth,
+            borderLeftWidth,
+            display: block ? 'block' : undefined,
+            //-------------------------------------------------------
+            label: 'Box',
+          },
+          getInteractiveStyles(),
+          sx,
+        ) as any,
+      )}
       onKeyDown={handleKeyDown}
       onKeyUp={handleKeyUp}
       ref={ref as ForwardedRef<HTMLDivElement>}
