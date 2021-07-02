@@ -26,7 +26,7 @@ export const Tab = forwardRef<HTMLDivElement, TabProps>(function Tab(
   const { disabled, isSelected, label, onSelect, sx, value, ...rest } = props;
   const theme = useThemeWithDefault();
 
-  const handleClick: MouseEventHandler<HTMLDivElement> = e => {
+  const handleClick: MouseEventHandler<HTMLDivElement> = (e) => {
     if (disabled || isSelected) return;
 
     onSelect?.(value, e);
@@ -36,7 +36,7 @@ export const Tab = forwardRef<HTMLDivElement, TabProps>(function Tab(
     <Box
       as="div"
       borderRadius="md"
-      height={12}
+      height={11}
       isInteractive={!disabled}
       onClick={handleClick}
       paddingX={4}

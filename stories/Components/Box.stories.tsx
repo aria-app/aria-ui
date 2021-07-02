@@ -41,13 +41,13 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<BoxProps<'div'>> = args => <Box {...args} />;
+export const Default: Story<BoxProps<'div'>> = (args) => <Box {...args} />;
 
 Default.args = {
   children: 'The quick brown fox jumps over the lazy dog',
 };
 
-export const Responsive: Story<BoxProps<'div'>> = args => {
+export const Responsive: Story<BoxProps<'div'>> = (args) => {
   const screenSizeType = useScreenSizeType();
 
   return (

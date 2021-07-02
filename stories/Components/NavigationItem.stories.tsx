@@ -13,7 +13,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<NavigationItemProps> = args => (
+export const Default: Story<NavigationItemProps> = (args) => (
   <NavigationItem {...args} />
 );
 
@@ -24,7 +24,7 @@ Default.args = {
   value: 'profile',
 };
 
-export const Selected: Story<NavigationItemProps> = args => (
+export const Selected: Story<NavigationItemProps> = (args) => (
   <NavigationItem {...args} />
 );
 

@@ -1,5 +1,5 @@
+import { css } from '@emotion/css';
 import { CSSObject } from '@emotion/react';
-import styled from '@emotion/styled';
 import CSS from 'csstype';
 import { isNil, omitBy } from 'lodash';
 import React, {
@@ -8,6 +8,7 @@ import React, {
   forwardRef,
   KeyboardEventHandler,
   useCallback,
+  useMemo,
   useState,
 } from 'react';
 import {
@@ -38,6 +39,7 @@ export type BoxOwnProps = {
   borderWidth?: CSS.Properties<number | string>['borderWidth'];
   bottom?: SpacingProp;
   childColor?: ColorName;
+  grow?: boolean;
   height?: SpacingProp;
   isInteractive?: boolean;
   left?: SpacingProp;
@@ -59,97 +61,12 @@ export type BoxOwnProps = {
   paddingY?: SpacingProp;
   parentColor?: ColorName;
   right?: SpacingProp;
+  shrink?: boolean;
   size?: SpacingProp;
   sx?: CSSObject;
   top?: SpacingProp;
   width?: SpacingProp;
 };
-
-interface StyledBoxProps {
-  borderRadiusValue?: keyof Theme['borderRadii'];
-  borderBottomLeftRadiusValue?: keyof Theme['borderRadii'];
-  borderBottomRightRadiusValue?: keyof Theme['borderRadii'];
-  borderTopLeftRadiusValue?: keyof Theme['borderRadii'];
-  borderTopRightRadiusValue?: keyof Theme['borderRadii'];
-  isKeyDown?: boolean;
-}
-
-const StyledBox = styled.div<BoxOwnProps & StyledBoxProps>(props => {
-  function getInteractiveStyles(): CSSObject {
-    if (!props.isInteractive) return {};
-
-    const foregroundColor = props.childColor
-      ? props.theme.getColor(props.childColor)
-      : props.theme.getForegroundColor(
-          props.parentColor || props.backgroundColor,
-        );
-
-    const hoveredStyles = {
-      opacity: isLightColor(foregroundColor || 'white') ? '0.2' : '0.1',
-    };
-
-    const pressedStyles = {
-      opacity: isLightColor(foregroundColor || 'white') ? '0.4' : '0.25',
-    };
-
-    return {
-      cursor: 'pointer',
-      position: 'relative',
-      '&::after': {
-        backgroundColor: foregroundColor,
-        borderRadius: props.theme.getBorderRadius(props.borderRadiusValue),
-        borderBottomLeftRadius: props.theme.getBorderRadius(
-          props.borderBottomLeftRadiusValue,
-        ),
-        borderBottomRightRadius: props.theme.getBorderRadius(
-          props.borderBottomRightRadiusValue,
-        ),
-        borderTopLeftRadius: props.theme.getBorderRadius(
-          props.borderTopLeftRadiusValue,
-        ),
-        borderTopRightRadius: props.theme.getBorderRadius(
-          props.borderTopRightRadiusValue,
-        ),
-        bottom: 0,
-        content: '""',
-        left: 0,
-        pointerEvents: 'none',
-        opacity: 0,
-        position: 'absolute',
-        right: 0,
-        top: 0,
-        transition: 'opacity 100ms ease-in-out',
-      },
-      '&:hover::after, &:focus::after': hoveredStyles,
-      '&:hover:active::after': pressedStyles,
-
-      ...(props.isKeyDown
-        ? {
-            '&:focus::after': pressedStyles,
-          }
-        : {}),
-    };
-  }
-
-  return mergeSX(
-    {
-      backgroundColor: props.theme.getColor(props.backgroundColor),
-      borderColor: props.theme.getColor(props.borderColor),
-      borderStyle: props.borderColor && 'solid',
-      //----Group border widths to enable proper overriding----
-      borderWidth: props.borderWidth,
-      borderRightWidth: props.borderRightWidth,
-      borderTopWidth: props.borderTopWidth,
-      borderBottomWidth: props.borderBottomWidth,
-      borderLeftWidth: props.borderLeftWidth,
-      display: props.block ? 'block' : undefined,
-      //-------------------------------------------------------
-      label: 'Box',
-    },
-    getInteractiveStyles(),
-    props.sx,
-  );
-});
 
 // Merge own props with others inherited from the underlying element type
 export type BoxProps<E extends ElementType> = PolymorphicPropsWithRef<
@@ -168,12 +85,23 @@ export const Box: PolymorphicForwardRefExoticComponent<
 ): JSX.Element {
   const [isKeyDown, setIsKeyDown] = useState<boolean>();
   const {
-    borderRadius,
+    as,
+    backgroundColor,
+    block,
     borderBottomLeftRadius,
     borderBottomRightRadius,
+    borderBottomWidth,
+    borderColor,
+    borderLeftWidth,
+    borderRadius,
+    borderRightWidth,
     borderTopLeftRadius,
     borderTopRightRadius,
+    borderTopWidth,
+    borderWidth,
     bottom,
+    childColor,
+    grow,
     height,
     isInteractive,
     left,
@@ -193,9 +121,12 @@ export const Box: PolymorphicForwardRefExoticComponent<
     paddingTop,
     paddingX,
     paddingY,
+    parentColor,
     right,
+    shrink,
     size,
     style: styleProp = {},
+    sx,
     top,
     width,
     ...rest
@@ -235,8 +166,70 @@ export const Box: PolymorphicForwardRefExoticComponent<
   const topValue = useResponsivePropValue(top);
   const widthValue = useResponsivePropValue(width);
 
+  const flexGrow = useMemo(() => {
+    if (isNil(grow)) return undefined;
+
+    return grow ? 1 : 0;
+  }, [grow]);
+
+  const flexShrink = useMemo(() => {
+    if (isNil(shrink)) return undefined;
+
+    return shrink ? 1 : 0;
+  }, [shrink]);
+
+  function getInteractiveStyles(): CSSObject {
+    if (!isInteractive) return {};
+
+    const foregroundColor = childColor
+      ? theme.getColor(childColor)
+      : theme.getForegroundColor(parentColor || backgroundColor);
+
+    const hoveredStyles = {
+      opacity: isLightColor(foregroundColor || 'white') ? '0.2' : '0.1',
+    };
+
+    const pressedStyles = {
+      opacity: isLightColor(foregroundColor || 'white') ? '0.4' : '0.25',
+    };
+
+    return {
+      cursor: 'pointer',
+      position: 'relative',
+      '&::after': {
+        backgroundColor: foregroundColor,
+        borderRadius: theme.getBorderRadius(borderRadiusValue),
+        borderBottomLeftRadius: theme.getBorderRadius(
+          borderBottomLeftRadiusValue,
+        ),
+        borderBottomRightRadius: theme.getBorderRadius(
+          borderBottomRightRadiusValue,
+        ),
+        borderTopLeftRadius: theme.getBorderRadius(borderTopLeftRadiusValue),
+        borderTopRightRadius: theme.getBorderRadius(borderTopRightRadiusValue),
+        bottom: 0,
+        content: '""',
+        left: 0,
+        pointerEvents: 'none',
+        opacity: 0,
+        position: 'absolute',
+        right: 0,
+        top: 0,
+        transition: 'opacity 100ms ease-in-out',
+      },
+      '&:hover::after, &:focus::after': hoveredStyles,
+      '&:hover:active::after': pressedStyles,
+
+      ...(isKeyDown
+        ? {
+            '&:focus::after': pressedStyles,
+          }
+        : {}),
+    };
+  }
+
   const handleKeyDown = useCallback<KeyboardEventHandler<HTMLElement>>(
-    e => {
+    (e) => {
       if (!e.repeat && isInteractive && e.key === ' ') {
         setIsKeyDown(true);
       }
@@ -249,16 +242,30 @@ export const Box: PolymorphicForwardRefExoticComponent<
     setIsKeyDown(false);
   }, [setIsKeyDown]);
 
+  const Component = as || defaultBoxElement;
+
   return (
-    <StyledBox
-      as={defaultBoxElement}
-      borderRadiusValue={borderRadiusValue}
-      borderBottomLeftRadiusValue={borderBottomLeftRadiusValue}
-      borderBottomRightRadiusValue={borderBottomRightRadiusValue}
-      borderTopLeftRadiusValue={borderTopLeftRadiusValue}
-      borderTopRightRadiusValue={borderTopRightRadiusValue}
-      isInteractive={isInteractive}
-      isKeyDown={!!isKeyDown}
+    <Component
+      className={css(
+        mergeSX(
+          {
+            backgroundColor: theme.getColor(backgroundColor),
+            borderColor: theme.getColor(borderColor),
+            borderStyle: borderColor && 'solid',
+            //----Group border widths to enable proper overriding----
+            borderWidth,
+            borderRightWidth,
+            borderTopWidth,
+            borderBottomWidth,
+            borderLeftWidth,
+            display: block ? 'block' : undefined,
+            //-------------------------------------------------------
+            label: 'Box',
+          },
+          getInteractiveStyles(),
+          sx,
+        ) as any,
+      )}
       onKeyDown={handleKeyDown}
       onKeyUp={handleKeyUp}
       ref={ref as ForwardedRef<HTMLDivElement>}
@@ -276,6 +283,8 @@ export const Box: PolymorphicForwardRefExoticComponent<
             borderTopRightRadiusValue,
           ),
           bottom: theme.space(bottomValue),
+          flexGrow,
+          flexShrink,
           height: theme.space(sizeValue || heightValue),
           left: theme.space(leftValue),
           marginBottom: theme.space(
@@ -308,8 +317,7 @@ export const Box: PolymorphicForwardRefExoticComponent<
         },
         isNil,
       )}
-      theme={theme}
       {...rest}
-    ></StyledBox>
+    />
   );
 });

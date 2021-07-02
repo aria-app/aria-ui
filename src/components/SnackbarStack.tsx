@@ -24,8 +24,8 @@ export const SnackbarStack = forwardRef<HTMLDivElement, SnackbarStackProps>(
     const { items = [], onItemsChange, sx, ...rest } = props;
 
     const handleSnackbarDismiss = useCallback<SnackbarOnDismiss>(
-      dismissedId => {
-        onItemsChange?.(items.filter(item => item.id !== dismissedId));
+      (dismissedId) => {
+        onItemsChange?.(items.filter((item) => item.id !== dismissedId));
       },
       [items, onItemsChange],
     );
@@ -44,7 +44,7 @@ export const SnackbarStack = forwardRef<HTMLDivElement, SnackbarStackProps>(
       >
         <Stack direction="column-reverse" space={2}>
           <AnimatePresence initial={false}>
-            {items.map(item => (
+            {items.map((item) => (
               <MotionBox
                 initial={{ opacity: 0, scale: 0.3, y: 40 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}

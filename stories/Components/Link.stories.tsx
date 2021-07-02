@@ -12,7 +12,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<LinkProps> = args => <Link {...args} />;
+export const Default: Story<LinkProps> = (args) => <Link {...args} />;
 
 Default.args = {
   children: 'Link to Google',

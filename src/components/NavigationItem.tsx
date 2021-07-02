@@ -39,7 +39,7 @@ export const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
     const { icon, isSelected, label, onSelect, sx, value, ...rest } = props;
 
     const handleClick = useCallback<MouseEventHandler<HTMLElement>>(
-      e => {
+      (e) => {
         onSelect?.(value, e);
       },
       [onSelect, value],

@@ -53,7 +53,7 @@ export const Wizard = forwardRef<HTMLDivElement, WizardProps>(function Wizard(
   }, [currentIndex, isOnLastStep, onCurrentIndexChange]);
 
   const handleGoToIndex = useCallback<(index: number) => void>(
-    index => {
+    (index) => {
       if (index === currentIndex) return;
 
       if (index < 0 || index > stepCount - 1) {

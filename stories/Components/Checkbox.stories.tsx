@@ -15,7 +15,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<CheckboxProps> = args => <Checkbox {...args} />;
+export const Default: Story<CheckboxProps> = (args) => <Checkbox {...args} />;
 
 Default.args = {
   disabled: false,
@@ -24,14 +24,14 @@ Default.args = {
   labelSide: 'right',
 };
 
-export const Disabled: Story<CheckboxProps> = args => <Checkbox {...args} />;
+export const Disabled: Story<CheckboxProps> = (args) => <Checkbox {...args} />;
 
 Disabled.args = {
   ...Default.args,
   disabled: true,
 };
 
-export const MultilineLabel: Story<CheckboxProps> = args => (
+export const MultilineLabel: Story<CheckboxProps> = (args) => (
   <Box sx={{ maxWidth: 320 }}>
     <Checkbox {...args} />
   </Box>

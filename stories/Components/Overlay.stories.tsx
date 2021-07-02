@@ -11,6 +11,6 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<OverlayProps> = args => <Overlay {...args} />;
+export const Default: Story<OverlayProps> = (args) => <Overlay {...args} />;
 
 Default.args = { isVisible: true };

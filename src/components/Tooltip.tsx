@@ -26,7 +26,7 @@ export const Tooltip: FC<TooltipProps> = function Tooltip(props) {
   };
 
   const onHide = ({ unmount }: Instance) => {
-    const cleanup = scale.onChange(value => {
+    const cleanup = scale.onChange((value) => {
       if (value <= initialScale) {
         cleanup();
         unmount();

@@ -24,7 +24,7 @@ export const NavigationRail = forwardRef<HTMLElement, NavigationRailProps>(
     const { items = [], onValueChange, sx, value, ...rest } = props;
 
     const getIsSelected = useCallback<(item: NavigationItemValue) => boolean>(
-      itemValue => itemValue === value,
+      (itemValue) => itemValue === value,
       [value],
     );
 

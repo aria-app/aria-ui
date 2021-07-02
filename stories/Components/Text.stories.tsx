@@ -24,7 +24,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<TextProps> = args => <Text {...args} />;
+export const Default: Story<TextProps> = (args) => <Text {...args} />;
 
 Default.args = {
   children: 'The quick brown fox jumps over the lazy dog',
@@ -38,13 +38,13 @@ export const Colors: Story<TextProps> = ({
 }) => (
   <Box style={{ maxWidth: 900 }}>
     <Text variant="header">Foreground Colors</Text>
-    {colors.map(color => (
+    {colors.map((color) => (
       <Text key={color} color={color} {...rest}>
         {children || color}
       </Text>
     ))}
     <Text variant="header">Background Colors</Text>
-    {colors.map(color => (
+    {colors.map((color) => (
       <Box key={`bg-${color}`} backgroundColor={color}>
         <Text color={color} {...rest} colorIsBackground>
           {children || color}
@@ -72,9 +72,9 @@ export const Variants: Story<TextProps> = ({
   <Box style={{ maxWidth: 900 }}>
     {orderBy(
       textVariants,
-      textVariant => lightTheme.textVariants[textVariant].fontSize,
+      (textVariant) => lightTheme.textVariants[textVariant].fontSize,
       'desc',
-    ).map(textVariant => (
+    ).map((textVariant) => (
       <Text key={textVariant} variant={textVariant} {...rest}>
         {children || textVariant}
       </Text>

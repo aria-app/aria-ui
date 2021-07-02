@@ -1,5 +1,6 @@
 import FocusTrap from 'focus-trap-react';
 import { AnimatePresence } from 'framer-motion';
+import CloseIcon from 'mdi-react/CloseIcon';
 import React, { forwardRef, MouseEventHandler, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -7,6 +8,7 @@ import { mergeSX } from '../helpers';
 import { useScreenSizeType, useThemeWithDefault } from '../hooks';
 import { Box, BoxProps } from './Box';
 import { Button, ButtonProps } from './Button';
+import { IconButton, IconButtonProps } from './IconButton';
 import { MotionBox } from './MotionBox';
 import { Overlay } from './Overlay';
 import { Stack } from './Stack';
@@ -17,6 +19,7 @@ export type DialogMaxWidth = 'auto' | 'lg' | 'md' | 'sm' | number;
 export interface DialogProps extends Omit<BoxProps<'aside'>, 'title'> {
   cancelProps?: ButtonProps;
   cancelText?: string;
+  closeProps?: IconButtonProps;
   confirmProps?: ButtonProps;
   confirmText?: string;
   id?: any;
@@ -26,6 +29,7 @@ export interface DialogProps extends Omit<BoxProps<'aside'>, 'title'> {
   isOpen?: boolean;
   maxWidth?: DialogMaxWidth;
   onCancel?: MouseEventHandler<HTMLButtonElement>;
+  onClose?: MouseEventHandler<HTMLButtonElement>;
   onConfirm?: MouseEventHandler<HTMLButtonElement>;
   onOverlayClick?: MouseEventHandler<HTMLElement>;
   portalContainer?: Element;
@@ -50,6 +54,7 @@ export const Dialog = forwardRef<HTMLElement, DialogProps>(function Dialog(
     isOpen,
     maxWidth = 'md',
     onCancel,
+    onClose,
     onConfirm,
     onOverlayClick,
     portalContainer = document.body,
@@ -167,7 +172,18 @@ export const Dialog = forwardRef<HTMLElement, DialogProps>(function Dialog(
               <Stack space={8}>
                 {title && (
                   <Box paddingX={6}>
-                    <Text variant="header">{title}</Text>
+                    <Stack align="center" direction="row" space={4}>
+                      <Text sx={{ flexGrow: 1 }} variant="header">
+                        {title}
+                      </Text>
+                      {onClose && (
+                        <IconButton
+                          icon={<CloseIcon />}
+                          margin={-3}
+                          onClick={onClose}
+                        />
+                      )}
+                    </Stack>
                   </Box>
                 )}
                 <Box paddingX={isContentPadded ? 6 : undefined}>{children}</Box>

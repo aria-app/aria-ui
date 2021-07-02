@@ -15,7 +15,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<RadioGroupProps> = args => (
+export const Default: Story<RadioGroupProps> = (args) => (
   <RadioGroup {...args}>
     <RadioButton label="Alpha" value="a" />
     <RadioButton label="Bravo" value="b" />
@@ -28,7 +28,7 @@ Default.args = {
   value: 'a',
 };
 
-export const Disabled: Story<RadioGroupProps> = args => (
+export const Disabled: Story<RadioGroupProps> = (args) => (
   <RadioGroup {...args}>
     <RadioButton label="Alpha" value="a" />
     <RadioButton label="Bravo" value="b" />
@@ -41,7 +41,7 @@ Disabled.args = {
   disabled: true,
 };
 
-export const DisabledButton: Story<RadioGroupProps> = args => (
+export const DisabledButton: Story<RadioGroupProps> = (args) => (
   <RadioGroup {...args}>
     <RadioButton label="Alpha" value="a" />
     <RadioButton label="Bravo" value="b" />
@@ -53,7 +53,7 @@ DisabledButton.args = {
   ...Default.args,
 };
 
-export const WithError: Story<RadioGroupProps> = args => (
+export const WithError: Story<RadioGroupProps> = (args) => (
   <RadioGroup {...args}>
     <RadioButton label="Alpha" value="a" />
     <RadioButton label="Bravo" value="b" />

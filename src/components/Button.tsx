@@ -80,7 +80,7 @@ export const Button = forwardRef<
       as={element}
       borderRadius="md"
       childColor={variant !== 'contained' ? color : undefined}
-      height={12}
+      height={11}
       isInteractive={!(disabled || isLoading)}
       paddingX={text ? 4 : undefined}
       ref={ref as Ref<HTMLButtonElement>}

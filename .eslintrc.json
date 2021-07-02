@@ -10,6 +10,7 @@
   ],
   "plugins": [
     "jest",
+    "prettier",
     "react",
     "react-hooks",
     "simple-import-sort",

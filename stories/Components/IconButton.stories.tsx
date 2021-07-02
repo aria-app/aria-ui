@@ -19,7 +19,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<IconButtonProps> = args => (
+export const Default: Story<IconButtonProps> = (args) => (
   <IconButton icon={<StarIcon />} {...args} />
 );
 
@@ -27,11 +27,21 @@ Default.args = {
   size: 'md',
 };
 
-export const Disabled: Story<IconButtonProps> = args => (
+export const Disabled: Story<IconButtonProps> = (args) => (
   <IconButton icon={<StarIcon />} {...args} />
 );
 
 Disabled.args = {
   ...Default.args,
   disabled: true,
+};
+
+export const BorderOverride: Story<IconButtonProps> = (args) => (
+  <IconButton icon={<StarIcon />} {...args} />
+);
+
+BorderOverride.args = {
+  ...Default.args,
+  borderColor: 'brandPrimary',
+  borderWidth: 2,
 };

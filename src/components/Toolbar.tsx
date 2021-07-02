@@ -13,11 +13,13 @@ export const Toolbar = forwardRef<HTMLDivElement, ToolbarProps>(
       <Box
         as="div"
         backgroundColor="backgroundContrast"
-        padding={4}
+        height={14}
+        paddingX={2}
         ref={ref}
         sx={mergeSX(
           {
             display: 'flex',
+            flexShrink: 0,
             label: 'Toolbar',
           },
           sx,

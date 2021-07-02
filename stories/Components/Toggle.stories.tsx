@@ -15,7 +15,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<ToggleProps> = args => <Toggle {...args} />;
+export const Default: Story<ToggleProps> = (args) => <Toggle {...args} />;
 
 Default.args = {
   disabled: false,
@@ -24,14 +24,14 @@ Default.args = {
   labelSide: 'right',
 };
 
-export const Disabled: Story<ToggleProps> = args => <Toggle {...args} />;
+export const Disabled: Story<ToggleProps> = (args) => <Toggle {...args} />;
 
 Disabled.args = {
   ...Default.args,
   disabled: true,
 };
 
-export const MultilineLabel: Story<ToggleProps> = args => (
+export const MultilineLabel: Story<ToggleProps> = (args) => (
   <Box sx={{ maxWidth: 320 }}>
     <Toggle {...args} />
   </Box>

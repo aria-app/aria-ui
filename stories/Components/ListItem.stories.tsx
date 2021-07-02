@@ -19,7 +19,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<ListItemProps> = args => (
+export const Default: Story<ListItemProps> = (args) => (
   <Box sx={{ overflow: 'hidden', width: 320 }}>
     <ListItem {...args} />
   </Box>
@@ -36,13 +36,13 @@ Default.argTypes = {
   onEndIconClick: { action: 'onEndIconClick' },
 };
 
-export const OnlyPrimaryText: Story<ListItemProps> = args => (
+export const OnlyPrimaryText: Story<ListItemProps> = (args) => (
   <Box
     backgroundColor="backgroundContrast"
     borderRadius="sm"
     sx={{ overflow: 'hidden', width: 320 }}
   >
-    {range(1, 7).map(n => (
+    {range(1, 7).map((n) => (
       <ListItem key={n} {...args} primaryText={`Primary Text ${n}`} />
     ))}
   </Box>
@@ -50,13 +50,13 @@ export const OnlyPrimaryText: Story<ListItemProps> = args => (
 
 OnlyPrimaryText.args = {};
 
-export const WithStartIcon: Story<ListItemProps> = args => (
+export const WithStartIcon: Story<ListItemProps> = (args) => (
   <Box
     backgroundColor="backgroundContrast"
     borderRadius="sm"
     sx={{ overflow: 'hidden', width: 320 }}
   >
-    {range(1, 7).map(n => (
+    {range(1, 7).map((n) => (
       <ListItem
         key={n}
         {...args}
@@ -73,13 +73,13 @@ WithStartIcon.argTypes = {
   onStartIconClick: { action: 'onStartIconClick' },
 };
 
-export const WithEndIcon: Story<ListItemProps> = args => (
+export const WithEndIcon: Story<ListItemProps> = (args) => (
   <Box
     backgroundColor="backgroundContrast"
     borderRadius="sm"
     sx={{ overflow: 'hidden', width: 320 }}
   >
-    {range(1, 7).map(n => (
+    {range(1, 7).map((n) => (
       <ListItem
         key={n}
         {...args}
@@ -92,13 +92,13 @@ export const WithEndIcon: Story<ListItemProps> = args => (
 
 WithEndIcon.args = {};
 
-export const PrimaryAndSecondaryText: Story<ListItemProps> = args => (
+export const PrimaryAndSecondaryText: Story<ListItemProps> = (args) => (
   <Box
     backgroundColor="backgroundContrast"
     borderRadius="sm"
     sx={{ overflow: 'hidden', width: 320 }}
   >
-    {range(1, 7).map(n => (
+    {range(1, 7).map((n) => (
       <ListItem
         key={n}
         {...args}
@@ -111,14 +111,14 @@ export const PrimaryAndSecondaryText: Story<ListItemProps> = args => (
 
 PrimaryAndSecondaryText.args = {};
 
-export const OnlySecondaryText: Story<ListItemProps> = args => (
+export const OnlySecondaryText: Story<ListItemProps> = (args) => (
   <Stack space={4} sx={{ width: 320 }}>
     <Box
       backgroundColor="backgroundContrast"
       borderRadius="sm"
       sx={{ overflow: 'hidden' }}
     >
-      {range(1, 7).map(n => (
+      {range(1, 7).map((n) => (
         <ListItem
           key={n}
           {...args}

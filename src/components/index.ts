@@ -6,6 +6,7 @@ export * from './Checkbox';
 export * from './Chip';
 export * from './Dialog';
 export * from './Divider';
+export * from './Fade';
 export * from './FormGroup';
 export * from './GlobalStyles';
 export * from './Icon';
