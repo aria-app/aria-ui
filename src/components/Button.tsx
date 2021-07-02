@@ -13,6 +13,8 @@ import { Icon, IconSize } from './Icon';
 import { Spinner } from './Spinner';
 import { Text } from './Text';
 
+export type ButtonSize = 'lg' | 'md' | 'sm';
+
 export type ButtonVariant = 'contained' | 'minimal' | 'outlined';
 
 export interface ButtonProps extends BoxProps<'a' | 'button'> {
@@ -21,6 +23,7 @@ export interface ButtonProps extends BoxProps<'a' | 'button'> {
   element?: 'a' | 'button';
   endIcon?: ReactElement;
   endIconSize?: IconSize;
+  size?: ButtonSize;
   startIcon?: ReactElement;
   startIconSize?: IconSize;
   isLoading?: boolean;
@@ -40,6 +43,7 @@ export const Button = forwardRef<
     endIcon,
     endIconSize = 'md',
     isLoading,
+    size = 'md',
     startIcon,
     startIconSize = 'md',
     sx,
@@ -80,7 +84,13 @@ export const Button = forwardRef<
       as={element}
       borderRadius="md"
       childColor={variant !== 'contained' ? color : undefined}
-      height={12}
+      height={
+        {
+          lg: 12,
+          md: 11,
+          sm: 10,
+        }[size]
+      }
       isInteractive={!(disabled || isLoading)}
       paddingX={text ? 4 : undefined}
       ref={ref as Ref<HTMLButtonElement>}
@@ -151,6 +161,7 @@ export const Button = forwardRef<
         <Spinner
           color={color}
           colorIsBackground={variant === 'contained'}
+          size={size}
           sx={{ position: 'absolute' }}
         />
       )}
