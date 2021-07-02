@@ -80,7 +80,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     }, [error, success, warning]);
 
     const handleInputChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
-      e => {
+      (e) => {
         onValueChange?.(e.currentTarget.value, e);
       },
       [onValueChange],
