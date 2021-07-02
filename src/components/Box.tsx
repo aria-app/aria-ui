@@ -74,7 +74,7 @@ interface StyledBoxProps {
   isKeyDown?: boolean;
 }
 
-const StyledBox = styled.div<BoxOwnProps & StyledBoxProps>(props => {
+const StyledBox = styled.div<BoxOwnProps & StyledBoxProps>((props) => {
   function getInteractiveStyles(): CSSObject {
     if (!props.isInteractive) return {};
 
@@ -236,7 +236,7 @@ export const Box: PolymorphicForwardRefExoticComponent<
   const widthValue = useResponsivePropValue(width);
 
   const handleKeyDown = useCallback<KeyboardEventHandler<HTMLElement>>(
-    e => {
+    (e) => {
       if (!e.repeat && isInteractive && e.key === ' ') {
         setIsKeyDown(true);
       }

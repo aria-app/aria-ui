@@ -14,20 +14,22 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<SnackbarProps> = args => <Snackbar {...args} />;
+export const Default: Story<SnackbarProps> = (args) => <Snackbar {...args} />;
 
 Default.args = {
   message: 'Snackbar message',
 };
 
-export const StatusIcon: Story<SnackbarProps> = args => <Snackbar {...args} />;
+export const StatusIcon: Story<SnackbarProps> = (args) => (
+  <Snackbar {...args} />
+);
 
 StatusIcon.args = {
   message: 'Snackbar message',
   status: 'warning',
 };
 
-export const LongMessage: Story<SnackbarProps> = args => (
+export const LongMessage: Story<SnackbarProps> = (args) => (
   <Box sx={{ maxWidth: 320 }}>
     <Snackbar {...args} />
   </Box>

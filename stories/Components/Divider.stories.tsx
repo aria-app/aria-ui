@@ -14,7 +14,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<DividerProps> = args => (
+export const Default: Story<DividerProps> = (args) => (
   <Box sx={{ maxWidth: 768, width: '100vw' }}>
     <Divider {...args} />
   </Box>

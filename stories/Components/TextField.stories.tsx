@@ -9,7 +9,7 @@ export default {
   title: 'Components/TextField',
   component: TextField,
   decorators: [
-    Story => (
+    (Story) => (
       <Box
         backgroundColor="backgroundContrast"
         borderRadius="md"
@@ -31,7 +31,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<TextFieldProps> = args => <TextField {...args} />;
+export const Default: Story<TextFieldProps> = (args) => <TextField {...args} />;
 
 Default.args = {
   id: 'default',
@@ -40,14 +40,16 @@ Default.args = {
   value: 'Value',
 };
 
-export const Disabled: Story<TextFieldProps> = args => <TextField {...args} />;
+export const Disabled: Story<TextFieldProps> = (args) => (
+  <TextField {...args} />
+);
 
 Disabled.args = {
   ...Default.args,
   disabled: true,
 };
 
-export const Statuses: Story<TextFieldProps> = args => (
+export const Statuses: Story<TextFieldProps> = (args) => (
   <Stack space={6}>
     <TextField {...args} error="error" />
     <TextField {...args} success="success" />
@@ -68,7 +70,7 @@ export const Statuses: Story<TextFieldProps> = args => (
 
 Statuses.args = {};
 
-export const ValueVersusPlaceholder: Story<TextFieldProps> = args => (
+export const ValueVersusPlaceholder: Story<TextFieldProps> = (args) => (
   <Stack space={4}>
     <TextField {...args} value="Value" />
     <TextField {...args} placeholder="Placeholder" />
@@ -77,7 +79,7 @@ export const ValueVersusPlaceholder: Story<TextFieldProps> = args => (
 
 ValueVersusPlaceholder.args = {};
 
-export const WithEndIcon: Story<TextFieldProps> = args => (
+export const WithEndIcon: Story<TextFieldProps> = (args) => (
   <TextField {...args} />
 );
 
@@ -90,7 +92,7 @@ WithEndIcon.argTypes = {
   onEndIconClick: { action: 'onEndIconClick' },
 };
 
-export const WithStartIcon: Story<TextFieldProps> = args => (
+export const WithStartIcon: Story<TextFieldProps> = (args) => (
   <TextField {...args} />
 );
 

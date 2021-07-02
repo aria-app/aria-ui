@@ -11,7 +11,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<SnackbarStackProps> = args => (
+export const Default: Story<SnackbarStackProps> = (args) => (
   <SnackbarStack {...args} />
 );
 

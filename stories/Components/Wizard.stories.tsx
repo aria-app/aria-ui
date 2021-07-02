@@ -7,7 +7,7 @@ export default {
   title: 'Components/Wizard',
   component: Wizard,
   decorators: [
-    Story => (
+    (Story) => (
       <Box
         backgroundColor="backgroundContrast"
         borderRadius="md"
@@ -36,7 +36,7 @@ const Step: FC<any> = ({ children, index }) => {
   return <Box paddingBottom={6}>{children}</Box>;
 };
 
-export const Default: Story<WizardProps> = args => (
+export const Default: Story<WizardProps> = (args) => (
   <Wizard {...args}>
     <Step index={0}>Step 1</Step>
     <Step index={1}>Step 2</Step>
@@ -49,7 +49,7 @@ Default.args = {
   finishText: 'Finish',
 };
 
-export const MiddleStep: Story<WizardProps> = args => (
+export const MiddleStep: Story<WizardProps> = (args) => (
   <Wizard {...args}>
     <Step index={0}>Step 1</Step>
     <Step index={1}>Step 2</Step>
@@ -62,7 +62,7 @@ MiddleStep.args = {
   currentIndex: 1,
 };
 
-export const LastStep: Story<WizardProps> = args => (
+export const LastStep: Story<WizardProps> = (args) => (
   <Wizard {...args}>
     <Step index={0}>Step 1</Step>
     <Step index={1}>Step 2</Step>

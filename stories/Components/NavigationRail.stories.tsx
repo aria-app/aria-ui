@@ -10,7 +10,7 @@ export default {
   title: 'Components/NavigationRail',
   component: NavigationRail,
   decorators: [
-    Story => (
+    (Story) => (
       <Box
         sx={{
           display: 'flex',
@@ -35,7 +35,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<NavigationRailProps> = args => (
+export const Default: Story<NavigationRailProps> = (args) => (
   <NavigationRail {...args} />
 );
 

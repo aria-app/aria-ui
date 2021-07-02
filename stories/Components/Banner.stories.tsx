@@ -19,10 +19,12 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<BannerProps & {
-  showConfirmButton: boolean;
-  showDismissButton: boolean;
-}> = ({
+export const Default: Story<
+  BannerProps & {
+    showConfirmButton: boolean;
+    showDismissButton: boolean;
+  }
+> = ({
   onConfirm,
   onDismiss,
   showConfirmButton,

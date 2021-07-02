@@ -15,7 +15,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<ToolbarProps> = args => (
+export const Default: Story<ToolbarProps> = (args) => (
   <Toolbar {...args}>
     <Stack align="center" direction="row" space={2}>
       <IconButton icon={<ContentSaveIcon />} />

@@ -9,7 +9,7 @@ export default {
   title: 'Components/Select',
   component: Select,
   decorators: [
-    Story => (
+    (Story) => (
       <Box
         backgroundColor="backgroundContrast"
         borderRadius="md"
@@ -37,21 +37,21 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<SelectProps> = args => <Select {...args} />;
+export const Default: Story<SelectProps> = (args) => <Select {...args} />;
 
 Default.args = {
   label: 'Some label text',
   secondaryLabel: 'A secondary label',
 };
 
-export const Disabled: Story<SelectProps> = args => <Select {...args} />;
+export const Disabled: Story<SelectProps> = (args) => <Select {...args} />;
 
 Disabled.args = {
   ...Default.args,
   disabled: true,
 };
 
-export const Statuses: Story<SelectProps> = args => (
+export const Statuses: Story<SelectProps> = (args) => (
   <Stack space={6}>
     <Select {...args} error="error" />
     <Select {...args} success="success" />
@@ -72,7 +72,7 @@ export const Statuses: Story<SelectProps> = args => (
 
 Statuses.args = {};
 
-export const WithStartIcon: Story<SelectProps> = args => <Select {...args} />;
+export const WithStartIcon: Story<SelectProps> = (args) => <Select {...args} />;
 
 WithStartIcon.args = {
   label: 'Favorite Citrus',
@@ -92,7 +92,7 @@ WithStartIcon.argTypes = {
   },
 };
 
-export const WithEndIconOtherThanChevron: Story<SelectProps> = args => (
+export const WithEndIconOtherThanChevron: Story<SelectProps> = (args) => (
   <Select {...args} />
 );
 

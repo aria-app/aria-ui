@@ -35,7 +35,9 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
       ...rest
     } = props;
 
-    const handleDismissButtonClick: MouseEventHandler<HTMLButtonElement> = e => {
+    const handleDismissButtonClick: MouseEventHandler<HTMLButtonElement> = (
+      e,
+    ) => {
       onDismiss?.(messageId, e);
     };
 

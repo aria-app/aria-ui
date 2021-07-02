@@ -19,7 +19,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<StackProps> = args => (
+export const Default: Story<StackProps> = (args) => (
   <Stack {...args}>
     <Box backgroundColor="backgroundContrast">
       <Text>First Item</Text>

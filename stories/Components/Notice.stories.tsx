@@ -17,7 +17,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<NoticeProps> = args => <Notice {...args} />;
+export const Default: Story<NoticeProps> = (args) => <Notice {...args} />;
 
 Default.args = {
   children: 'This is a notice to the user of this app',
@@ -25,13 +25,13 @@ Default.args = {
   status: 'info',
 };
 
-export const ShortMessage: Story<NoticeProps> = args => <Notice {...args} />;
+export const ShortMessage: Story<NoticeProps> = (args) => <Notice {...args} />;
 
 ShortMessage.args = {
   children: 'msg',
 };
 
-export const LongMessage: Story<NoticeProps> = args => (
+export const LongMessage: Story<NoticeProps> = (args) => (
   <Box sx={{ maxWidth: 480 }}>
     <Notice {...args} />
   </Box>

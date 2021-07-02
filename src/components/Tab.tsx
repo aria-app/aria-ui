@@ -26,7 +26,7 @@ export const Tab = forwardRef<HTMLDivElement, TabProps>(function Tab(
   const { disabled, isSelected, label, onSelect, sx, value, ...rest } = props;
   const theme = useThemeWithDefault();
 
-  const handleClick: MouseEventHandler<HTMLDivElement> = e => {
+  const handleClick: MouseEventHandler<HTMLDivElement> = (e) => {
     if (disabled || isSelected) return;
 
     onSelect?.(value, e);

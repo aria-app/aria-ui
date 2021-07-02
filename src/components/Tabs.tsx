@@ -35,7 +35,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
   } = props;
 
   const tabChildren = Children.toArray(children).filter(
-    child => isValidElement(child) && child.type === Tab,
+    (child) => isValidElement(child) && child.type === Tab,
   );
 
   const handleTabSelect = useCallback<TabOnSelect>(
@@ -61,7 +61,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
       {...rest}
     >
       <AnimateSharedLayout>
-        {tabChildren.map(child =>
+        {tabChildren.map((child) =>
           isValidElement(child)
             ? cloneElement(child, {
                 isSelected: child.props.value === value,

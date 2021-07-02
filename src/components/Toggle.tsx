@@ -48,12 +48,12 @@ export const Toggle = forwardRef<HTMLDivElement, ToggleProps>(function Toggle(
 
   useImperativeHandle(ref, () => elementRef.current as HTMLDivElement);
 
-  const handleClick: MouseEventHandler<HTMLDivElement> = e => {
+  const handleClick: MouseEventHandler<HTMLDivElement> = (e) => {
     if (disabled) return;
     onIsCheckedChange?.(!isChecked, e);
   };
 
-  const handleKeyDown: KeyboardEventHandler<HTMLDivElement> = e => {
+  const handleKeyDown: KeyboardEventHandler<HTMLDivElement> = (e) => {
     if (disabled || e.repeat || e.key !== ' ') return;
     onIsCheckedChange?.(!isChecked, e);
   };

@@ -35,15 +35,15 @@ export const RadioGroup = forwardRef<HTMLElement, RadioGroupProps>(
     const { children, disabled, onValueChange, value, sx, ...rest } = props;
 
     const radioButtonChildren = Children.toArray(children).filter(
-      child => isValidElement(child) && child.type === RadioButton,
+      (child) => isValidElement(child) && child.type === RadioButton,
     );
 
     const selectNextValue = useCallback<KeyboardEventHandler<HTMLElement>>(
-      e => {
+      (e) => {
         const values = (radioButtonChildren as ReactElement<any>[]).map(
           ({ props }) => props.value,
         );
-        const valueIndex = values.findIndex(v => v === value);
+        const valueIndex = values.findIndex((v) => v === value);
 
         if (valueIndex === values.length - 1) return;
 
@@ -58,11 +58,11 @@ export const RadioGroup = forwardRef<HTMLElement, RadioGroupProps>(
     );
 
     const selectPreviousValue = useCallback<KeyboardEventHandler<HTMLElement>>(
-      e => {
+      (e) => {
         const values = (radioButtonChildren as ReactElement<any>[]).map(
           ({ props }) => props.value,
         );
-        const valueIndex = values.findIndex(v => v === value);
+        const valueIndex = values.findIndex((v) => v === value);
 
         if (valueIndex === 0) return;
 
@@ -77,7 +77,7 @@ export const RadioGroup = forwardRef<HTMLElement, RadioGroupProps>(
     );
 
     const handleKeyDown = useCallback<KeyboardEventHandler<HTMLElement>>(
-      e => {
+      (e) => {
         if (e.key === Key.ArrowUp) {
           selectPreviousValue(e);
         }
@@ -114,7 +114,7 @@ export const RadioGroup = forwardRef<HTMLElement, RadioGroupProps>(
         {...rest}
       >
         <Stack space={2}>
-          {radioButtonChildren.map(child =>
+          {radioButtonChildren.map((child) =>
             isValidElement(child)
               ? cloneElement(child, {
                   disabled: disabled || child.props.disabled,

@@ -58,8 +58,9 @@ export function createTheme(themeOptions: ThemeOptions): Theme {
       lineGap: 0,
       unitsPerEm: 1000,
     },
-    getBorderRadius: borderRadius => borderRadius && borderRadii[borderRadius],
-    getColor: colorName => {
+    getBorderRadius: (borderRadius) =>
+      borderRadius && borderRadii[borderRadius],
+    getColor: (colorName) => {
       if (!colorName) return colorName;
 
       const themeColor =
@@ -69,7 +70,7 @@ export function createTheme(themeOptions: ThemeOptions): Theme {
 
       return themeColor;
     },
-    getForegroundColor: backgroundColorName => {
+    getForegroundColor: (backgroundColorName) => {
       const themeColor =
         themeOptions.colors[backgroundColorName as keyof Theme['colors']] ||
         backgroundColorName;
@@ -86,7 +87,7 @@ export function createTheme(themeOptions: ThemeOptions): Theme {
 
       return isLightColor(themeColor) ? darkColor : '#fff';
     },
-    getTextVariant: textVariant =>
+    getTextVariant: (textVariant) =>
       textVariant && textVariants[textVariant]
         ? textVariants[textVariant]
         : textVariants.body,
@@ -95,7 +96,7 @@ export function createTheme(themeOptions: ThemeOptions): Theme {
       md: 768,
       sm: 480,
     },
-    space: spacing => (isNumber(spacing) ? spacing * 4 : spacing),
+    space: (spacing) => (isNumber(spacing) ? spacing * 4 : spacing),
     textVariants,
   };
   return merge({}, baseTheme, themeOptions);

@@ -46,12 +46,12 @@ export const RadioButton = forwardRef<HTMLDivElement, RadioButtonProps>(
 
     useImperativeHandle(ref, () => elementRef.current as HTMLDivElement);
 
-    const handleClick: MouseEventHandler<HTMLDivElement> = e => {
+    const handleClick: MouseEventHandler<HTMLDivElement> = (e) => {
       if (isChecked || disabled) return;
       onSelect?.(value, e);
     };
 
-    const handleKeyDown: KeyboardEventHandler<HTMLDivElement> = e => {
+    const handleKeyDown: KeyboardEventHandler<HTMLDivElement> = (e) => {
       if (isChecked || disabled || e.repeat || e.key !== ' ') return;
       onSelect?.(value, e);
     };

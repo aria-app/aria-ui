@@ -11,7 +11,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<ChipProps> = args => <Chip {...args} />;
+export const Default: Story<ChipProps> = (args) => <Chip {...args} />;
 
 Default.args = {
   label: 'Label',
@@ -21,7 +21,7 @@ Default.argTypes = {
   onDelete: { action: 'onDelete' },
 };
 
-export const WithoutDelete: Story<ChipProps> = args => <Chip {...args} />;
+export const WithoutDelete: Story<ChipProps> = (args) => <Chip {...args} />;
 
 WithoutDelete.args = {
   ...Default.args,
@@ -34,7 +34,7 @@ export const List: Story<ChipProps & { fruits: string[] }> = ({
 }) => (
   <Box sx={{ maxWidth: 320 }}>
     <Inline space={2}>
-      {fruits.map(fruit => (
+      {fruits.map((fruit) => (
         <Chip key={fruit} {...args} label={fruit} />
       ))}
     </Inline>

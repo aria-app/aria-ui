@@ -33,7 +33,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<ButtonProps> = args => <Button {...args} />;
+export const Default: Story<ButtonProps> = (args) => <Button {...args} />;
 
 Default.args = {
   disabled: false,
@@ -42,14 +42,14 @@ Default.args = {
   variant: 'outlined',
 };
 
-export const Disabled: Story<ButtonProps> = args => <Button {...args} />;
+export const Disabled: Story<ButtonProps> = (args) => <Button {...args} />;
 
 Disabled.args = {
   ...Default.args,
   disabled: true,
 };
 
-export const Loading: Story<ButtonProps> = args => <Button {...args} />;
+export const Loading: Story<ButtonProps> = (args) => <Button {...args} />;
 
 Loading.args = {
   ...Default.args,
@@ -63,7 +63,7 @@ export const Variants: Story<ButtonProps> = ({
   ...rest
 }) => (
   <Stack space={4}>
-    {buttonVariants.map(buttonVariant => (
+    {buttonVariants.map((buttonVariant) => (
       <Button
         key={buttonVariant}
         variant={buttonVariant}
@@ -80,7 +80,9 @@ Variants.argTypes = {
   variant: { table: { disable: true } },
 };
 
-export const WithStartIcon: Story<ButtonProps> = args => <Variants {...args} />;
+export const WithStartIcon: Story<ButtonProps> = (args) => (
+  <Variants {...args} />
+);
 
 WithStartIcon.args = {
   ...Variants.args,
@@ -93,7 +95,7 @@ WithStartIcon.argTypes = {
   startIcon: { table: { disable: true } },
 };
 
-export const WithEndIcon: Story<ButtonProps> = args => <Variants {...args} />;
+export const WithEndIcon: Story<ButtonProps> = (args) => <Variants {...args} />;
 
 WithEndIcon.args = {
   ...Variants.args,

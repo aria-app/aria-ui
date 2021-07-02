@@ -11,7 +11,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<TabProps> = args => <Tab {...args} />;
+export const Default: Story<TabProps> = (args) => <Tab {...args} />;
 
 Default.args = {
   disabled: false,
@@ -20,14 +20,14 @@ Default.args = {
   value: 'tab value',
 };
 
-export const Selected: Story<TabProps> = args => <Tab {...args} />;
+export const Selected: Story<TabProps> = (args) => <Tab {...args} />;
 
 Selected.args = {
   ...Default.args,
   isSelected: true,
 };
 
-export const Disabled: Story<TabProps> = args => <Tab {...args} />;
+export const Disabled: Story<TabProps> = (args) => <Tab {...args} />;
 
 Disabled.args = {
   ...Default.args,

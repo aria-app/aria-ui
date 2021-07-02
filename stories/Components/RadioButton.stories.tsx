@@ -11,7 +11,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<RadioButtonProps> = args => (
+export const Default: Story<RadioButtonProps> = (args) => (
   <RadioButton {...args} />
 );
 
@@ -22,7 +22,7 @@ Default.args = {
   value: 'value',
 };
 
-export const Disabled: Story<RadioButtonProps> = args => (
+export const Disabled: Story<RadioButtonProps> = (args) => (
   <RadioButton {...args} />
 );
 
@@ -31,7 +31,7 @@ Disabled.args = {
   disabled: true,
 };
 
-export const MultilineLabel: Story<RadioButtonProps> = args => (
+export const MultilineLabel: Story<RadioButtonProps> = (args) => (
   <Box sx={{ maxWidth: 320 }}>
     <RadioButton {...args} />
   </Box>

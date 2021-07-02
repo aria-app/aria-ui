@@ -15,7 +15,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<FormGroupProps> = args => (
+export const Default: Story<FormGroupProps> = (args) => (
   <FormGroup {...args}>
     <span>Content</span>
   </FormGroup>
@@ -26,7 +26,7 @@ Default.args = {
   label: 'Label',
 };
 
-export const Disabled: Story<FormGroupProps> = args => (
+export const Disabled: Story<FormGroupProps> = (args) => (
   <FormGroup {...args}>
     <span>Content</span>
   </FormGroup>
@@ -39,7 +39,7 @@ Disabled.args = {
   secondaryLabel: 'Secondary label',
 };
 
-export const WithError: Story<FormGroupProps> = args => (
+export const WithError: Story<FormGroupProps> = (args) => (
   <FormGroup {...args}>
     <span>Content</span>
   </FormGroup>
@@ -50,7 +50,7 @@ WithError.args = {
   error: 'Error message',
 };
 
-export const WithSecondaryLabel: Story<FormGroupProps> = args => (
+export const WithSecondaryLabel: Story<FormGroupProps> = (args) => (
   <FormGroup {...args}>
     <span>Content</span>
   </FormGroup>
@@ -61,7 +61,7 @@ WithSecondaryLabel.args = {
   secondaryLabel: 'Secondary label',
 };
 
-export const WithSuccess: Story<FormGroupProps> = args => (
+export const WithSuccess: Story<FormGroupProps> = (args) => (
   <FormGroup {...args}>
     <span>Content</span>
   </FormGroup>
@@ -72,7 +72,7 @@ WithSuccess.args = {
   success: 'Success message',
 };
 
-export const WithWarning: Story<FormGroupProps> = args => (
+export const WithWarning: Story<FormGroupProps> = (args) => (
   <FormGroup {...args}>
     <span>Content</span>
   </FormGroup>

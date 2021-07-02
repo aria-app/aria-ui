@@ -17,7 +17,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<SpinnerProps> = args => <Spinner {...args} />;
+export const Default: Story<SpinnerProps> = (args) => <Spinner {...args} />;
 
 Default.args = {
   color: 'brandPrimary',

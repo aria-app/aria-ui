@@ -10,7 +10,7 @@ export default {
   title: 'Components/BottomNavigation',
   component: BottomNavigation,
   decorators: [
-    Story => (
+    (Story) => (
       <Box
         sx={{
           display: 'flex',
@@ -37,7 +37,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<BottomNavigationProps> = args => (
+export const Default: Story<BottomNavigationProps> = (args) => (
   <BottomNavigation {...args} />
 );
 

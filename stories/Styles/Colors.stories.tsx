@@ -10,7 +10,7 @@ export default {
 
 export const Colors: Story<never> = () => (
   <Stack space={2}>
-    {colors.map(color => (
+    {colors.map((color) => (
       <Box
         key={color}
         backgroundColor={color}
