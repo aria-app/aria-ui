@@ -1,4 +1,4 @@
-import { css } from '@emotion/css';
+import { css, cx } from '@emotion/css';
 import { CSSObject } from '@emotion/react';
 import CSS from 'csstype';
 import { isNil, omitBy } from 'lodash';
@@ -101,6 +101,7 @@ export const Box: PolymorphicForwardRefExoticComponent<
     borderWidth,
     bottom,
     childColor,
+    className,
     grow,
     height,
     isInteractive,
@@ -246,7 +247,7 @@ export const Box: PolymorphicForwardRefExoticComponent<
 
   return (
     <Component
-      className={css(
+      className={cx(css(
         mergeSX(
           {
             backgroundColor: theme.getColor(backgroundColor),
@@ -265,7 +266,7 @@ export const Box: PolymorphicForwardRefExoticComponent<
           getInteractiveStyles(),
           sx,
         ) as any,
-      )}
+      ), className)}
       onKeyDown={handleKeyDown}
       onKeyUp={handleKeyUp}
       ref={ref as ForwardedRef<HTMLDivElement>}
