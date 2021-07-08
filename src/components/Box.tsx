@@ -7,6 +7,7 @@ import React, {
   ForwardedRef,
   forwardRef,
   KeyboardEventHandler,
+  memo,
   useCallback,
   useMemo,
   useState,
@@ -79,7 +80,7 @@ export const defaultBoxElement = 'div';
 export const Box: PolymorphicForwardRefExoticComponent<
   BoxOwnProps,
   typeof defaultBoxElement
-> = forwardRef(function Box<E extends ElementType = typeof defaultBoxElement>(
+> = memo(forwardRef(function Box<E extends ElementType = typeof defaultBoxElement>(
   props: BoxProps<E>,
   ref: ForwardedRef<Element>,
 ): JSX.Element {
@@ -321,4 +322,6 @@ export const Box: PolymorphicForwardRefExoticComponent<
       {...rest}
     />
   );
-});
+}));
+
+Box.displayName = 'Box';
