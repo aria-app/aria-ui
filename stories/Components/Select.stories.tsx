@@ -2,14 +2,15 @@ import { Meta, Story } from '@storybook/react';
 import DotsHorizontalIcon from 'mdi-react/DotsHorizontalIcon';
 import FruitCitrusIcon from 'mdi-react/FruitCitrusIcon';
 import React from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { Box, Select, SelectProps, Stack } from '../../src';
+import { Box, Button, Select, SelectProps, Stack } from '../../src';
 
 export default {
   title: 'Components/Select',
   component: Select,
   decorators: [
-    (Story) => (
+    Story => (
       <Box
         backgroundColor="backgroundContrast"
         borderRadius="md"
@@ -37,21 +38,21 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<SelectProps> = (args) => <Select {...args} />;
+export const Default: Story<SelectProps> = args => <Select {...args} />;
 
 Default.args = {
   label: 'Some label text',
   secondaryLabel: 'A secondary label',
 };
 
-export const Disabled: Story<SelectProps> = (args) => <Select {...args} />;
+export const Disabled: Story<SelectProps> = args => <Select {...args} />;
 
 Disabled.args = {
   ...Default.args,
   disabled: true,
 };
 
-export const Statuses: Story<SelectProps> = (args) => (
+export const Statuses: Story<SelectProps> = args => (
   <Stack space={6}>
     <Select {...args} error="error" />
     <Select {...args} success="success" />
@@ -72,7 +73,7 @@ export const Statuses: Story<SelectProps> = (args) => (
 
 Statuses.args = {};
 
-export const WithStartIcon: Story<SelectProps> = (args) => <Select {...args} />;
+export const WithStartIcon: Story<SelectProps> = args => <Select {...args} />;
 
 WithStartIcon.args = {
   label: 'Favorite Citrus',
@@ -92,10 +93,57 @@ WithStartIcon.argTypes = {
   },
 };
 
-export const WithEndIconOtherThanChevron: Story<SelectProps> = (args) => (
+export const WithEndIconOtherThanChevron: Story<SelectProps> = args => (
   <Select {...args} />
 );
 
 WithEndIconOtherThanChevron.args = {
   endIcon: <DotsHorizontalIcon />,
+};
+
+interface WithReactHookFormValues {
+  num: number;
+}
+
+interface WithReactHookFormArgs extends SelectProps {
+  onFormSubmit: SubmitHandler<WithReactHookFormValues>;
+}
+
+export const WithReactHookForm: Story<WithReactHookFormArgs> = args => {
+  const {
+    formState: { errors },
+    handleSubmit,
+    register,
+  } = useForm<WithReactHookFormValues>({
+    defaultValues: {
+      num: 2,
+    },
+  });
+
+  return (
+    <Stack
+      align="start"
+      element="form"
+      onSubmit={handleSubmit(args.onFormSubmit)}
+      space={2}
+    >
+      <Select
+        error={errors.num && 'Error'}
+        label="Num"
+        options={[
+          { label: 1, value: 1 },
+          { label: 2, value: 2 },
+          { label: 3, value: 3 },
+        ]}
+        selectProps={register('num', { valueAsNumber: true })}
+      />
+      <Button text="Submit" type="submit" />
+    </Stack>
+  );
+};
+
+WithReactHookForm.args = {};
+
+WithReactHookForm.argTypes = {
+  onFormSubmit: { action: 'onFormSubmit' },
 };

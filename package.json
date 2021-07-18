@@ -125,6 +125,7 @@
     "plop": "^2.7.4",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
+    "react-hook-form": "^7.11.1",
     "react-is": "^17.0.2",
     "rimraf": "^3.0.2",
     "semantic-release": "^17.4.4",

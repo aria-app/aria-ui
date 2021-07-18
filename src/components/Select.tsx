@@ -58,7 +58,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       selectProps = {},
       success,
       sx,
-      value = '',
+      value: valueProp = '',
       warning,
       ...rest
     } = props;
@@ -71,14 +71,23 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       return 'transparent';
     }, [error, success, warning]);
 
-    const handleChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
+    const handleChange: ChangeEventHandler<HTMLSelectElement> = e => {
       const selectedIndex = placeholder
         ? e.target.selectedIndex - 1
         : e.target.selectedIndex;
       onValueChange?.(options[selectedIndex].value, e);
     };
 
-    const selectedOption = options.find((option) => option.value === value);
+    const selectedOption = useMemo(
+      () => options.find(option => option.value === valueProp),
+      [options, valueProp],
+    );
+
+    const value = useMemo(() => {
+      if (!onValueChange) return;
+
+      return selectedOption ? valueProp : '';
+    }, [onValueChange, selectedOption, valueProp]);
 
     return (
       <FormGroup
@@ -149,7 +158,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
                 cursor: disabled ? 'not-allowed' : 'pointer',
               },
             }}
-            value={selectedOption ? value : ''}
+            value={value}
             {...selectProps}
           >
             {placeholder && (
