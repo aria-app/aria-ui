@@ -1,4 +1,4 @@
-# Aria UI
+![Lines of Code](https://tokei.rs/b1/github/aria-app/aria-ui)
 
 React components for the Aria family of web apps.
 
