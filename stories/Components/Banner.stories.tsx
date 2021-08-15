@@ -2,7 +2,6 @@ import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
 import { Banner, BannerProps } from '../../src';
-import { status } from '../argTypes';
 
 export default {
   title: 'Components/Banner',
@@ -15,7 +14,6 @@ export default {
     onDismiss: { action: 'onConfirm' },
     showConfirmButton: { control: { type: 'boolean' } },
     showDismissButton: { control: { type: 'boolean' } },
-    status,
   },
 } as Meta;
 
