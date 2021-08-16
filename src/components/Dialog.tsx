@@ -170,7 +170,7 @@ export const Dialog = forwardRef<HTMLElement, DialogProps>(function Dialog(
               )}
             >
               <Stack space={8}>
-                {title && (
+                {(title || onClose) && (
                   <Box paddingX={6}>
                     <Stack align="center" direction="row" space={4}>
                       <Text sx={{ flexGrow: 1 }} variant="header">

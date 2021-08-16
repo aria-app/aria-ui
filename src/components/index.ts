@@ -11,6 +11,7 @@ export * from './FormGroup';
 export * from './GlobalStyles';
 export * from './Icon';
 export * from './IconButton';
+export * from './ImperativeDialogOutlet';
 export * from './Inline';
 export * from './Link';
 export * from './ListItem';
