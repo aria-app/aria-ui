@@ -1,7 +1,12 @@
 import FocusTrap from 'focus-trap-react';
 import { AnimatePresence } from 'framer-motion';
 import CloseIcon from 'mdi-react/CloseIcon';
-import React, { forwardRef, MouseEventHandler, useMemo } from 'react';
+import React, {
+  forwardRef,
+  MouseEventHandler,
+  useCallback,
+  useMemo,
+} from 'react';
 import { createPortal } from 'react-dom';
 
 import { mergeSX } from '../helpers';
@@ -31,6 +36,7 @@ export interface DialogProps extends Omit<BoxProps<'aside'>, 'title'> {
   onCancel?: MouseEventHandler<HTMLButtonElement>;
   onClose?: MouseEventHandler<HTMLButtonElement>;
   onConfirm?: MouseEventHandler<HTMLButtonElement>;
+  onCloseComplete?: () => void;
   onOverlayClick?: MouseEventHandler<HTMLElement>;
   portalContainer?: Element;
   title?: string;
@@ -56,6 +62,7 @@ export const Dialog = forwardRef<HTMLElement, DialogProps>(function Dialog(
     onCancel,
     onClose,
     onConfirm,
+    onCloseComplete,
     onOverlayClick,
     portalContainer = document.body,
     sx,
@@ -106,6 +113,15 @@ export const Dialog = forwardRef<HTMLElement, DialogProps>(function Dialog(
     return `calc(100% - ${paddingX * 2}px)`;
   }, [isFullWidth, screenSizeType, theme]);
 
+  const handleWindowAnimationComplete = useCallback(
+    ({ opacity }) => {
+      if (opacity === 0) {
+        onCloseComplete?.();
+      }
+    },
+    [onCloseComplete],
+  );
+
   return createPortal(
     <Box
       as="aside"
@@ -152,6 +168,7 @@ export const Dialog = forwardRef<HTMLElement, DialogProps>(function Dialog(
               borderRadius="md"
               exit={{ opacity: 0, scale: 0.1, x: '-50%', y: '-50%' }}
               initial={{ opacity: 0, scale: 0.1, x: '-50%', y: '-50%' }}
+              onAnimationComplete={handleWindowAnimationComplete}
               paddingBottom={windowPaddingBottom}
               paddingTop={windowPaddingTop}
               role="dialog"

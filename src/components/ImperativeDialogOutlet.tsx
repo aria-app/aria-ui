@@ -1,40 +1,30 @@
-import { set, uniqueId } from 'lodash';
-import React, {
-  FC,
-  MouseEventHandler,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import { set } from 'lodash';
+import React, { FC, MouseEventHandler, useCallback, useMemo } from 'react';
 
+import { useImperativeDialog } from '../hooks';
 import { Dialog } from './Dialog';
 
 export type ImperativeDialogOutletProps = Record<string, never>;
 
-export interface ImperativeDialogConfig {
-  id: string;
-  isOpen: boolean;
-  title?: string;
-  message?: string;
-  variant?: 'alert' | 'confirm';
-}
-
 export interface ImperativeDialogProps {
+  cancelText?: string;
   confirmText?: string;
   id: string;
   isOpen: boolean;
   title?: string;
   message?: string;
+  onCloseComplete: (id: string) => void;
   onResolve: (id: string, result?: boolean) => void;
   variant?: 'alert' | 'confirm';
 }
 
 const ImperativeDialog = ({
+  cancelText,
   confirmText: confirmTextProp,
   id,
   isOpen,
   message,
+  onCloseComplete,
   onResolve,
   title,
   variant = 'alert',
@@ -53,6 +43,10 @@ const ImperativeDialog = ({
     onResolve?.(id);
   }, [id, onResolve]);
 
+  const handleCloseComplete = useCallback<() => void>(() => {
+    onCloseComplete?.(id);
+  }, [id, onCloseComplete]);
+
   const handleConfirm = useCallback<
     MouseEventHandler<HTMLButtonElement>
   >(() => {
@@ -61,11 +55,13 @@ const ImperativeDialog = ({
 
   return (
     <Dialog
+      cancelText={cancelText}
       confirmText={confirmText}
       isOpen={isOpen}
       key={id}
       onCancel={variant === 'confirm' ? handleCancel : undefined}
       onConfirm={variant === 'confirm' ? handleConfirm : handleClose}
+      onCloseComplete={handleCloseComplete}
       title={title}
     >
       {message}
@@ -74,59 +70,51 @@ const ImperativeDialog = ({
 };
 
 export const ImperativeDialogOutlet: FC<ImperativeDialogOutletProps> = () => {
-  const [dialogConfigs, setDialogConfigs] = useState<ImperativeDialogConfig[]>([
-    {
-      id: uniqueId(),
-      isOpen: true,
-      message:
-        'The song could not be deleted because the server is disconnected.',
-      title: undefined,
-    },
-    {
-      id: uniqueId(),
-      isOpen: true,
-      message:
-        'The song could not be deleted because the server is disconnected.',
-      title: undefined,
-      variant: 'confirm',
-    },
-  ]);
+  const imperativeDialog = useImperativeDialog();
+  const { configs, setConfigs } = imperativeDialog;
 
-  const handleResolve = useCallback<(id: string, result?: boolean) => void>(
+  const handleDialogCloseComplete = useCallback<(id: string) => void>(
+    (id) => {
+      setConfigs(configs.filter((config) => config.id !== id));
+    },
+    [configs, setConfigs],
+  );
+
+  const handleDialogResolve = useCallback<
+    (id: string, result?: boolean) => void
+  >(
     (id, result) => {
-      console.log({ dialogConfigs, id, result });
-      setDialogConfigs(
-        dialogConfigs.map((dialogConfig) =>
-          dialogConfig.id === id
-            ? set(dialogConfig, 'isOpen', false)
-            : dialogConfig,
+      const config = configs.find((config) => config.id === id);
+
+      config?.onResolve(result);
+
+      setConfigs(
+        configs.map((config) =>
+          config.id === id ? set(config, 'isOpen', false) : config,
         ),
       );
     },
-    [dialogConfigs, setDialogConfigs],
+    [configs, setConfigs],
   );
-
-  useEffect(() => {
-    if (!dialogConfigs.some(({ isOpen }) => !isOpen)) return;
-
-    setTimeout(() => {
-      setDialogConfigs(dialogConfigs.filter(({ isOpen }) => isOpen));
-    }, 500);
-  }, [dialogConfigs, setDialogConfigs]);
 
   return (
     <>
-      {dialogConfigs.map(({ id, isOpen, message, title, variant }) => (
-        <ImperativeDialog
-          id={id}
-          isOpen={isOpen}
-          key={id}
-          message={message}
-          onResolve={handleResolve}
-          title={title}
-          variant={variant}
-        />
-      ))}
+      {configs.map(
+        ({ cancelText, confirmText, id, isOpen, message, title, variant }) => (
+          <ImperativeDialog
+            cancelText={cancelText}
+            confirmText={confirmText}
+            id={id}
+            isOpen={isOpen}
+            key={id}
+            message={message}
+            onCloseComplete={handleDialogCloseComplete}
+            onResolve={handleDialogResolve}
+            title={title}
+            variant={variant}
+          />
+        ),
+      )}
     </>
   );
 };
