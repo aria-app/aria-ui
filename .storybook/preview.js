@@ -1,4 +1,5 @@
 import { darkTheme, GlobalStyles, lightTheme, ThemeProvider } from '../src';
+import { DecoratorStory } from '../stories/DecoratorStory';
 
 export const globalTypes = {
   theme: {
@@ -25,7 +26,7 @@ export const decorators = [
         theme={context.globals.theme === 'dark' ? darkTheme : lightTheme}
       >
         <GlobalStyles />
-        {storyFn()}
+        <DecoratorStory storyFn={storyFn} />
       </ThemeProvider>
     );
   },
