@@ -22,4 +22,10 @@ export interface ImperativeDialogConfirmOptions {
   title?: string;
 }
 
+export interface SnackbarManagerConfig {
+  id: number;
+  message: string;
+  status?: Status;
+}
+
 export type Status = 'error' | 'info' | 'success' | 'warning';

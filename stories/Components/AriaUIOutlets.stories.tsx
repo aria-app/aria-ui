@@ -36,3 +36,5 @@ export const Default: Story<AriaUIOutletsProps> = () => {
     </>
   );
 };
+
+Default.args = {};

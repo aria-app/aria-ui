@@ -28,6 +28,8 @@ export * from './RadioGroup';
 export * from './Select';
 export * from './Sheet';
 export * from './Snackbar';
+export * from './SnackbarManagerOutlet';
+export * from './SnackbarManagerProvider';
 export * from './SnackbarStack';
 export * from './Spinner';
 export * from './Stack';
