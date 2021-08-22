@@ -18,21 +18,21 @@ export const Default: Story<SnackbarStackProps> = (args) => (
 Default.args = {
   items: [
     {
-      id: 1,
+      id: '1',
       message: 'Your progress was saved',
       status: 'success',
     },
     {
-      id: 2,
+      id: '2',
       message: 'There are new items available in the shop',
     },
     {
-      id: 3,
+      id: '3',
       message: 'Inventory almost full',
       status: 'warning',
     },
     {
-      id: 4,
+      id: '4',
       message: 'Health low',
       status: 'error',
     },
