@@ -70,8 +70,7 @@ const ImperativeDialog = ({
 };
 
 export const ImperativeDialogOutlet: FC<ImperativeDialogOutletProps> = () => {
-  const imperativeDialog = useImperativeDialog();
-  const { configs, setConfigs } = imperativeDialog;
+  const { configs, setConfigs } = useImperativeDialog();
 
   const handleDialogCloseComplete = useCallback<(id: string) => void>(
     (id) => {

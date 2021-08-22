@@ -24,21 +24,21 @@ export default {
 } as Meta;
 
 export const Default: Story<ImperativeDialogOutletProps> = (args) => {
-  const imperativeDialog = useImperativeDialog();
+  const { alert, confirm } = useImperativeDialog();
 
   const handleAlert = useCallback(() => {
     (async () => {
-      const result = await imperativeDialog.alert({
+      const result = await alert({
         message: 'This is an alert!',
       });
 
       console.log('result', result);
     })();
-  }, [imperativeDialog]);
+  }, [alert]);
 
   const handleConfirm = useCallback(() => {
     (async () => {
-      const result = await imperativeDialog.confirm({
+      const result = await confirm({
         cancelText: 'No',
         confirmText: 'Yes',
         message: 'Please confirm your action.',
@@ -47,7 +47,7 @@ export const Default: Story<ImperativeDialogOutletProps> = (args) => {
 
       console.log('result', result);
     })();
-  }, [imperativeDialog]);
+  }, [confirm]);
 
   return (
     <>

@@ -15,9 +15,21 @@ export interface ImperativeDialogContextValue {
 
 export const ImperativeDialogContext = createContext<ImperativeDialogContextValue>(
   {
-    alert: async () => undefined,
+    alert: async () => {
+      throw new Error(
+        'Imperative Dialog "alert" function was called without a proper provider. Please use the AriaUIProviders or ImperativeDialogProvider.',
+      );
+    },
     configs: [],
-    confirm: async () => false,
-    setConfigs: () => {},
+    confirm: async () => {
+      throw new Error(
+        'Imperative Dialog "confirm" function was called without a proper provider. Please use the AriaUIProviders or ImperativeDialogProvider.',
+      );
+    },
+    setConfigs: () => {
+      throw new Error(
+        'Imperative Dialog "setConfigs" function was called without a proper provider. Please use the AriaUIProviders or ImperativeDialogProvider.',
+      );
+    },
   },
 );
