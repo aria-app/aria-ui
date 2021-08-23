@@ -5,6 +5,7 @@ import { useDialogManager } from '../hooks';
 import { Dialog } from './Dialog';
 
 export interface DialogManagerDialogProps {
+  canCancel?: boolean;
   cancelText?: string;
   confirmText?: string;
   id: string;
@@ -13,10 +14,10 @@ export interface DialogManagerDialogProps {
   message?: string;
   onCloseComplete: (id: string) => void;
   onResolve: (id: string, result?: boolean) => void;
-  variant?: 'alert' | 'confirm';
 }
 
 const DialogManagerDialog = ({
+  canCancel,
   cancelText,
   confirmText: confirmTextProp,
   id,
@@ -25,20 +26,15 @@ const DialogManagerDialog = ({
   onCloseComplete,
   onResolve,
   title,
-  variant = 'alert',
 }: DialogManagerDialogProps) => {
   const confirmText = useMemo<string>(() => {
     if (confirmTextProp) return confirmTextProp;
 
-    return variant === 'confirm' ? 'Confirm' : 'Dismiss';
-  }, [confirmTextProp, variant]);
+    return canCancel ? 'Confirm' : 'Dismiss';
+  }, [canCancel, confirmTextProp]);
 
   const handleCancel = useCallback<MouseEventHandler<HTMLButtonElement>>(() => {
     onResolve?.(id, false);
-  }, [id, onResolve]);
-
-  const handleClose = useCallback<MouseEventHandler<HTMLButtonElement>>(() => {
-    onResolve?.(id);
   }, [id, onResolve]);
 
   const handleCloseComplete = useCallback<() => void>(() => {
@@ -57,8 +53,8 @@ const DialogManagerDialog = ({
       confirmText={confirmText}
       isOpen={isOpen}
       key={id}
-      onCancel={variant === 'confirm' ? handleCancel : undefined}
-      onConfirm={variant === 'confirm' ? handleConfirm : handleClose}
+      onCancel={canCancel ? handleCancel : undefined}
+      onConfirm={handleConfirm}
       onCloseComplete={handleCloseComplete}
       title={title}
     >
@@ -99,8 +95,17 @@ export const DialogManagerOutlet: FC<DialogManagerOutletProps> = () => {
   return (
     <>
       {configs.map(
-        ({ cancelText, confirmText, id, isOpen, message, title, variant }) => (
+        ({
+          canCancel,
+          cancelText,
+          confirmText,
+          id,
+          isOpen,
+          message,
+          title,
+        }) => (
           <DialogManagerDialog
+            canCancel={canCancel}
             cancelText={cancelText}
             confirmText={confirmText}
             id={id}
@@ -110,7 +115,6 @@ export const DialogManagerOutlet: FC<DialogManagerOutletProps> = () => {
             onCloseComplete={handleDialogCloseComplete}
             onResolve={handleDialogResolve}
             title={title}
-            variant={variant}
           />
         ),
       )}

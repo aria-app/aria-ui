@@ -1,24 +1,19 @@
-export interface DialogManagerAlertOptions {
+export interface DialogManagerAddDialogOptions {
+  canCancel?: boolean;
+  cancelText?: string;
   confirmText?: string;
   message?: string;
   title?: string;
 }
 
 export interface DialogManagerConfig {
+  canCancel?: boolean;
   cancelText?: string;
   confirmText?: string;
   id: string;
   isOpen: boolean;
   message?: string;
   onResolve: (result?: boolean) => void;
-  title?: string;
-  variant?: 'alert' | 'confirm';
-}
-
-export interface DialogManagerConfirmOptions {
-  cancelText?: string;
-  confirmText?: string;
-  message?: string;
   title?: string;
 }
 

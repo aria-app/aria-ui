@@ -2,11 +2,7 @@ import { uniqueId } from 'lodash';
 import React, { FC, ReactNode, useCallback, useMemo, useState } from 'react';
 
 import { DialogManagerContext } from '../contexts';
-import {
-  DialogManagerAlertOptions,
-  DialogManagerConfig,
-  DialogManagerConfirmOptions,
-} from '../types';
+import { DialogManagerAddDialogOptions, DialogManagerConfig } from '../types';
 
 export interface DialogManagerProviderProps {
   children: ReactNode;
@@ -17,35 +13,15 @@ export const DialogManagerProvider: FC<DialogManagerProviderProps> = ({
 }) => {
   const [configs, setConfigs] = useState<DialogManagerConfig[]>([]);
 
-  const handleAlert = useCallback<
-    (options: DialogManagerAlertOptions) => Promise<void>
+  const handleAddDialog = useCallback<
+    (options: DialogManagerAddDialogOptions) => Promise<boolean>
   >(
-    ({ confirmText, message, title }) =>
+    ({ canCancel, cancelText, confirmText, message, title }) =>
       new Promise((resolve) => {
         setConfigs([
           ...configs,
           {
-            confirmText,
-            id: uniqueId(),
-            isOpen: true,
-            message,
-            onResolve: () => resolve(),
-            title,
-            variant: 'alert',
-          },
-        ]);
-      }),
-    [configs, setConfigs],
-  );
-
-  const handleConfirm = useCallback<
-    (options: DialogManagerConfirmOptions) => Promise<boolean>
-  >(
-    ({ cancelText, confirmText, message, title }) =>
-      new Promise((resolve) => {
-        setConfigs([
-          ...configs,
-          {
+            canCancel,
             cancelText,
             confirmText,
             id: uniqueId(),
@@ -53,7 +29,6 @@ export const DialogManagerProvider: FC<DialogManagerProviderProps> = ({
             message,
             onResolve: (result) => resolve(!!result),
             title,
-            variant: 'confirm',
           },
         ]);
       }),
@@ -62,12 +37,11 @@ export const DialogManagerProvider: FC<DialogManagerProviderProps> = ({
 
   const value = useMemo(
     () => ({
-      alert: handleAlert,
+      addDialog: handleAddDialog,
       configs,
-      confirm: handleConfirm,
       setConfigs,
     }),
-    [configs, handleAlert, handleConfirm, setConfigs],
+    [configs, handleAddDialog, setConfigs],
   );
 
   return (

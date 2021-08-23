@@ -2,6 +2,7 @@ import { Meta, Story } from '@storybook/react';
 import React, { useCallback } from 'react';
 
 import {
+  Box,
   Button,
   DialogManagerOutlet,
   DialogManagerOutletProps,
@@ -24,21 +25,22 @@ export default {
 } as Meta;
 
 export const Default: Story<DialogManagerOutletProps> = (args) => {
-  const { alert, confirm } = useDialogManager();
+  const { addDialog } = useDialogManager();
 
   const handleAlert = useCallback(() => {
     (async () => {
-      const result = await alert({
+      const result = await addDialog({
         message: 'This is an alert!',
       });
 
       console.log('result', result);
     })();
-  }, [alert]);
+  }, [addDialog]);
 
   const handleConfirm = useCallback(() => {
     (async () => {
-      const result = await confirm({
+      const result = await addDialog({
+        canCancel: true,
         cancelText: 'No',
         confirmText: 'Yes',
         message: 'Please confirm your action.',
@@ -47,14 +49,16 @@ export const Default: Story<DialogManagerOutletProps> = (args) => {
 
       console.log('result', result);
     })();
-  }, [confirm]);
+  }, [addDialog]);
 
   return (
     <>
-      <Stack space={4}>
-        <Button onClick={handleAlert} text="Alert" />
-        <Button onClick={handleConfirm} text="Confirm" />
-      </Stack>
+      <Box backgroundColor="backgroundContrast" borderRadius="md" padding={4}>
+        <Stack space={4}>
+          <Button onClick={handleAlert} text="Alert" variant="contained" />
+          <Button onClick={handleConfirm} text="Confirm" variant="contained" />
+        </Stack>
+      </Box>
       <DialogManagerOutlet {...args} />
     </>
   );

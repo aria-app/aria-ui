@@ -14,13 +14,13 @@ import { Stack } from './Stack';
 import { Text } from './Text';
 
 export type SnackbarOnDismiss = (
-  dismissedId: number,
+  dismissedId: string,
   e: MouseEvent<HTMLButtonElement>,
 ) => void;
 
 export interface SnackbarProps extends BoxProps<'div'> {
   message?: string;
-  messageId: number;
+  messageId: string;
   onDismiss?: SnackbarOnDismiss;
   status?: Status;
 }
