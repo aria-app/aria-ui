@@ -8,14 +8,14 @@ export default {
   component: Fade,
 } as Meta;
 
-export const Default: Story<FadeProps> = args => <Fade {...args} />;
+export const Default: Story<FadeProps> = (args) => <Fade {...args} />;
 
 Default.args = {
   children: 'Now you see me...',
   in: true,
 };
 
-export const Invisible: Story<FadeProps> = args => <Fade {...args} />;
+export const Invisible: Story<FadeProps> = (args) => <Fade {...args} />;
 
 Invisible.args = {
   ...Default.args,
