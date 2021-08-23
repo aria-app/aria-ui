@@ -71,7 +71,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       return 'transparent';
     }, [error, success, warning]);
 
-    const handleChange: ChangeEventHandler<HTMLSelectElement> = e => {
+    const handleChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
       const selectedIndex = placeholder
         ? e.target.selectedIndex - 1
         : e.target.selectedIndex;
@@ -79,7 +79,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     };
 
     const selectedOption = useMemo(
-      () => options.find(option => option.value === valueProp),
+      () => options.find((option) => option.value === valueProp),
       [options, valueProp],
     );
 

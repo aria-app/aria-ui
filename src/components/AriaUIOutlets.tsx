@@ -1,13 +1,15 @@
 import React, { FC } from 'react';
 
-import { ImperativeDialogOutlet } from './ImperativeDialogOutlet';
+import { DialogManagerOutlet } from './DialogManagerOutlet';
+import { SnackbarManagerOutlet } from './SnackbarManagerOutlet';
 
 export type AriaUIOutletsProps = Record<string, never>;
 
 export const AriaUIOutlets: FC<AriaUIOutletsProps> = () => {
   return (
     <>
-      <ImperativeDialogOutlet />
+      <DialogManagerOutlet />
+      <SnackbarManagerOutlet />
     </>
   );
 };

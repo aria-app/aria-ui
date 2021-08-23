@@ -2,21 +2,19 @@ import { AnimatePresence } from 'framer-motion';
 import React, { forwardRef, useCallback } from 'react';
 
 import { mergeSX } from '../helpers';
-import { Status } from '../types';
+import { SnackbarManagerConfig } from '../types';
 import { Box, BoxProps } from './Box';
 import { MotionBox } from './MotionBox';
 import { Snackbar, SnackbarOnDismiss } from './Snackbar';
 import { Stack } from './Stack';
 
-export interface SnackbarStackItem {
-  id: number;
-  message: string;
-  status?: Status;
-}
+export type SnackbarStackOnItemsChange = (
+  items: SnackbarManagerConfig[],
+) => void;
 
 export interface SnackbarStackProps extends BoxProps<'div'> {
-  items?: SnackbarStackItem[];
-  onItemsChange?: (items?: SnackbarStackItem[]) => void;
+  items?: SnackbarManagerConfig[];
+  onItemsChange?: SnackbarStackOnItemsChange;
 }
 
 export const SnackbarStack = forwardRef<HTMLDivElement, SnackbarStackProps>(

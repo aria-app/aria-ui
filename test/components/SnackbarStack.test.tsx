@@ -14,8 +14,8 @@ describe('SnackbarStack', () => {
     render(
       <Default
         items={[
-          { id: 0, message: 'testMessage1', status: 'success' },
-          { id: 1, message: 'testMessage2', status: 'success' },
+          { id: '0', message: 'testMessage1', status: 'success' },
+          { id: '1', message: 'testMessage2', status: 'success' },
         ]}
         onItemsChange={handleItemsChange}
       />,

@@ -4,6 +4,7 @@ import CloseIcon from 'mdi-react/CloseIcon';
 import React, {
   forwardRef,
   MouseEventHandler,
+  RefCallback,
   useCallback,
   useMemo,
 } from 'react';
@@ -11,6 +12,7 @@ import { createPortal } from 'react-dom';
 
 import { mergeSX } from '../helpers';
 import { useScreenSizeType, useThemeWithDefault } from '../hooks';
+import { DialogFocusedButton } from '../types';
 import { Box, BoxProps } from './Box';
 import { Button, ButtonProps } from './Button';
 import { IconButton, IconButtonProps } from './IconButton';
@@ -27,6 +29,7 @@ export interface DialogProps extends Omit<BoxProps<'aside'>, 'title'> {
   closeProps?: IconButtonProps;
   confirmProps?: ButtonProps;
   confirmText?: string;
+  focusedButton?: DialogFocusedButton;
   id?: any;
   isContentPadded?: boolean;
   isFocusTrapped?: boolean;
@@ -53,6 +56,7 @@ export const Dialog = forwardRef<HTMLElement, DialogProps>(function Dialog(
     children,
     confirmProps = {},
     confirmText = 'Confirm',
+    focusedButton = 'confirm',
     id: idProp,
     isContentPadded = true,
     isFocusTrapped,
@@ -112,6 +116,28 @@ export const Dialog = forwardRef<HTMLElement, DialogProps>(function Dialog(
 
     return `calc(100% - ${paddingX * 2}px)`;
   }, [isFullWidth, screenSizeType, theme]);
+
+  const handleCancelButtonRef = useCallback<RefCallback<HTMLElement>>(
+    (ref) => {
+      if (!ref) return;
+
+      if (focusedButton === 'cancel') {
+        ref.focus();
+      }
+    },
+    [focusedButton],
+  );
+
+  const handleConfirmButtonRef = useCallback<RefCallback<HTMLElement>>(
+    (ref) => {
+      if (!ref) return;
+
+      if (focusedButton === 'confirm') {
+        ref.focus();
+      }
+    },
+    [focusedButton],
+  );
 
   const handleWindowAnimationComplete = useCallback(
     ({ opacity }) => {
@@ -214,6 +240,7 @@ export const Dialog = forwardRef<HTMLElement, DialogProps>(function Dialog(
                       {onCancel && (
                         <Button
                           onClick={onCancel}
+                          ref={handleCancelButtonRef}
                           text={cancelText}
                           {...cancelProps}
                         />
@@ -221,6 +248,7 @@ export const Dialog = forwardRef<HTMLElement, DialogProps>(function Dialog(
                       {onConfirm && (
                         <Button
                           onClick={onConfirm}
+                          ref={handleConfirmButtonRef}
                           text={confirmText}
                           variant="contained"
                           {...confirmProps}

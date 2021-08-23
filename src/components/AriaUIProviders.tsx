@@ -1,6 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 
-import { ImperativeDialogProvider } from './ImperativeDialogProvider';
+import { DialogManagerProvider } from './DialogManagerProvider';
+import { SnackbarManagerProvider } from './SnackbarManagerProvider';
 
 export interface AriaUIProvidersProps {
   children: ReactNode;
@@ -9,5 +10,9 @@ export interface AriaUIProvidersProps {
 export const AriaUIProviders: FC<AriaUIProvidersProps> = (props) => {
   const { children } = props;
 
-  return <ImperativeDialogProvider>{children}</ImperativeDialogProvider>;
+  return (
+    <DialogManagerProvider>
+      <SnackbarManagerProvider>{children}</SnackbarManagerProvider>
+    </DialogManagerProvider>
+  );
 };

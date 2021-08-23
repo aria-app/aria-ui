@@ -1,25 +1,35 @@
-export interface ImperativeDialogAlertOptions {
-  confirmText?: string;
-  message?: string;
-  title?: string;
-}
+export type DialogFocusedButton = 'cancel' | 'confirm';
 
-export interface ImperativeDialogConfig {
+export interface DialogManagerConfig {
+  canCancel?: boolean;
   cancelText?: string;
   confirmText?: string;
+  focusedButton?: DialogFocusedButton;
   id: string;
   isOpen: boolean;
   message?: string;
   onResolve: (result?: boolean) => void;
   title?: string;
-  variant?: 'alert' | 'confirm';
 }
 
-export interface ImperativeDialogConfirmOptions {
+export interface DialogManagerPromptOptions {
+  canCancel?: boolean;
   cancelText?: string;
   confirmText?: string;
+  focusedButton?: DialogFocusedButton;
   message?: string;
   title?: string;
+}
+
+export interface SnackbarManagerConfig {
+  id: string;
+  message: string;
+  status?: Status;
+}
+
+export interface SnackbarManagerNotifyOptions {
+  message: string;
+  status?: Status;
 }
 
 export type Status = 'error' | 'info' | 'success' | 'warning';

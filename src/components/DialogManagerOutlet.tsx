@@ -1,46 +1,43 @@
 import { set } from 'lodash';
 import React, { FC, MouseEventHandler, useCallback, useMemo } from 'react';
 
-import { useImperativeDialog } from '../hooks';
+import { useDialogManager } from '../hooks';
+import { DialogFocusedButton } from '../types';
 import { Dialog } from './Dialog';
 
-export type ImperativeDialogOutletProps = Record<string, never>;
-
-export interface ImperativeDialogProps {
+export interface DialogManagerDialogProps {
+  canCancel?: boolean;
   cancelText?: string;
   confirmText?: string;
+  focusedButton?: DialogFocusedButton;
   id: string;
   isOpen: boolean;
   title?: string;
   message?: string;
   onCloseComplete: (id: string) => void;
   onResolve: (id: string, result?: boolean) => void;
-  variant?: 'alert' | 'confirm';
 }
 
-const ImperativeDialog = ({
+const DialogManagerDialog = ({
+  canCancel,
   cancelText,
   confirmText: confirmTextProp,
+  focusedButton,
   id,
   isOpen,
   message,
   onCloseComplete,
   onResolve,
   title,
-  variant = 'alert',
-}: ImperativeDialogProps) => {
+}: DialogManagerDialogProps) => {
   const confirmText = useMemo<string>(() => {
     if (confirmTextProp) return confirmTextProp;
 
-    return variant === 'confirm' ? 'Confirm' : 'Dismiss';
-  }, [confirmTextProp, variant]);
+    return canCancel ? 'Confirm' : 'Dismiss';
+  }, [canCancel, confirmTextProp]);
 
   const handleCancel = useCallback<MouseEventHandler<HTMLButtonElement>>(() => {
     onResolve?.(id, false);
-  }, [id, onResolve]);
-
-  const handleClose = useCallback<MouseEventHandler<HTMLButtonElement>>(() => {
-    onResolve?.(id);
   }, [id, onResolve]);
 
   const handleCloseComplete = useCallback<() => void>(() => {
@@ -57,10 +54,11 @@ const ImperativeDialog = ({
     <Dialog
       cancelText={cancelText}
       confirmText={confirmText}
+      focusedButton={focusedButton}
       isOpen={isOpen}
       key={id}
-      onCancel={variant === 'confirm' ? handleCancel : undefined}
-      onConfirm={variant === 'confirm' ? handleConfirm : handleClose}
+      onCancel={canCancel ? handleCancel : undefined}
+      onConfirm={handleConfirm}
       onCloseComplete={handleCloseComplete}
       title={title}
     >
@@ -69,8 +67,10 @@ const ImperativeDialog = ({
   );
 };
 
-export const ImperativeDialogOutlet: FC<ImperativeDialogOutletProps> = () => {
-  const { configs, setConfigs } = useImperativeDialog();
+export type DialogManagerOutletProps = Record<string, any>;
+
+export const DialogManagerOutlet: FC<DialogManagerOutletProps> = () => {
+  const { configs, setConfigs } = useDialogManager();
 
   const handleDialogCloseComplete = useCallback<(id: string) => void>(
     (id) => {
@@ -99,10 +99,21 @@ export const ImperativeDialogOutlet: FC<ImperativeDialogOutletProps> = () => {
   return (
     <>
       {configs.map(
-        ({ cancelText, confirmText, id, isOpen, message, title, variant }) => (
-          <ImperativeDialog
+        ({
+          canCancel,
+          cancelText,
+          confirmText,
+          focusedButton,
+          id,
+          isOpen,
+          message,
+          title,
+        }) => (
+          <DialogManagerDialog
+            canCancel={canCancel}
             cancelText={cancelText}
             confirmText={confirmText}
+            focusedButton={focusedButton}
             id={id}
             isOpen={isOpen}
             key={id}
@@ -110,7 +121,6 @@ export const ImperativeDialogOutlet: FC<ImperativeDialogOutletProps> = () => {
             onCloseComplete={handleDialogCloseComplete}
             onResolve={handleDialogResolve}
             title={title}
-            variant={variant}
           />
         ),
       )}
