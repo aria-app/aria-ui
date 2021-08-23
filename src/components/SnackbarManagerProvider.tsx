@@ -14,13 +14,7 @@ export interface SnackbarManagerProviderProps {
 export const SnackbarManagerProvider: FC<SnackbarManagerProviderProps> = ({
   children,
 }) => {
-  const [configs, setConfigs] = useState<SnackbarManagerConfig[]>([
-    {
-      id: uniqueId(),
-      message: 'Your progress was saved',
-      status: 'success',
-    },
-  ]);
+  const [configs, setConfigs] = useState<SnackbarManagerConfig[]>([]);
 
   const handleAddSnackbar = useCallback<
     SnackbarManagerContextValue['addSnackbar']

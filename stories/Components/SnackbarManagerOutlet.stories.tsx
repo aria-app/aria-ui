@@ -78,8 +78,8 @@ export default {
 } as Meta;
 
 export const Default: Story<SnackbarManagerOutletProps> = (args) => {
-  const [message, setMessage] = useState<string>('Some text');
-  const [status, setStatus] = useState<Status>('error');
+  const [message, setMessage] = useState<string>('Your progress was saved!');
+  const [status, setStatus] = useState<Status>('success');
   const { addSnackbar } = useSnackbarManager();
 
   const handleAddButtonClick = useCallback(() => {

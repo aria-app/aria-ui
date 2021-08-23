@@ -5,6 +5,7 @@ import CloseIcon from 'mdi-react/CloseIcon';
 import React, { forwardRef, MouseEvent, MouseEventHandler } from 'react';
 
 import { mergeSX } from '../helpers';
+import { useThemeWithDefault } from '../hooks';
 import { Status } from '../types';
 import { Box, BoxProps } from './Box';
 import { Icon } from './Icon';
@@ -34,6 +35,7 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
       sx,
       ...rest
     } = props;
+    const theme = useThemeWithDefault();
 
     const handleDismissButtonClick: MouseEventHandler<HTMLButtonElement> = (
       e,
@@ -63,6 +65,7 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
         sx={mergeSX(
           {
             label: 'Snackbar',
+            maxWidth: theme.screenSizes.sm,
           },
           sx,
         )}

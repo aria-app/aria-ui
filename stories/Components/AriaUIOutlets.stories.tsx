@@ -5,8 +5,11 @@ import {
   AriaUIOutlets,
   AriaUIOutletsProps,
   AriaUIProviders,
+  Box,
   Button,
+  Stack,
   useImperativeDialog,
+  useSnackbarManager,
 } from '../../src';
 import { DecoratorStory } from '../DecoratorStory';
 
@@ -24,6 +27,13 @@ export default {
 
 export const Default: Story<AriaUIOutletsProps> = () => {
   const { alert } = useImperativeDialog();
+  const { addSnackbar } = useSnackbarManager();
+
+  const handleAddSnackbar = useCallback(() => {
+    addSnackbar({
+      message: 'Adding a snackbar with AriaUIProviders + AriaUIOutlets!',
+    });
+  }, [addSnackbar]);
 
   const handleAlert = useCallback(() => {
     alert({ message: 'Alerting with AriaUIProviders + AriaUIOutlets!' });
@@ -31,7 +41,16 @@ export const Default: Story<AriaUIOutletsProps> = () => {
 
   return (
     <>
-      <Button onClick={handleAlert} text="Alert" />
+      <Box backgroundColor="backgroundContrast" borderRadius="md" padding={4}>
+        <Stack space={4}>
+          <Button onClick={handleAlert} text="Alert" variant="contained" />
+          <Button
+            onClick={handleAddSnackbar}
+            text="Add Snackbar"
+            variant="contained"
+          />
+        </Stack>
+      </Box>
       <AriaUIOutlets />
     </>
   );
