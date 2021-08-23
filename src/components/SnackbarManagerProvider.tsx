@@ -16,9 +16,7 @@ export const SnackbarManagerProvider: FC<SnackbarManagerProviderProps> = ({
 }) => {
   const [configs, setConfigs] = useState<SnackbarManagerConfig[]>([]);
 
-  const handleAddSnackbar = useCallback<
-    SnackbarManagerContextValue['addSnackbar']
-  >(
+  const handleNotify = useCallback<SnackbarManagerContextValue['notify']>(
     ({ message, status }) => {
       setConfigs([...configs, { id: uniqueId(), message, status }]);
     },
@@ -27,11 +25,11 @@ export const SnackbarManagerProvider: FC<SnackbarManagerProviderProps> = ({
 
   const value = useMemo(
     () => ({
-      addSnackbar: handleAddSnackbar,
       configs,
+      notify: handleNotify,
       setConfigs,
     }),
-    [configs, handleAddSnackbar, setConfigs],
+    [configs, handleNotify, setConfigs],
   );
 
   return (

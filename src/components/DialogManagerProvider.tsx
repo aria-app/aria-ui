@@ -38,8 +38,8 @@ export const DialogManagerProvider: FC<DialogManagerProviderProps> = ({
 
   const value = useMemo(
     () => ({
-      prompt: handlePrompt,
       configs,
+      prompt: handlePrompt,
       setConfigs,
     }),
     [configs, handlePrompt, setConfigs],

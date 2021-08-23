@@ -21,13 +21,13 @@ export interface DialogManagerPromptOptions {
   title?: string;
 }
 
-export interface SnackbarManagerAddSnackbarOptions {
+export interface SnackbarManagerConfig {
+  id: string;
   message: string;
   status?: Status;
 }
 
-export interface SnackbarManagerConfig {
-  id: string;
+export interface SnackbarManagerNotifyOptions {
   message: string;
   status?: Status;
 }

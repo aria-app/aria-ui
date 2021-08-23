@@ -27,13 +27,13 @@ export default {
 
 export const Default: Story<AriaUIOutletsProps> = () => {
   const { prompt } = useDialogManager();
-  const { addSnackbar } = useSnackbarManager();
+  const { notify } = useSnackbarManager();
 
-  const handleAddSnackbar = useCallback(() => {
-    addSnackbar({
-      message: 'Adding a snackbar with AriaUIProviders + AriaUIOutlets!',
+  const handleNotify = useCallback(() => {
+    notify({
+      message: 'Notifying with AriaUIProviders + AriaUIOutlets!',
     });
-  }, [addSnackbar]);
+  }, [notify]);
 
   const handlePrompt = useCallback(() => {
     prompt({ message: 'Prompting with AriaUIProviders + AriaUIOutlets!' });
@@ -43,12 +43,8 @@ export const Default: Story<AriaUIOutletsProps> = () => {
     <>
       <Box backgroundColor="backgroundContrast" borderRadius="md" padding={4}>
         <Stack space={4}>
+          <Button onClick={handleNotify} text="Notify" variant="contained" />
           <Button onClick={handlePrompt} text="Prompt" variant="contained" />
-          <Button
-            onClick={handleAddSnackbar}
-            text="Notify"
-            variant="contained"
-          />
         </Stack>
       </Box>
       <AriaUIOutlets />

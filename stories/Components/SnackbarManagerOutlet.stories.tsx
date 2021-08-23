@@ -80,11 +80,11 @@ export default {
 export const Default: Story<SnackbarManagerOutletProps> = (args) => {
   const [message, setMessage] = useState<string>('Your progress was saved!');
   const [status, setStatus] = useState<Status>('success');
-  const { addSnackbar } = useSnackbarManager();
+  const { notify } = useSnackbarManager();
 
-  const handleAddButtonClick = useCallback(() => {
-    addSnackbar({ message, status });
-  }, [addSnackbar, message, status]);
+  const handleNotify = useCallback(() => {
+    notify({ message, status });
+  }, [notify, message, status]);
 
   return (
     <>
@@ -97,11 +97,7 @@ export const Default: Story<SnackbarManagerOutletProps> = (args) => {
             value={message}
           />
           <StatusSelect onStatusChange={setStatus} status={status} />
-          <Button
-            onClick={handleAddButtonClick}
-            text="Add Snackbar"
-            variant="contained"
-          />
+          <Button onClick={handleNotify} text="Notify" variant="contained" />
         </Stack>
       </Box>
       <SnackbarManagerOutlet {...args} />
