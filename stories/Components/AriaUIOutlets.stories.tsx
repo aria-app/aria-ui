@@ -8,7 +8,7 @@ import {
   Box,
   Button,
   Stack,
-  useImperativeDialog,
+  useDialogManager,
   useSnackbarManager,
 } from '../../src';
 import { DecoratorStory } from '../DecoratorStory';
@@ -26,7 +26,7 @@ export default {
 } as Meta;
 
 export const Default: Story<AriaUIOutletsProps> = () => {
-  const { alert } = useImperativeDialog();
+  const { alert } = useDialogManager();
   const { addSnackbar } = useSnackbarManager();
 
   const handleAddSnackbar = useCallback(() => {

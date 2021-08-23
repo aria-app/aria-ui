@@ -1,10 +1,10 @@
-export interface ImperativeDialogAlertOptions {
+export interface DialogManagerAlertOptions {
   confirmText?: string;
   message?: string;
   title?: string;
 }
 
-export interface ImperativeDialogConfig {
+export interface DialogManagerConfig {
   cancelText?: string;
   confirmText?: string;
   id: string;
@@ -15,7 +15,7 @@ export interface ImperativeDialogConfig {
   variant?: 'alert' | 'confirm';
 }
 
-export interface ImperativeDialogConfirmOptions {
+export interface DialogManagerConfirmOptions {
   cancelText?: string;
   confirmText?: string;
   message?: string;

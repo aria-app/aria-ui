@@ -1,24 +1,24 @@
 import { uniqueId } from 'lodash';
 import React, { FC, ReactNode, useCallback, useMemo, useState } from 'react';
 
-import { ImperativeDialogContext } from '../contexts';
+import { DialogManagerContext } from '../contexts';
 import {
-  ImperativeDialogAlertOptions,
-  ImperativeDialogConfig,
-  ImperativeDialogConfirmOptions,
+  DialogManagerAlertOptions,
+  DialogManagerConfig,
+  DialogManagerConfirmOptions,
 } from '../types';
 
-export interface ImperativeDialogProviderProps {
+export interface DialogManagerProviderProps {
   children: ReactNode;
 }
 
-export const ImperativeDialogProvider: FC<ImperativeDialogProviderProps> = ({
+export const DialogManagerProvider: FC<DialogManagerProviderProps> = ({
   children,
 }) => {
-  const [configs, setConfigs] = useState<ImperativeDialogConfig[]>([]);
+  const [configs, setConfigs] = useState<DialogManagerConfig[]>([]);
 
   const handleAlert = useCallback<
-    (options: ImperativeDialogAlertOptions) => Promise<void>
+    (options: DialogManagerAlertOptions) => Promise<void>
   >(
     ({ confirmText, message, title }) =>
       new Promise((resolve) => {
@@ -39,7 +39,7 @@ export const ImperativeDialogProvider: FC<ImperativeDialogProviderProps> = ({
   );
 
   const handleConfirm = useCallback<
-    (options: ImperativeDialogConfirmOptions) => Promise<boolean>
+    (options: DialogManagerConfirmOptions) => Promise<boolean>
   >(
     ({ cancelText, confirmText, message, title }) =>
       new Promise((resolve) => {
@@ -71,8 +71,8 @@ export const ImperativeDialogProvider: FC<ImperativeDialogProviderProps> = ({
   );
 
   return (
-    <ImperativeDialogContext.Provider value={value}>
+    <DialogManagerContext.Provider value={value}>
       {children}
-    </ImperativeDialogContext.Provider>
+    </DialogManagerContext.Provider>
   );
 };

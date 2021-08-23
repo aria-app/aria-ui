@@ -3,28 +3,28 @@ import React, { useCallback } from 'react';
 
 import {
   Button,
-  ImperativeDialogOutlet,
-  ImperativeDialogOutletProps,
-  ImperativeDialogProvider,
+  DialogManagerOutlet,
+  DialogManagerOutletProps,
+  DialogManagerProvider,
   Stack,
-  useImperativeDialog,
+  useDialogManager,
 } from '../../src';
 import { DecoratorStory } from '../DecoratorStory';
 
 export default {
-  title: 'Components/ImperativeDialogOutlet',
-  component: ImperativeDialogOutlet,
+  title: 'Components/DialogManagerOutlet',
+  component: DialogManagerOutlet,
   decorators: [
     (storyFn) => (
-      <ImperativeDialogProvider>
+      <DialogManagerProvider>
         <DecoratorStory storyFn={storyFn} />
-      </ImperativeDialogProvider>
+      </DialogManagerProvider>
     ),
   ],
 } as Meta;
 
-export const Default: Story<ImperativeDialogOutletProps> = (args) => {
-  const { alert, confirm } = useImperativeDialog();
+export const Default: Story<DialogManagerOutletProps> = (args) => {
+  const { alert, confirm } = useDialogManager();
 
   const handleAlert = useCallback(() => {
     (async () => {
@@ -55,7 +55,7 @@ export const Default: Story<ImperativeDialogOutletProps> = (args) => {
         <Button onClick={handleAlert} text="Alert" />
         <Button onClick={handleConfirm} text="Confirm" />
       </Stack>
-      <ImperativeDialogOutlet {...args} />
+      <DialogManagerOutlet {...args} />
     </>
   );
 };

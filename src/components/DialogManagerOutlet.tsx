@@ -1,12 +1,10 @@
 import { set } from 'lodash';
 import React, { FC, MouseEventHandler, useCallback, useMemo } from 'react';
 
-import { useImperativeDialog } from '../hooks';
+import { useDialogManager } from '../hooks';
 import { Dialog } from './Dialog';
 
-export type ImperativeDialogOutletProps = Record<string, never>;
-
-export interface ImperativeDialogProps {
+export interface DialogManagerDialogProps {
   cancelText?: string;
   confirmText?: string;
   id: string;
@@ -18,7 +16,7 @@ export interface ImperativeDialogProps {
   variant?: 'alert' | 'confirm';
 }
 
-const ImperativeDialog = ({
+const DialogManagerDialog = ({
   cancelText,
   confirmText: confirmTextProp,
   id,
@@ -28,7 +26,7 @@ const ImperativeDialog = ({
   onResolve,
   title,
   variant = 'alert',
-}: ImperativeDialogProps) => {
+}: DialogManagerDialogProps) => {
   const confirmText = useMemo<string>(() => {
     if (confirmTextProp) return confirmTextProp;
 
@@ -69,8 +67,10 @@ const ImperativeDialog = ({
   );
 };
 
-export const ImperativeDialogOutlet: FC<ImperativeDialogOutletProps> = () => {
-  const { configs, setConfigs } = useImperativeDialog();
+export type DialogManagerOutletProps = Record<string, never>;
+
+export const DialogManagerOutlet: FC<DialogManagerOutletProps> = () => {
+  const { configs, setConfigs } = useDialogManager();
 
   const handleDialogCloseComplete = useCallback<(id: string) => void>(
     (id) => {
@@ -100,7 +100,7 @@ export const ImperativeDialogOutlet: FC<ImperativeDialogOutletProps> = () => {
     <>
       {configs.map(
         ({ cancelText, confirmText, id, isOpen, message, title, variant }) => (
-          <ImperativeDialog
+          <DialogManagerDialog
             cancelText={cancelText}
             confirmText={confirmText}
             id={id}
