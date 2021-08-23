@@ -2,12 +2,14 @@ import { set } from 'lodash';
 import React, { FC, MouseEventHandler, useCallback, useMemo } from 'react';
 
 import { useDialogManager } from '../hooks';
+import { DialogFocusedButton } from '../types';
 import { Dialog } from './Dialog';
 
 export interface DialogManagerDialogProps {
   canCancel?: boolean;
   cancelText?: string;
   confirmText?: string;
+  focusedButton?: DialogFocusedButton;
   id: string;
   isOpen: boolean;
   title?: string;
@@ -20,6 +22,7 @@ const DialogManagerDialog = ({
   canCancel,
   cancelText,
   confirmText: confirmTextProp,
+  focusedButton,
   id,
   isOpen,
   message,
@@ -51,6 +54,7 @@ const DialogManagerDialog = ({
     <Dialog
       cancelText={cancelText}
       confirmText={confirmText}
+      focusedButton={focusedButton}
       isOpen={isOpen}
       key={id}
       onCancel={canCancel ? handleCancel : undefined}
@@ -63,7 +67,7 @@ const DialogManagerDialog = ({
   );
 };
 
-export type DialogManagerOutletProps = Record<string, never>;
+export type DialogManagerOutletProps = Record<string, any>;
 
 export const DialogManagerOutlet: FC<DialogManagerOutletProps> = () => {
   const { configs, setConfigs } = useDialogManager();
@@ -99,6 +103,7 @@ export const DialogManagerOutlet: FC<DialogManagerOutletProps> = () => {
           canCancel,
           cancelText,
           confirmText,
+          focusedButton,
           id,
           isOpen,
           message,
@@ -108,6 +113,7 @@ export const DialogManagerOutlet: FC<DialogManagerOutletProps> = () => {
             canCancel={canCancel}
             cancelText={cancelText}
             confirmText={confirmText}
+            focusedButton={focusedButton}
             id={id}
             isOpen={isOpen}
             key={id}

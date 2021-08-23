@@ -29,10 +29,10 @@ export interface ButtonProps extends BoxProps<'a' | 'button'> {
   variant?: ButtonVariant;
 }
 
-export const Button = forwardRef<
-  HTMLAnchorElement | HTMLButtonElement,
-  ButtonProps
->(function Button(props, ref) {
+export const Button = forwardRef<HTMLElement, ButtonProps>(function Button(
+  props,
+  ref,
+) {
   const {
     color = 'textPrimary',
     element = 'button',

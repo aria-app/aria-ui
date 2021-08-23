@@ -10,6 +10,7 @@ import {
   Stack,
   useDialogManager,
 } from '../../src';
+import { DialogFocusedButton } from '../../src/types';
 import { DecoratorStory } from '../DecoratorStory';
 
 export default {
@@ -22,34 +23,48 @@ export default {
       </DialogManagerProvider>
     ),
   ],
+  argTypes: {
+    focusedButton: {
+      control: { type: 'inline-radio' },
+      options: ['cancel', 'confirm'],
+    },
+  },
 } as Meta;
 
-export const Default: Story<DialogManagerOutletProps> = (args) => {
-  const { addDialog } = useDialogManager();
+type DialogManagerOutletArgs = DialogManagerOutletProps & {
+  focusedButton: DialogFocusedButton;
+};
+
+export const Default: Story<DialogManagerOutletArgs> = ({
+  focusedButton,
+  ...rest
+}) => {
+  const { prompt } = useDialogManager();
 
   const handleAlert = useCallback(() => {
     (async () => {
-      const result = await addDialog({
+      const result = await prompt({
         message: 'This is an alert!',
       });
 
       console.log('result', result);
     })();
-  }, [addDialog]);
+  }, [prompt]);
 
   const handleConfirm = useCallback(() => {
     (async () => {
-      const result = await addDialog({
+      const result = await prompt({
         canCancel: true,
         cancelText: 'No',
         confirmText: 'Yes',
+        focusedButton,
         message: 'Please confirm your action.',
         title: 'Are you sure?',
       });
 
       console.log('result', result);
     })();
-  }, [addDialog]);
+  }, [focusedButton, prompt]);
 
   return (
     <>
@@ -59,9 +74,11 @@ export const Default: Story<DialogManagerOutletProps> = (args) => {
           <Button onClick={handleConfirm} text="Confirm" variant="contained" />
         </Stack>
       </Box>
-      <DialogManagerOutlet {...args} />
+      <DialogManagerOutlet {...rest} />
     </>
   );
 };
 
-Default.args = {};
+Default.args = {
+  focusedButton: 'confirm',
+};

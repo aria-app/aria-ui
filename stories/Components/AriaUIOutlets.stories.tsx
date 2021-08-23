@@ -26,7 +26,7 @@ export default {
 } as Meta;
 
 export const Default: Story<AriaUIOutletsProps> = () => {
-  const { addDialog } = useDialogManager();
+  const { prompt } = useDialogManager();
   const { addSnackbar } = useSnackbarManager();
 
   const handleAddSnackbar = useCallback(() => {
@@ -35,18 +35,18 @@ export const Default: Story<AriaUIOutletsProps> = () => {
     });
   }, [addSnackbar]);
 
-  const handleAlert = useCallback(() => {
-    addDialog({ message: 'Alerting with AriaUIProviders + AriaUIOutlets!' });
-  }, [addDialog]);
+  const handlePrompt = useCallback(() => {
+    prompt({ message: 'Prompting with AriaUIProviders + AriaUIOutlets!' });
+  }, [prompt]);
 
   return (
     <>
       <Box backgroundColor="backgroundContrast" borderRadius="md" padding={4}>
         <Stack space={4}>
-          <Button onClick={handleAlert} text="Alert" variant="contained" />
+          <Button onClick={handlePrompt} text="Prompt" variant="contained" />
           <Button
             onClick={handleAddSnackbar}
-            text="Add Snackbar"
+            text="Notify"
             variant="contained"
           />
         </Stack>

@@ -1,19 +1,23 @@
-export interface DialogManagerAddDialogOptions {
-  canCancel?: boolean;
-  cancelText?: string;
-  confirmText?: string;
-  message?: string;
-  title?: string;
-}
+export type DialogFocusedButton = 'cancel' | 'confirm';
 
 export interface DialogManagerConfig {
   canCancel?: boolean;
   cancelText?: string;
   confirmText?: string;
+  focusedButton?: DialogFocusedButton;
   id: string;
   isOpen: boolean;
   message?: string;
   onResolve: (result?: boolean) => void;
+  title?: string;
+}
+
+export interface DialogManagerPromptOptions {
+  canCancel?: boolean;
+  cancelText?: string;
+  confirmText?: string;
+  focusedButton?: DialogFocusedButton;
+  message?: string;
   title?: string;
 }
 

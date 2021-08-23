@@ -2,7 +2,7 @@ import { uniqueId } from 'lodash';
 import React, { FC, ReactNode, useCallback, useMemo, useState } from 'react';
 
 import { DialogManagerContext } from '../contexts';
-import { DialogManagerAddDialogOptions, DialogManagerConfig } from '../types';
+import { DialogManagerConfig, DialogManagerPromptOptions } from '../types';
 
 export interface DialogManagerProviderProps {
   children: ReactNode;
@@ -13,10 +13,10 @@ export const DialogManagerProvider: FC<DialogManagerProviderProps> = ({
 }) => {
   const [configs, setConfigs] = useState<DialogManagerConfig[]>([]);
 
-  const handleAddDialog = useCallback<
-    (options: DialogManagerAddDialogOptions) => Promise<boolean>
+  const handlePrompt = useCallback<
+    (options: DialogManagerPromptOptions) => Promise<boolean>
   >(
-    ({ canCancel, cancelText, confirmText, message, title }) =>
+    ({ canCancel, cancelText, confirmText, focusedButton, message, title }) =>
       new Promise((resolve) => {
         setConfigs([
           ...configs,
@@ -24,6 +24,7 @@ export const DialogManagerProvider: FC<DialogManagerProviderProps> = ({
             canCancel,
             cancelText,
             confirmText,
+            focusedButton,
             id: uniqueId(),
             isOpen: true,
             message,
@@ -37,11 +38,11 @@ export const DialogManagerProvider: FC<DialogManagerProviderProps> = ({
 
   const value = useMemo(
     () => ({
-      addDialog: handleAddDialog,
+      prompt: handlePrompt,
       configs,
       setConfigs,
     }),
-    [configs, handleAddDialog, setConfigs],
+    [configs, handlePrompt, setConfigs],
   );
 
   return (
