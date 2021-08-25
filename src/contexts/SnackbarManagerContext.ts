@@ -8,8 +8,8 @@ export interface SnackbarManagerContextValue {
   setConfigs: (configs: SnackbarManagerConfig[]) => void;
 }
 
-export const SnackbarManagerContext = createContext<SnackbarManagerContextValue>(
-  {
+export const SnackbarManagerContext =
+  createContext<SnackbarManagerContextValue>({
     configs: [],
     notify: () => {
       throw new Error(
@@ -21,5 +21,4 @@ export const SnackbarManagerContext = createContext<SnackbarManagerContextValue>
         'Snackbar Manager "setConfigs" function was called without a proper provider. Please use the AriaUIProviders or SnackbarManagerProvider.',
       );
     },
-  },
-);
+  });

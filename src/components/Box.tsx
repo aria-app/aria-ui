@@ -142,12 +142,10 @@ export const Box: PolymorphicForwardRefExoticComponent<
     const borderBottomRightRadiusValue = useResponsivePropValue(
       borderBottomRightRadius,
     );
-    const borderTopLeftRadiusValue = useResponsivePropValue(
-      borderTopLeftRadius,
-    );
-    const borderTopRightRadiusValue = useResponsivePropValue(
-      borderTopRightRadius,
-    );
+    const borderTopLeftRadiusValue =
+      useResponsivePropValue(borderTopLeftRadius);
+    const borderTopRightRadiusValue =
+      useResponsivePropValue(borderTopRightRadius);
     const bottomValue = useResponsivePropValue(bottom);
     const heightValue = useResponsivePropValue(height);
     const leftValue = useResponsivePropValue(left);
