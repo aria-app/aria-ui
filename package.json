@@ -2,6 +2,14 @@
   "version": "0.0.0-development",
   "license": "MIT",
   "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "exports": {
+    ".": {
+      "default": "./dist/index.esm.js",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js"
+    }
+  },
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
@@ -13,7 +21,7 @@
   "scripts": {
     "analyze": "size-limit --why",
     "build-storybook": "build-storybook",
-    "build": "tsdx build",
+    "build": "rollup -c",
     "ci": "yarn lint && yarn build && yarn test && yarn build-storybook",
     "clean": "rimraf build-storybook.log coverage dist storybook-static yarn-error.log",
     "lint": "tsdx lint src stories test --fix",
@@ -73,7 +81,6 @@
   },
   "name": "aria-ui",
   "author": "Nick Johnson",
-  "module": "dist/aria-ui.esm.js",
   "size-limit": [
     {
       "path": "dist/aria-ui.cjs.production.min.js",
@@ -89,6 +96,9 @@
     "@emotion/css": "^11.1.3",
     "@emotion/react": "^11.4.0",
     "@reach/router": "^1.3.4",
+    "@rollup/plugin-commonjs": "^20.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.4",
+    "@rollup/plugin-typescript": "^8.2.5",
     "@size-limit/preset-small-lib": "^4.12.0",
     "@storybook/addon-essentials": "^6.3.7",
     "@storybook/addon-info": "^5.3.21",
@@ -128,6 +138,7 @@
     "react-hook-form": "^7.11.1",
     "react-is": "^17.0.2",
     "rimraf": "^3.0.2",
+    "rollup": "^2.56.3",
     "semantic-release": "^17.4.4",
     "size-limit": "^4.12.0",
     "tsdx": "^0.14.1",
