@@ -5,9 +5,8 @@ import React from 'react';
 import { render, screen } from '../../src/testUtils';
 import * as stories from '../../stories/Components/TextField.stories';
 
-const { Default, Disabled, WithEndIcon, WithStartIcon } = composeStories(
-  stories,
-);
+const { Default, Disabled, WithEndIcon, WithStartIcon } =
+  composeStories(stories);
 
 describe('TextField', () => {
   test('should allow text entry by default', () => {

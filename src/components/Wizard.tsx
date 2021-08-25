@@ -32,9 +32,10 @@ export const Wizard = forwardRef<HTMLDivElement, WizardProps>(function Wizard(
     ...rest
   } = props;
 
-  const stepCount = useMemo(() => Children.toArray(children).length, [
-    children,
-  ]);
+  const stepCount = useMemo(
+    () => Children.toArray(children).length,
+    [children],
+  );
 
   const isOnFirstStep = currentIndex <= 0;
 
