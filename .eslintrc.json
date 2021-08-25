@@ -22,6 +22,7 @@
       "files": ["**/test/**/*.[jt]s?(x)"]
     }
   ],
+  "ignorePatterns": "**/*.json",
   "rules": {
     "import/order": "off",
     "react/prop-types": "off",

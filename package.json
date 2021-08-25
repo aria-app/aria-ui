@@ -1,5 +1,5 @@
 {
-  "version": "2.2.1-alpha.1",
+  "version": "0.0.0-development",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -12,8 +12,7 @@
   },
   "typings": "dist/index.d.ts",
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "engines": {
     "node": ">=10"
@@ -24,15 +23,16 @@
     "build": "tsc && rollup -c",
     "ci": "yarn lint && yarn build && yarn test && yarn build-storybook",
     "clean": "rimraf build-storybook.log coverage dist storybook-static yarn-error.log",
-    "lint": "tsdx lint src stories test --fix",
+    "lint-eslint": "eslint \"{src,stories,test}/**\" --fix",
+    "lint-prettier": "prettier --write \"{src,stories,test}/**/*.{ts,tsx}\"",
+    "lint": "yarn lint-eslint && yarn lint-prettier",
     "plop": "plop",
-    "prepare": "yarn build",
+    "prepublishOnly": "yarn build",
     "semantic-release": "semantic-release",
     "size": "size-limit",
     "start": "yarn clean && start-storybook -p 6006",
-    "storybook": "start-storybook -p 6006 --modern",
-    "test": "tsdx test --passWithNoTests",
-    "test:watch": "tsdx test --coverage --watch",
+    "test": "jest --passWithNoTests",
+    "test:watch": "jest --coverage --watch",
     "tsc": "tsc"
   },
   "dependencies": {
@@ -56,7 +56,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "tsdx lint"
+      "pre-commit": "yarn lint"
     }
   },
   "babel": {
@@ -67,11 +67,6 @@
           "loose": true
         }
       ]
-    ]
-  },
-  "jest": {
-    "setupFilesAfterEnv": [
-      "<rootDir>src/testSetup.ts"
     ]
   },
   "prettier": {
@@ -131,6 +126,7 @@
     "eslint-plugin-simple-import-sort": "7.0.0",
     "eslint-plugin-testing-library": "^4.6.0",
     "husky": "^6.0.0",
+    "jest": "^27.0.6",
     "lodash": "^4.17.12",
     "mdi-react": "^7.5.0",
     "plop": "^2.7.4",
@@ -143,6 +139,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "semantic-release": "^17.4.4",
     "size-limit": "^4.12.0",
+    "ts-jest": "^27.0.5",
     "tsdx": "^0.14.1",
     "tslib": "^2.3.0",
     "typescript": "^4.3.5"
@@ -159,8 +156,6 @@
   "resolutions": {
     "**/@typescript-eslint/eslint-plugin": "^4.11.1",
     "**/@typescript-eslint/parser": "^4.11.1",
-    "**/jest": "^26.6.3",
-    "**/ts-jest": "^26.4.4",
     "**/typescript": "^4.1.3"
   }
 }
