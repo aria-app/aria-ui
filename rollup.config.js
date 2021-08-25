@@ -35,7 +35,6 @@ export default {
       },
       ecma: 5,
       output: { comments: false },
-      sourcemap: true,
       warnings: true,
     }),
   ],
