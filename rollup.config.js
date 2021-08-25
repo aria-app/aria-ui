@@ -27,6 +27,16 @@ export default {
     nodeResolve(),
     commonjs(),
     typescript({ tsconfig: './tsconfig.json' }),
-    terser(),
+    terser({
+      compress: {
+        keep_infinity: true,
+        pure_getters: true,
+        passes: 10,
+      },
+      ecma: 5,
+      output: { comments: false },
+      sourcemap: true,
+      warnings: true,
+    }),
   ],
 };
