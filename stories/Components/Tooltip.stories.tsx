@@ -7,6 +7,9 @@ export default {
   title: 'Components/Tooltip',
   component: Tooltip,
   decorators: [(Story) => <Box padding={16}>{Story()}</Box>],
+  parameters: {
+    chromatic: { delay: 300 },
+  },
 } as Meta;
 
 export const Default: Story<TooltipProps> = (args) => (
